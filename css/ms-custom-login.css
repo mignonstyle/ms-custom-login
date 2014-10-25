@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+/* ====================================
+Options Style
+
+1.0 - Links
+1.1 - clearfix
+2.0 - form
+2.1 - submit-button
+2.2 - option box
+3.0 - table
+4.0 - image media-uploader
+==================================== */
+
+/* ------------------------------------
+1.0 - base style
+------------------------------------ */
+
+#ms-custom-login a {
+	outline: none;
+	text-decoration: none;
+}
+
+#ms-custom-login p + input,
+#ms-custom-login p + .color-picker,
+#ms-custom-login p + select {
+	margin-top: 5px;
+}
+
+#ms-custom-login h2 {
+	margin-bottom: 10px;
+}
+
+/* ------------------------------------
+1.1 - clearfix
+------------------------------------ */
+
+#ms-custom-login .clearfix:after {
+	clear: both;
+	content: "";
+	display: block;
+}
+
+/* ------------------------------------
+2.0 - form
+------------------------------------ */
+
+#ms-custom-login .radio-button label {
+	padding-right: 30px;
+}
+
+#ms-custom-login td>img {
+	max-height: 200px;
+	max-width: 290px;
+}
+
+@media (min-width: 641px) {
+	#ms-custom-login td>img {
+		max-height: 250px;
+		max-width: 320px;
+	}
+}
+
+/* ------------------------------------
+2.1 - submit-button
+------------------------------------ */
+
+#ms-custom-login #submit-button p {
+	float: left;
+	margin: 0;
+}
+
+#ms-custom-login #submit-button p:last-child {
+	float: right;
+}
+
+#ms-custom-login #submit-button #reset {
+	background: #999;
+	border-color: #666;
+	color: #fff;
+	-webkit-box-shadow: inset 0 1px 0 #ccc, 0 1px 0 rgba(0, 0, 0, .15);
+	box-shadow: inset 0 1px 0 #ccc, 0 1px 0 rgba(0, 0, 0, .15);
+}
+
+#ms-custom-login #submit-button #reset:hover {
+	background: #777;
+}
+
+/* ------------------------------------
+2.2 - option box
+------------------------------------ */
+
+#ms-custom-login .option-box {
+	background: #fff;
+	border: solid 1px #e5e5e5;
+	-webkit-box-shadow: 0px 1px 1px rgba(102, 102, 102, 0.1);
+	box-shadow: 0px 1px 1px rgba(102, 102, 102, 0.1);
+	margin-bottom: 20px;
+}
+
+#ms-custom-login .option-box h3 {
+	border-bottom: solid 1px #e5e5e5;
+	cursor: pointer;
+	font-size: 1.2em;
+	margin: 0;
+	padding: 12px 15px;
+}
+
+#ms-custom-login .option-box h3:after {
+	color: #aaa;
+	content: "\f142";
+	float: right;
+	font-family: "dashicons";
+}
+
+#ms-custom-login .close-box h3:after {
+	content: "\f140";
+}
+
+#ms-custom-login .option-box .inside {
+	padding: 0 15px 5px;
+}
+
+#ms-custom-login #submit-button {
+	margin-top: -10px;
+}
+
+/* ------------------------------------
+3.0 - table
+------------------------------------ */
+
+#ms-custom-login table.nest td {
+	padding: 0;
+}
+
+@media (min-width: 641px) {
+	#ms-custom-login table.nest td {
+		padding-right: 50px;
+	}
+
+	#ms-custom-login table.nest td:last-child {
+		padding-right: 0;
+	}
+}
+
+/* ------------------------------------
+4.0 - image media-uploader
+------------------------------------ */
+
+#ms-custom-login .media-upload .remove-open td.upload-button,
+#ms-custom-login .media-upload .upload-open td.remove-button {
+	display: none;
+}
+
+#ms-custom-login .media-upload table td {
+	padding-left: 0;
+}
+
+#ms-custom-login .media-upload table img {
+	border: solid 1px #ddd;
+	margin-right: 10px;
+}
