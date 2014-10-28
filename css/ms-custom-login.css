@@ -157,6 +157,7 @@ Options Style
 }
 
 #ms-custom-login .media-upload table img {
+	background: #eee;
 	border: solid 1px #ddd;
 	margin-right: 10px;
 }
