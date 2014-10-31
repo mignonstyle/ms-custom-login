@@ -11,9 +11,6 @@
  */
 
 function ms_custom_login_checkbox( $options, $option_name, $option_text ) {
-	$options = $options;
-	$option_name = $option_name;
-	$option_text = $option_text;
 ?>
 	<p><label><input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" type="checkbox" value="1" <?php checked( $options[$option_name], 1 ); ?> /><?php esc_attr_e( $option_text ); ?></label></p>
 <?php
@@ -26,11 +23,6 @@ function ms_custom_login_checkbox( $options, $option_name, $option_text ) {
  */
 
 function ms_custom_login_radio( $options, $option_array, $option_id, $option_name ) {
-	$options = $options;
-	$option_array = $option_array;
-	$option_id = $option_id;
-	$option_name = $option_name;
-
 	if ( is_array( $option_array ) ) {
 ?>
 	<div id="<?php esc_attr_e( $option_id ); ?>" class="radio-button">
@@ -52,9 +44,6 @@ function ms_custom_login_radio( $options, $option_array, $option_id, $option_nam
  */
 
 function ms_custom_login_select( $options, $option_array, $option_name ) {
-	$options = $options;
-	$option_array = $option_array;
-	$option_name = $option_name;
 ?>
 	<select id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" >
 	<?php if ( is_array( $option_array ) ) :
@@ -72,14 +61,33 @@ function ms_custom_login_select( $options, $option_array, $option_name ) {
  */
 
 function ms_custom_login_color_picker( $options, $option_name, $default_color ) {
-	$options = $options;
-	$option_name = $option_name;
-	$default_color = $default_color;
+	$default_color = ms_custom_login_sanitize_hex_color( $default_color );
+
 ?>
 	<div class="color-picker">
-		<input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" value="<?php esc_attr_e( $options[$option_name] ); ?>" type="text" data-default-color="<?php esc_attr_e( $default_color ); ?>" class="color-picker-field" />
+		<input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" value="<?php
+	$color = ms_custom_login_sanitize_hex_color( $options[$option_name] );
+	$color = ! empty( $color ) ? $color : $default_color;
+	esc_attr_e( $color ); ?>" type="text" data-default-color="<?php esc_attr_e( $default_color ); ?>" class="color-picker-field" />
 	</div>
 <?php
+}
+
+/**
+ * ------------------------------------------------------------
+ * 10.3.1 - Color Sanitize
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_sanitize_hex_color( $color ) {
+	if ( '' === $color )
+		return '';
+
+	// 3 or 6 hex digits, or the empty string.
+	if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) )
+		return $color;
+
+	return null;
 }
 
 /**
@@ -171,12 +179,8 @@ function ms_custom_login_validate( $input ) {
 		//　Form Setting
 		$input['mcl_form_bg_color'] = esc_attr( $input['mcl_form_bg_color'] );
 
-		if ( ! ( $input['mcl_form_bg_alpha'] <= 1 && $input['mcl_form_bg_alpha'] >= 0 ) ) {
+		if ( ! array_key_exists( $input['mcl_form_bg_alpha'], ms_custom_login_bg_alpha() ) )
 			$input['mcl_form_bg_alpha'] = 1;
-		} else {
-			$input['mcl_form_bg_alpha'] = round( $input['mcl_form_bg_alpha'], 1 );
-		}
-		$input['mcl_form_bg_alpha'] = sanitize_text_field( $input['mcl_form_bg_alpha'] );
 
 		$input['mcl_form_bg_url'] = esc_url_raw( $input['mcl_form_bg_url'] );
 

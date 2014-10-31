@@ -5,7 +5,7 @@
  * Description: MS Custom Login is you can easily customize the login page of your WordPress.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.1
+ * Version: 0.2
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -318,6 +318,62 @@ function ms_custom_login_bg_size() {
 
 /**
  * ------------------------------------------------------------
+ * 3.3.6 - Create an array of options - form background alpha
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_bg_alpha() {
+	$bg_alpha = array(
+		'1' => array(
+			'value' => '1',
+			'label' => __( '1', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.9' => array(
+			'value' => '0.9',
+			'label' => __( '0.9', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.8' => array(
+			'value' => '0.8',
+			'label' => __( '0.8', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.7' => array(
+			'value' => '0.7',
+			'label' => __( '0.7', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.6' => array(
+			'value' => '0.6',
+			'label' => __( '0.6', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.5' => array(
+			'value' => '0.5',
+			'label' => __( '0.5', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.4' => array(
+			'value' => '0.4',
+			'label' => __( '0.4', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.3' => array(
+			'value' => '0.3',
+			'label' => __( '0.3', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.2' => array(
+			'value' => '0.2',
+			'label' => __( '0.2', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0.1' => array(
+			'value' => '0.1',
+			'label' => __( '0.1', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'0' => array(
+			'value' => '0',
+			'label' => __( '0', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+	);
+	return $bg_alpha;
+}
+
+/**
+ * ------------------------------------------------------------
  * 4.0 - Get the value options
  * ------------------------------------------------------------
  */
@@ -475,15 +531,18 @@ function ms_custom_login_options() {
 						<tr><?php /* Form Background Color */ ?>
 							<th scope="row"><?php printf( __( '%s Background Color', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Form', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><table class="nest"><tr>
-								<td colspan="2"><p><?php _e( 'Enter the transparency if you want to make transparent the color of the background. The default is 1.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p></td>
+								<td colspan="2"><p><?php _e( 'Select the transparency if you want to make transparent the color of the background. The default is Opacity.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p></td>
 								</tr><tr>
 								<td><p><?php _e( 'Background color', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
 									$option_name = 'mcl_form_bg_color';
 									$default_color = $default_option['mcl_form_bg_color'];
 									ms_custom_login_color_picker( $options, $option_name, $default_color );
 								?></td>
-								<td><p><?php echo __( 'Background Transparency', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . __( '( Transparency : 0, Opacity : 1 )', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ?></p>
-									<input id="ms_custom_login_options[mcl_form_bg_alpha]" name="ms_custom_login_options[mcl_form_bg_alpha]" value="<?php esc_attr_e( $options['mcl_form_bg_alpha'] ); ?>" type="number" class="small-text" /></td>
+								<td><p><?php echo __( 'Background Transparency', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . __( '( Transparency : 0 - Opacity : 1 )', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ?></p><?php
+									$option_array = ms_custom_login_bg_alpha();
+									$option_name = 'mcl_form_bg_alpha';
+									ms_custom_login_select( $options, $option_array, $option_name );
+									?></td>
 							</tr></table></td>
 						</tr>
 
@@ -713,7 +772,7 @@ a:focus,
 <?php
 	$color = $options['mcl_form_bg_color'];
 
-	if ( $options['mcl_form_bg_alpha'] < 1 && $options['mcl_form_bg_alpha'] >= 0 ) {
+	if ( $options['mcl_form_bg_alpha'] != 1 ) {
 		$rgb = ms_custom_login_rgb16c( $options['mcl_form_bg_color'] );
 		$color = 'rgba('.$rgb.', '.$options['mcl_form_bg_alpha'].')';
 	}
