@@ -10,9 +10,13 @@
  * ------------------------------------------------------------
  */
 
-function ms_custom_login_checkbox( $options, $option_name, $option_text ) {
+function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $option_img = '' ) {
 ?>
-	<p><label><input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" type="checkbox" value="1" <?php checked( $options[$option_name], 1 ); ?> /><?php esc_attr_e( $option_text ); ?></label></p>
+	<p class="checkbox"><label><input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" type="checkbox" value="1" <?php checked( $options[$option_name], 1 ); ?> /><?php
+	if ( ! empty( $option_img ) ) {
+		echo '<img src="' . esc_url( plugins_url( $option_img, __FILE__ ) ) . '" alt="' . esc_attr( $option_text ) . '">';
+	}
+	esc_attr_e( $option_text ); ?></label></p>
 <?php
 }
 
@@ -139,30 +143,47 @@ function ms_custom_login_validate( $input ) {
 		// Default
 		$input['mcl_default'] = 'true';
 
+		// Options
+		if ( ! isset( $input['mcl_option_chocolat'] ) )
+			$input['mcl_option_chocolat'] = null;
+		$input['mcl_option_chocolat'] = ( $input['mcl_option_chocolat'] == 1 ? 1 : 0 );
+
 		// Page Setting
 		$input['mcl_page_bg_color'] = esc_attr( $input['mcl_page_bg_color'] );
 
 		$input['mcl_page_bg_url'] = esc_url_raw( $input['mcl_page_bg_url'] );
 
+		if ( ! isset( $input['mcl_bg_x_select'] ) )
+			$input['mcl_bg_x_select'] = null;
 		if ( ! array_key_exists( $input['mcl_bg_x_select'], ms_custom_login_bg_position_x() ) )
 			$input['mcl_bg_x_select'] = null;
 
+		if ( ! isset( $input['mcl_bg_y_select'] ) )
+			$input['mcl_bg_y_select'] = null;
 		if ( ! array_key_exists( $input['mcl_bg_y_select'], ms_custom_login_bg_position_y() ) )
 			$input['mcl_bg_y_select'] = null;
 
+		if ( ! isset( $input['mcl_bg_repeat_select'] ) )
+			$input['mcl_bg_repeat_select'] = null;
 		if ( ! array_key_exists( $input['mcl_bg_repeat_select'], ms_custom_login_bg_repeat() ) )
 			$input['mcl_bg_repeat_select'] = null;
 
+		if ( ! isset( $input['mcl_bg_attach_select'] ) )
+			$input['mcl_bg_attach_select'] = null;
 		if ( ! array_key_exists( $input['mcl_bg_attach_select'], ms_custom_login_bg_attach() ) )
 			$input['mcl_bg_attach_select'] = null;
 
+		if ( ! isset( $input['mcl_bg_size_select'] ) )
+			$input['mcl_bg_size_select'] = null;
 		if ( ! array_key_exists( $input['mcl_bg_size_select'], ms_custom_login_bg_size() ) )
 			$input['mcl_bg_size_select'] = null;
 
 		$input['mcl_bg_size_value'] = sanitize_text_field( $input['mcl_bg_size_value'] );
 
 		$input['mcl_text_color'] = esc_attr( $input['mcl_text_color'] );
+
 		$input['mcl_link_color'] = esc_attr( $input['mcl_link_color'] );
+
 		$input['mcl_link_color_hover'] = esc_attr( $input['mcl_link_color_hover'] );
 
 		// Logo Setting
@@ -174,22 +195,48 @@ function ms_custom_login_validate( $input ) {
 			$input['mcl_logo_link_attr'] = null;
 		$input['mcl_logo_link_attr'] = ( $input['mcl_logo_link_attr'] == 1 ? 1 : 0 );
 
+		if ( ! isset( $input['mcl_show_logo_img'] ) )
+			$input['mcl_show_logo_img'] = null;
+		$input['mcl_show_logo_img'] = ( $input['mcl_show_logo_img'] == 1 ? 1 : 0 );
+
 		$input['mcl_logo_url'] = esc_url_raw( $input['mcl_logo_url'] );
+
+		if ( ! isset( $input['mcl_show_logo_text'] ) )
+			$input['mcl_show_logo_text'] = null;
+		$input['mcl_show_logo_text'] = ( $input['mcl_show_logo_text'] == 1 ? 1 : 0 );
+
+		$input['mcl_text_size'] = absint( $input['mcl_text_size'] );
+
+		$input['mcl_logo_text_color'] = esc_attr( $input['mcl_logo_text_color'] );
+
+		$input['mcl_logo_text_hover'] = esc_attr( $input['mcl_logo_text_hover'] );
+
+		$input['mcl_text_family'] = wp_kses_stripslashes( $input['mcl_text_family'] );
+
+		$input['mcl_text_webfont'] = wp_kses_stripslashes( $input['mcl_text_webfont'] );
 
 		//　Form Setting
 		$input['mcl_form_bg_color'] = esc_attr( $input['mcl_form_bg_color'] );
 
+		if ( ! isset( $input['mcl_form_bg_alpha'] ) )
+			$input['mcl_form_bg_alpha'] = 1;
 		if ( ! array_key_exists( $input['mcl_form_bg_alpha'], ms_custom_login_bg_alpha() ) )
 			$input['mcl_form_bg_alpha'] = 1;
 
 		$input['mcl_form_bg_url'] = esc_url_raw( $input['mcl_form_bg_url'] );
 
+		if ( ! isset( $input['mcl_form_bg_x_select'] ) )
+			$input['mcl_form_bg_x_select'] = null;
 		if ( ! array_key_exists( $input['mcl_form_bg_x_select'], ms_custom_login_bg_position_x() ) )
 			$input['mcl_form_bg_x_select'] = null;
 
+		if ( ! isset( $input['mcl_form_bg_y_select'] ) )
+			$input['mcl_form_bg_y_select'] = null;
 		if ( ! array_key_exists( $input['mcl_form_bg_y_select'], ms_custom_login_bg_position_y() ) )
 			$input['mcl_form_bg_y_select'] = null;
 
+		if ( ! isset( $input['mcl_form_bg_repeat_select'] ) )
+			$input['mcl_form_bg_repeat_select'] = null;
 		if ( ! array_key_exists( $input['mcl_form_bg_repeat_select'], ms_custom_login_bg_repeat() ) )
 			$input['mcl_form_bg_repeat_select'] = null;
 
@@ -202,12 +249,24 @@ function ms_custom_login_validate( $input ) {
 
 		// Button Setting
 		$input['mcl_btn_text_color'] = esc_attr( $input['mcl_btn_text_color'] );
+
 		$input['mcl_btn_border_color'] = esc_attr( $input['mcl_btn_border_color'] );
+
 		$input['mcl_btn_bg_color'] = esc_attr( $input['mcl_btn_bg_color'] );
+
 		$input['mcl_btn_bg_hover'] = esc_attr( $input['mcl_btn_bg_hover'] );
 
+		// Links Setting
+		if ( ! isset( $input['mcl_hide_nav'] ) )
+			$input['mcl_hide_nav'] = null;
+		$input['mcl_hide_nav'] = ( $input['mcl_hide_nav'] == 1 ? 1 : 0 );
+
+		if ( ! isset( $input['mcl_hide_backlink'] ) )
+			$input['mcl_hide_backlink'] = null;
+		$input['mcl_hide_backlink'] = ( $input['mcl_hide_backlink'] == 1 ? 1 : 0 );
+
 		// Custom CSS Setting
-		$input['mcl_custom_css'] = esc_textarea( $input['mcl_custom_css'] );
+		$input['mcl_custom_css'] = wp_kses_stripslashes( $input['mcl_custom_css'] );
 	}
 	return $input;
 }

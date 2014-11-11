@@ -31,6 +31,24 @@ Options Style
 	margin-bottom: 10px;
 }
 
+#ms-custom-login .center {
+	text-align: center;
+}
+
+#ms-custom-login img {
+	border: solid 1px #ccc;
+}
+
+#ms-custom-login img.w-150 {
+	max-width: 150px;
+	margin-bottom: 5px;
+}
+
+#ms-custom-login .example {
+	color: #999;
+	font-size: 0.9em;
+}
+
 /* ------------------------------------
 1.1 - clearfix
 ------------------------------------ */
@@ -59,6 +77,31 @@ Options Style
 		max-height: 250px;
 		max-width: 320px;
 	}
+}
+
+/* checkbox */
+#ms-custom-login .checkbox img {
+	background: #ccc;
+	border: solid 2px #fff;
+	max-width: 150px;
+	padding: 1px;
+}
+
+#ms-custom-login .checkbox input[type="checkbox"]:checked + img {
+	border-color: #ccc;
+}
+
+#ms-custom-login .block .checkbox {
+	text-align: center;
+}
+
+#ms-custom-login .block .checkbox input {
+	display: none;
+}
+
+#ms-custom-login .block .checkbox img {
+	display: block;
+	margin: 0 auto 10px;
 }
 
 /* ------------------------------------

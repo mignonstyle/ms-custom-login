@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+/* ====================================
+MS Custom Login special edition
+Chocolat Style
+==================================== */
+
+html {
+	background-color: #f9f6ed !important;
+	background-image: url(img/bg_body.png) !important;
+}
+
+body {
+	background-color: #f9f6ed !important;
+	background-image: url(img/bg-header.png), url(img/bg-footer.png), url(img/bg-footer-wl.png), url(img/bg_body.png) !important;
+	background-repeat: repeat-x, repeat-x, repeat-x, repeat !important;
+	background-position: left top, left bottom, left bottom, left top !important;
+}
+
+@media screen and ( max-width: 640px ) {
+	body.mobile {
+		background-image: url(img/bg-header.png), url(img/bg_body.png) !important;
+		background-repeat: repeat-x, repeat !important;
+		background-position: left top, left top !important;
+	}
+
+	.mobile div.clear {
+		background-image: url(img/bg-footer.png), url(img/bg-footer-wl.png);
+		background-repeat: repeat-x, repeat;
+		background-position: left bottom, left bottom;
+		content: "";
+		display: block;
+		height: 70px;
+	}
+}
+
+a,
+.login #nav a,
+.login #backtoblog a {
+	color: #f56993;
+}
+
+a:hover,
+a:active,
+.login #nav a:hover,
+.login #backtoblog a:hover {
+	color: #895628;
+}
+
+.login h1 a {
+	color: #41250c;
+	font-family: "Century Gothic", sans-serif;
+	font-size: 38px;
+}
+
+.mobile #login h1 {
+	margin-top: 40px;
+}
+
+@media screen and ( min-width: 641px ) {
+	.mobile #login h1 {
+		margin-top: 60px;
+	}
+}
+
+.login form {
+	background-color: #ffffff;
+	border: solid 1px #d6ac75;
+	border-radius: 10px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.login .button-primary {
+	background: #895628;
+}
+
+.login .button-primary:hover,
+.login .button-primary:focus,
+.login .button-primary:active {
+	background: #ba8d65;
+}
+
+.login .button-primary,
+.login .button-primary:hover,
+.login .button-primary:focus,
+.login .button-primary:active {
+	border-color: #603c21;
+	-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+	box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+	color: #ffffff;
+}

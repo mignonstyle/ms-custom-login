@@ -15,7 +15,7 @@ MS Custom Login is you can easily customize the login page of your WordPress.
 
 MS Custom Login is you can easily customize the login page of your WordPress. You can image and color settings in MS Custom Login Settings page using the media uploader and color picker of WordPress.
 
-= What the plugin can do =
+= Features =
 
 * Change the logo.
 * Link the logo to your homepage.
@@ -40,8 +40,15 @@ https://github.com/mignonstyle/ms-custom-login
 
 1. Setting is very easy.
 2. Customizing the login page you can variety. You can make only login page.
+3. WordPress Theme "Chocolat" users special edition.
 
 == Changelog ==
+
+= 0.3 =
+* Add plugin setting links.
+* Add theme "Chocolat" option.
+* Add Logo Text and "Password" and "Back" Links Settings.
+* Bug and Text fix.
 
 = 0.2 =
 * Add function ms_custom_login_sanitize_hex_color().

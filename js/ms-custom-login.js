@@ -20,7 +20,7 @@ jQuery(function($){
 	}
 
 	// checkbox
-	$('.option-check .target input:checkbox').change(function(){
+	$('.option-check .target input:checkbox, .option-check .target2 input:checkbox').change(function(){
 		var parent_id = $(this).parents('.option-check').attr('id');
 		checkbox_show_hide(parent_id);
 	});
@@ -35,10 +35,18 @@ jQuery(function($){
 	function checkbox_show_hide(parent_id){
 		parent_id = '#'+parent_id;
 
-		if($(parent_id+' .target input:checkbox').prop('checked')){
-			$(parent_id+' .hidebox').show();
+		if ( parent_id == '#logo-setting'){
+			if($(parent_id+' .target2 input:checkbox').prop('checked')){
+				$(parent_id+' .hidebox2').show();
+			}else{
+				$(parent_id+' .hidebox2').hide();
+			}
 		}else{
-			$(parent_id+' .hidebox').hide();
+			if($(parent_id+' .target input:checkbox').prop('checked')){
+				$(parent_id+' .hidebox').show();
+			}else{
+				$(parent_id+' .hidebox').hide();
+			}
 		}
 	}
 });
