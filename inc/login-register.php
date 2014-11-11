@@ -114,7 +114,7 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 			<div class="upload-remove <?php esc_attr_e( $upload_remove_class ); ?>">
 				<input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" value="<?php echo esc_url( $options[$option_name] ); ?>" type="hidden" class="regular-text" />
 				<table><tr>
-					<td class="upload-button"><input id="option-upload-<?php esc_attr_e( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
+					<td class="upload-button"><input id="option-upload-<?php esc_attr_e( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select an Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
 					<?php if ( ! empty( $options[$option_name] ) ) {
 						$image_src = esc_url( $options[$option_name] );
 						if( preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $image_src ) ) {
@@ -126,7 +126,7 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 			</div>
 		</div>
 	<?php else : ?>
-		<p><?php _e( 'Sorry, WordPress you are using is not supported. Upgrade your version of WordPress.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p>
+		<p><?php _e( 'Sorry, WordPress you are using is not supported. Upgrade your WordPress.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p>
 <?php endif;
 }
 
