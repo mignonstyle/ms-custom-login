@@ -10,6 +10,8 @@ Options Style
 2.2 - option box
 3.0 - table
 4.0 - image media-uploader
+9.0 - CodeMirror
+9.1 - thickbox (preview)
 ==================================== */
 
 /* ------------------------------------
@@ -110,23 +112,35 @@ Options Style
 
 #ms-custom-login #submit-button p {
 	float: left;
-	margin: 0;
+	margin: 10px 20px 0 0;
+	padding: 0;
 }
 
 #ms-custom-login #submit-button p:last-child {
 	float: right;
+	margin-right: 0;
 }
 
+/* reset button */
 #ms-custom-login #submit-button #reset {
 	background: #999;
 	border-color: #666;
+	-webkit-box-shadow: inset 0 1px 0 #aaa, 0 1px 0 rgba(0, 0, 0, .15);
+	box-shadow: inset 0 1px 0 #aaa, 0 1px 0 rgba(0, 0, 0, .15);
 	color: #fff;
-	-webkit-box-shadow: inset 0 1px 0 #ccc, 0 1px 0 rgba(0, 0, 0, .15);
-	box-shadow: inset 0 1px 0 #ccc, 0 1px 0 rgba(0, 0, 0, .15);
 }
 
 #ms-custom-login #submit-button #reset:hover {
 	background: #777;
+}
+
+/* preview button */
+#ms-custom-login #preview a {
+	background: #fff;
+}
+
+#ms-custom-login #preview a:hover {
+	background: #eee;
 }
 
 /* ------------------------------------
@@ -203,4 +217,30 @@ Options Style
 	background: #eee;
 	border: solid 1px #ddd;
 	margin-right: 10px;
+}
+
+/* media-children */
+#ms-custom-login .media-children.children-hide {
+	display: none;
+}
+
+/* ------------------------------------
+9.0 - CodeMirror
+------------------------------------ */
+
+#ms-custom-login .CodeMirror {
+	border: solid 1px #ddd;
+	font-family: 'Consolas', 'Monaco', monospace;
+	height: 100%;
+	line-height: 1.2;
+	min-height: 50px;
+	width: 95%;
+}
+
+/* ------------------------------------
+9.1 - thickbox (preview)
+------------------------------------ */
+
+#preview-popup {
+	display: none;
 }

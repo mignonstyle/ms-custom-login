@@ -101,11 +101,6 @@ function ms_custom_login_sanitize_hex_color( $color ) {
  */
 
 function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $option_name, $option_desc ) {
-	$options = $options;
-	$text_domain = $text_domain;
-	$option_id = $option_id;
-	$option_name = $option_name;
-	$option_desc = $option_desc;
 	$upload_remove_class = ! empty( $options[$option_name] ) ? 'remove-open' : 'upload-open';
 
 	if ( function_exists( 'wp_enqueue_media' ) ) : ?>
@@ -114,7 +109,7 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 			<div class="upload-remove <?php esc_attr_e( $upload_remove_class ); ?>">
 				<input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" value="<?php echo esc_url( $options[$option_name] ); ?>" type="hidden" class="regular-text" />
 				<table><tr>
-					<td class="upload-button"><input id="option-upload-<?php esc_attr_e( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select an Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
+					<td class="upload-button"><input id="option-upload-<?php esc_attr_e( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
 					<?php if ( ! empty( $options[$option_name] ) ) {
 						$image_src = esc_url( $options[$option_name] );
 						if( preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $image_src ) ) {

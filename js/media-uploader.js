@@ -57,13 +57,19 @@ jQuery(function($){
 			var image = frame.state().get('selection').first();
 			frame.close();
 
+			// parent id
 			var parent_ID = $('.upload-select').attr('ID');
 			parent = $('#'+parent_ID);
+
+			// grandparents id
+			var this_grandparents = parent.closest('.option-box');
+			var grandparents = $('#'+this_grandparents.attr('id'));
 
 			if(image.attributes.type == 'image'){
 				$('input[name*="_url"]', parent).val(image.attributes.url);
 				$('.upload-remove table tr', parent).prepend('<td class="upload-preview"><img src="'+image.attributes.url+'" alt="" /></td>');
 				$('.upload-remove', parent).addClass('remove-open').removeClass('upload-open');
+				$('.media-children', grandparents).addClass('children-show').removeClass('children-hide');
 			}
 		});
 
@@ -72,8 +78,13 @@ jQuery(function($){
 	}
 
 	function options_remove_file(parent){
+		var parent_id = $('#'+parent.attr('ID'));
+		var this_grandparents = parent_id.closest('.option-box');
+		var grandparents = $('#'+this_grandparents.attr('id'));
+
 		$('input[name*="_url"]', parent).val('');
 		$('.upload-remove', parent).addClass('upload-open').removeClass('remove-open');
+		$('.media-children', grandparents).addClass('children-hide').removeClass('children-show');
 		$('td.upload-preview', parent).empty();
 	}
 });

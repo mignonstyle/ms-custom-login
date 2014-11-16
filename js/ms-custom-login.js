@@ -7,6 +7,8 @@
 jQuery(function($){
 	options_slidebox();
 	options_checkbox();
+	codemirror();
+	preview_popup();
 
 	// h3 option box
 	function options_slidebox(){
@@ -48,5 +50,19 @@ jQuery(function($){
 				$(parent_id+' .hidebox').hide();
 			}
 		}
+	}
+
+	// CodeMirror
+	function codemirror(){
+		var editor = CodeMirror.fromTextArea(document.getElementById("ms_custom_login_options[mcl_custom_css]"), {
+			lineNumbers: true,
+			lineWrapping: true,
+		});
+	}
+
+	// login page preview
+	function preview_popup(){
+		var $href = $('#preview a').attr('href');
+		$('#preview a').attr('href', $href+'?TB_iframe=true&width=800&height=600&sandbox=""');
 	}
 });

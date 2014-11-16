@@ -2,10 +2,10 @@
 /**
  * Plugin Name: MS Custom Login
  * Plugin URI: https://wordpress.org/plugins/ms-custom-login/
- * Description: MS Custom Login is you can easily customize the login page of your WordPress.
+ * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.3
+ * Version: 0.4
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -81,9 +81,16 @@ add_action( 'plugins_loaded', 'ms_custom_login_load_textdomain' );
  * ------------------------------------------------------------
  */
 
-function ms_custom_login_admin_enqueue_style() {
-	wp_enqueue_style( 'wp-color-picker' );
-	wp_enqueue_style( 'ms_custom_login_style', MS_CUSTOM_LOGIN_PLUGIN_URL . 'css/ms-custom-login.css', array(), null );
+function ms_custom_login_admin_enqueue_style( $hook ) {
+	if ( 'settings_page_ms-custom-login' == $hook ) {
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'ms_custom_login_style', MS_CUSTOM_LOGIN_PLUGIN_URL . 'css/ms-custom-login.css', array(), null );
+
+		// CodeMirror
+		wp_enqueue_style( 'mcl-codemirror', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/codemirror/lib/codemirror.css', array(), null );
+		wp_enqueue_script( 'mcl-codemirror-js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/codemirror/lib/codemirror.js', array(), false, true );
+		wp_enqueue_script( 'mcl-codemirror-css-js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/codemirror/mode/css/css.js', array( 'mcl-codemirror-js' ), false, true );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'ms_custom_login_admin_enqueue_style' );
 
@@ -94,7 +101,7 @@ add_action( 'admin_enqueue_scripts', 'ms_custom_login_admin_enqueue_style' );
  */
 
 function ms_custom_login_admin_print_scripts() {
-	wp_enqueue_script( 'ms_custom_login_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/ms-custom-login.js', array( 'jquery' ), false, true );
+	wp_enqueue_script( 'ms_custom_login_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/ms-custom-login.js', array( 'jquery', 'mcl-codemirror-js' ), false, true );
 
 	// color picker
 	wp_enqueue_script( 'ms_custom_login_colorpicker_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/color-picer.js', array( 'wp-color-picker' ), false, true );
@@ -104,8 +111,8 @@ function ms_custom_login_admin_print_scripts() {
 		wp_enqueue_media();
 		wp_register_script( 'ms_custom_login_media_uploader_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/media-uploader.js', array( 'jquery' ), false, true );
 		$translation_array = array(
-			'title'  => __( 'Select an Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
-			'button' => __( 'Set up an Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'title'  => __( 'Select Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'button' => __( 'Set up Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		);
 		wp_localize_script( 'ms_custom_login_media_uploader_js', 'option_media_text', $translation_array );
 		wp_enqueue_script( 'ms_custom_login_media_uploader_js' );
@@ -248,15 +255,15 @@ function ms_custom_login_bg_position_x() {
 	$bg_position_x = array(
 		'left' => array(
 			'value' => 'left',
-			'label' => __( 'left', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Left', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'center' => array(
 			'value' => 'center',
-			'label' => __( 'center', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Center', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'right' => array(
 			'value' => 'right',
-			'label' => __( 'right', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Right', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 	);
 	return $bg_position_x;
@@ -272,15 +279,15 @@ function ms_custom_login_bg_position_y() {
 	$bg_position_y = array(
 		'top' => array(
 			'value' => 'top',
-			'label' => __( 'top', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Top', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'center' => array(
 			'value' => 'center',
-			'label' => __( 'center', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Center', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'bottom' => array(
 			'value' => 'bottom',
-			'label' => __( 'bottom', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Bottom', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 	);
 	return $bg_position_y;
@@ -296,19 +303,19 @@ function ms_custom_login_bg_repeat() {
 	$bg_repeat = array(
 		'repeat' => array(
 			'value' => 'repeat',
-			'label' => __( 'repeat', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Tile', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'repeat-x' => array(
 			'value' => 'repeat-x',
-			'label' => __( 'repeat-x', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Tile Horizontally', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'repeat-y' => array(
 			'value' => 'repeat-y',
-			'label' => __( 'repeat-y', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Tile Vertically', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'no-repeat' => array(
 			'value' => 'no-repeat',
-			'label' => __( 'no-repeat', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'No Repeat', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 	);
 	return $bg_repeat;
@@ -324,11 +331,11 @@ function ms_custom_login_bg_attach() {
 	$bg_attach = array(
 		'scroll' => array(
 			'value' => 'scroll',
-			'label' => __( 'scroll', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Scroll', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'fixed' => array(
 			'value' => 'fixed',
-			'label' => __( 'fixed', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Fixed', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 	);
 	return $bg_attach;
@@ -344,15 +351,15 @@ function ms_custom_login_bg_size() {
 	$bg_size = array(
 		'auto' => array(
 			'value' => 'auto',
-			'label' => __( 'auto', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Auto', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'contain' => array(
 			'value' => 'contain',
-			'label' => __( 'contain', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Contain', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 		'cover' => array(
 			'value' => 'cover',
-			'label' => __( 'cover', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			'label' => __( 'Cover', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
 		),
 	);
 	return $bg_size;
@@ -441,7 +448,8 @@ function ms_custom_login_options() {
 		<h2><?php _e( MS_CUSTOM_LOGIN_TITLE ); ?></h2>
 
 		<form method="post" action="options.php" enctype="multipart/form-data">
-		<?php settings_fields( 'ms_custom_login_options' ); ?>
+		<?php settings_fields( 'ms_custom_login_options' );
+			if ( ! is_multisite() && is_user_logged_in() ) add_thickbox(); ?>
 			<input id="ms_custom_login_options[mcl_default]" class="regular-text" type="hidden" name="ms_custom_login_options[mcl_default]" value="<?php echo esc_attr_e( $options['mcl_default'] ); ?>" />
 
 			<div id="page-setting" class="option-box option-check"><?php /* Login Page Setting */ ?>
@@ -462,12 +470,12 @@ function ms_custom_login_options() {
 							<td><fieldset><?php
 								$option_id = 'page-bg';
 								$option_name = 'mcl_page_bg_url';
-								$option_desc = __( 'The image you set will be used for the backgrounds of the login page. Recommendation: png, jpg or gif.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								$option_desc = __( 'The image you set will be used for the backgrounds of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'png, jpg or gif', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
 								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc );
 							?></fieldset></td>
 						</tr>
 
-						<tr><?php /* Page Background Position */ ?>
+						<tr class="<?php esc_attr_e( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Position */ ?>
 							<th scope="row"><?php printf( __( '%s Background Position', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Page', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
@@ -493,7 +501,7 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr><?php /* Page Background Size */ ?>
+						<tr class="<?php esc_attr_e( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Size */ ?>
 							<th scope="row"><?php printf( __( '%s Background Size', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Page', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td colspan="2"><p><?php printf( __( 'Please Select a %s background size or enter a value.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Page', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></p></td>
@@ -570,7 +578,7 @@ function ms_custom_login_options() {
 							<td><fieldset><?php
 								$option_id = 'mcl-logo-img';
 								$option_name = 'mcl_logo_url';
-								$option_desc = __( 'The image you set will be used for the logo of the login page. Recommendation: a png, jpg or gif file of width 320px.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								$option_desc = __( 'The image you set will be used for the logo of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'a png, jpg or gif file of width 320px', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
 								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc );
 							?></fieldset></td>
 						</tr>
@@ -657,12 +665,12 @@ function ms_custom_login_options() {
 							<td><fieldset><?php
 								$option_id = 'mcl-form-bg';
 								$option_name = 'mcl_form_bg_url';
-								$option_desc = __( 'The image you set will be used as a background image of the login form. Recommendation: a png, jpg or gif file of width 320px, height 275px.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								$option_desc = __( 'The image you set will be used as a background image of the login form.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'a png, jpg or gif file of width 320px, height 275px', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
 								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc );
 							?></fieldset></td>
 						</tr>
 
-						<tr><?php /* Form Background Position */ ?>
+						<tr class="<?php esc_attr_e( ms_custom_login_upload_children( $options['mcl_form_bg_url'] ) ); ?>"><?php /* Form Background Position */ ?>
 							<th scope="row"><?php printf( __( '%s Background Position', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Form', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
@@ -774,9 +782,10 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Custom CSS Setting', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php /* Custom CSS */ ?>
+						<tr><?php /* Custom CSS */
+							$content = isset( $options['mcl_custom_css'] ) && ! empty( $options['mcl_custom_css'] ) ? $options['mcl_custom_css'] : '/* ' . __( 'Enter Your Custom CSS Here', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' */'; ?>
 							<th scope="row"><?php _e( 'Custom CSS', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
-							<td><textarea id="ms_custom_login_options[mcl_custom_css]" cols="50" rows="3" name="ms_custom_login_options[mcl_custom_css]" placeholder="/* CSS */"><?php echo esc_textarea( $options['mcl_custom_css'] ); ?></textarea></td>
+							<td><textarea id="ms_custom_login_options[mcl_custom_css]" cols="50" rows="3" name="ms_custom_login_options[mcl_custom_css]"><?php echo esc_textarea( $content ); ?></textarea></td>
 						</tr>
 					</table>
 				</div>
@@ -804,12 +813,26 @@ function ms_custom_login_options() {
 			<?php endif; ?>
 
 			<div id="submit-button">
-				<?php submit_button( __( 'Save Changes', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'primary', 'save' ); ?>
-				<?php submit_button( __( 'Reset Defaults', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'secondary', 'reset' ); ?>
+				<?php submit_button( __( 'Save Changes', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'primary', 'save' );
+				if ( ! is_multisite() && is_user_logged_in() ) : ?>
+				<p id="preview"><a class="thickbox button" href="<?php echo wp_login_url(); ?>" ><?php _e( 'Preview', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></a></p>
+				<?php endif;
+				submit_button( __( 'Reset Defaults', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'secondary', 'reset' ); ?>
 			</div>
 		</form>
 	</div>
-<?php
+
+	<?php /* login page preview */
+		if ( ! is_multisite() && is_user_logged_in() ) : ?>
+	<div id="preview-popup">
+		<h3 class="title"><?php _e( 'Preview', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
+		<div class="preview-inline">
+			<div id="preview-container">
+				<iframe src="<?php echo wp_login_url( get_permalink() ); ?>" sandbox="" style="width: 100%; height: 650px;"></iframe>
+			</div>
+		</div>
+	</div>
+	<?php endif;
 }
 
 /**
@@ -868,6 +891,18 @@ function ms_custom_login_rgb16c( $color ) {
 	$rgb = trim( $c16, ', ' );
 
 	return $rgb;
+}
+
+/**
+ * ------------------------------------------------------------
+ * 7.2.2 - Media UpLoader children
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_upload_children( $upload_option ) {
+	$upload_children_class = 'media-children ';
+	$upload_children_class .= ! empty( $upload_option ) ? 'children-show' : 'children-hide';
+	return $upload_children_class;
 }
 
 /**
@@ -1058,6 +1093,8 @@ if ( empty( $options['mcl_show_logo'] ) ) {
 			$text_indent = ( $width + 10 ) . 'px';
 			$bg_position = 'left center';
 			$login_h1_css .= "\t" . 'display: table;' . "\n";
+			$login_h1_css .= "\t" . 'margin: 0 auto 25px;' . "\n";
+			$login_h1_a_css .= "\t" . 'margin: 0;' . "\n";
 			$logo_hover = true;
 
 			if ( $height < $options['mcl_text_size'] ) {

@@ -9,7 +9,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Customize login page of your WordPress with images and colors.
+Customize login page of your WordPress with images, colors and more.
 
 == Description ==
 
@@ -28,6 +28,15 @@ This plugin enables you to customize the login screen page by uploading image an
 
 https://github.com/mignonstyle/ms-custom-login
 
+= Translators =
+
+* Japanese (ja) : [Mignon Style](http://mignonstyle.com/)
+
+= Contributors =
+
+Special Thanks!
+* Shinichi Nishikawa
+
 == Installation ==
 
 1. Upload the plugin to the `/wp-content/plugins/` directory.
@@ -43,6 +52,12 @@ https://github.com/mignonstyle/ms-custom-login
 3. This plugin includes a special edition for users of WordPress Theme "Chocolat".
 
 == Changelog ==
+
+= 0.4 =
+* Add CSS source code editor plugin.
+* Add preview of the login page. (single site only)
+* Media Upload code fix.
+* Bug and Text fix.
 
 = 0.3 =
 * Add plugin setting links.
