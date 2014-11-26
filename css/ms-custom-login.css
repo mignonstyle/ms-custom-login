@@ -12,6 +12,7 @@ Options Style
 4.0 - image media-uploader
 9.0 - CodeMirror
 9.1 - thickbox (preview)
+9.2 - tab panel (jquery ui tabs)
 ==================================== */
 
 /* ------------------------------------
@@ -51,6 +52,15 @@ Options Style
 	font-size: 0.9em;
 }
 
+#ms-custom-login .right-space {
+	padding-right: 3em;
+}
+
+#ms-custom-login .right-space:last-child {
+	padding-right: 0;
+}
+
+
 /* ------------------------------------
 1.1 - clearfix
 ------------------------------------ */
@@ -66,7 +76,7 @@ Options Style
 ------------------------------------ */
 
 #ms-custom-login .radio-button label {
-	padding-right: 30px;
+	padding-right: 3em;
 }
 
 #ms-custom-login td>img {
@@ -186,13 +196,21 @@ Options Style
 3.0 - table
 ------------------------------------ */
 
+#ms-custom-login table {
+	border-collapse: collapse;
+}
+
+#ms-custom-login table td {
+	padding: 17px 15px 17px 0;
+}
+
 #ms-custom-login table.nest td {
 	padding: 0;
 }
 
 @media (min-width: 641px) {
 	#ms-custom-login table.nest td {
-		padding-right: 50px;
+		padding-right: 3em;
 	}
 
 	#ms-custom-login table.nest td:last-child {
@@ -209,14 +227,17 @@ Options Style
 	display: none;
 }
 
-#ms-custom-login .media-upload table td {
-	padding-left: 0;
+#ms-custom-login .media-upload .upload-preview {
+	padding-right: 0;
+}
+
+#ms-custom-login .media-upload .remove-button {
+	padding-left: 15px;
 }
 
 #ms-custom-login .media-upload table img {
 	background: #eee;
 	border: solid 1px #ddd;
-	margin-right: 10px;
 }
 
 /* media-children */
@@ -231,10 +252,9 @@ Options Style
 #ms-custom-login .CodeMirror {
 	border: solid 1px #ddd;
 	font-family: 'Consolas', 'Monaco', monospace;
-	height: 100%;
+	height: 800px;
 	line-height: 1.2;
-	min-height: 50px;
-	width: 95%;
+	width: 100%;
 }
 
 /* ------------------------------------
@@ -243,4 +263,96 @@ Options Style
 
 #preview-popup {
 	display: none;
+}
+
+/* ------------------------------------
+9.2 - tab panel (jquery ui tabs)
+------------------------------------ */
+
+#ms-custom-login .ui-tabs {
+	position: relative;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav {
+	margin: 0;
+	padding: 0;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav li {
+	background: #eee;
+	border: solid 1px #ccc;
+	border-bottom-width: 0;
+	border-radius: 5px 5px 0 0;
+	float: left;
+	list-style: none;
+	margin: 0 3px 0 0;
+	position: relative;
+	top: 0;
+	white-space: nowrap;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav li h3 {
+	margin: 0;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+	color: #666;
+	display: block;
+	font-size: 0.9em;
+	font-weight: normal;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 15px;
+	text-decoration: none;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+	background: #fff;
+	margin-bottom: -1px;
+	padding-bottom: 1px;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav li:hover {
+	background: #aaa;
+	border-color: #aaa;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav li:hover .ui-tabs-anchor {
+	color: #fff;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
+	cursor: default;
+}
+
+#ms-custom-login .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
+	cursor: pointer;
+}
+
+#ms-custom-login .ui-tabs .ui-tabs-panel {
+	background: #fff;
+	border: solid 1px #ccc;
+	border-radius: 0 5px 5px 5px;
+	display: block;
+	margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+	#ms-custom-login .ui-tabs {
+		margin-top: 20px;
+	}
+
+	#ms-custom-login .ui-tabs .ui-tabs-panel {
+		padding: 20px 10px;
+	}
+}
+
+@media (min-width: 641px) {
+	#ms-custom-login .ui-tabs {
+		margin-top: 35px;
+	}
+
+	#ms-custom-login .ui-tabs .ui-tabs-panel {
+		padding: 30px 20px 40px;
+	}
 }

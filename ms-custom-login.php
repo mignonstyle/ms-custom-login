@@ -5,7 +5,7 @@
  * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.4
+ * Version: 0.5
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -101,7 +101,8 @@ add_action( 'admin_enqueue_scripts', 'ms_custom_login_admin_enqueue_style' );
  */
 
 function ms_custom_login_admin_print_scripts() {
-	wp_enqueue_script( 'ms_custom_login_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/ms-custom-login.js', array( 'jquery', 'mcl-codemirror-js' ), false, true );
+	wp_enqueue_script( 'ms_custom_login_cookie', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/jquery.cookie.js', array( 'jquery' ), null, true );
+	wp_enqueue_script( 'ms_custom_login_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/ms-custom-login.js', array( 'jquery', 'ms_custom_login_cookie', 'jquery-ui-tabs', 'mcl-codemirror-js' ), false, true );
 
 	// color picker
 	wp_enqueue_script( 'ms_custom_login_colorpicker_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/color-picer.js', array( 'wp-color-picker' ), false, true );
@@ -423,6 +424,37 @@ function ms_custom_login_bg_alpha() {
 
 /**
  * ------------------------------------------------------------
+ * 3.3.7 - Tabs Title
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_tab_title() {
+	$tab_title = array(
+		'settings' => array(
+			'id'    => 'mcl-settings',
+			'title' => __( 'Login Page Settings', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+		'css' => array(
+			'id'    => 'mcl-css',
+			'title' => __( 'Custom CSS', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+		),
+	);
+
+	if ( strcmp( get_template(), 'chocolat' ) == 0 ) {
+		$tab_option = array(
+			'option' => array(
+				'id'    => 'mcl-option',
+				'title' => __( 'Option', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			),
+		);
+		$tab_title = array_merge( $tab_title, $tab_option );
+	}
+
+	return $tab_title;
+}
+
+/**
+ * ------------------------------------------------------------
  * 4.0 - Get the value options
  * ------------------------------------------------------------
  */
@@ -440,6 +472,7 @@ function ms_custom_login_get_option() {
 function ms_custom_login_options() {
 	$default_option = ms_custom_login_default_options();
 	$options = ms_custom_login_get_option();
+	$tab_title = ms_custom_login_tab_title();
 
 	if ( !current_user_can( 'manage_options' ) ) 
 		wp_die( _e( 'You do not have sufficient permissions to access this page.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
@@ -452,6 +485,15 @@ function ms_custom_login_options() {
 			if ( ! is_multisite() && is_user_logged_in() ) add_thickbox(); ?>
 			<input id="ms_custom_login_options[mcl_default]" class="regular-text" type="hidden" name="ms_custom_login_options[mcl_default]" value="<?php echo esc_attr_e( $options['mcl_default'] ); ?>" />
 
+	<div id="tabset"><?php /* tabset */ ?>
+		<ul class="tabs clearfix"><?php /* tabs */ ?>
+		<?php if ( is_array( $tab_title ) ) :
+			foreach( $tab_title as $tabs ) :
+				echo '<li><h3 class="title"><a href="#'.$tabs['id'].'" id="tab-'.$tabs['id'].'">'.$tabs['title'].'</a></h3></li>'."\n";
+		endforeach; endif; ?>
+		</ul>
+
+		<div id="<?php echo $tab_title['settings']['id']; ?>" class="panel"><?php /* panel */ ?>
 			<div id="page-setting" class="option-box option-check"><?php /* Login Page Setting */ ?>
 				<h3><?php _e( 'Login Page Setting', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
 				<div class="inside">
@@ -512,7 +554,7 @@ function ms_custom_login_options() {
 									ms_custom_login_select( $options, $option_array, $option_name );
 								?></td>
 							<td><input id="ms_custom_login_options[mcl_bg_size_value]" name="ms_custom_login_options[mcl_bg_size_value]" value="<?php esc_attr_e( $options['mcl_bg_size_value'] ); ?>" type="text" class="regular-text" placeholder="<?php _e( 'Enter a value', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" /></td>
-					</tr></table></td>
+							</tr></table></td>
 						</tr>
 
 						<tr><?php /* Page Text Color */ ?>
@@ -777,53 +819,52 @@ function ms_custom_login_options() {
 					</table>
 				</div>
 			</div><!-- /#links-setting -->
+		</div><!-- /.panel -->
 
-			<div id="custom-css-setting" class="option-box option-check"><?php /* Custom CSS Setting */ ?>
-				<h3><?php _e( 'Custom CSS Setting', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
-				<div class="inside">
-					<table class="form-table">
-						<tr><?php /* Custom CSS */
-							$content = isset( $options['mcl_custom_css'] ) && ! empty( $options['mcl_custom_css'] ) ? $options['mcl_custom_css'] : '/* ' . __( 'Enter Your Custom CSS Here', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' */'; ?>
-							<th scope="row"><?php _e( 'Custom CSS', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
-							<td><textarea id="ms_custom_login_options[mcl_custom_css]" cols="50" rows="3" name="ms_custom_login_options[mcl_custom_css]"><?php echo esc_textarea( $content ); ?></textarea></td>
-						</tr>
-					</table>
-				</div>
+		<div id="<?php echo $tab_title['css']['id']; ?>" class="panel"><?php /* panel */ ?>
+			<div id="custom-css-setting"><?php /* Custom CSS Setting */ ?>
+				<h3><?php _e( 'Custom CSS', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
+				<table class="form-table">
+					<tr><?php /* Custom CSS */
+						$content = isset( $options['mcl_custom_css'] ) && ! empty( $options['mcl_custom_css'] ) ? $options['mcl_custom_css'] : '/* ' . __( 'Enter Your Custom CSS Here', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' */'; ?>
+						<td><textarea id="ms_custom_login_options[mcl_custom_css]" cols="50" rows="3" name="ms_custom_login_options[mcl_custom_css]"><?php echo esc_textarea( $content ); ?></textarea></td>
+					</tr>
+				</table>
 			</div><!-- /#custom-css-setting -->
+		</div><!-- /.panel -->
 
-			<?php if ( strcmp( get_template(), 'chocolat' ) == 0 ) : ?>
-			<div id="login-option" class="option-box option-check"><?php /* Options */ ?>
+		<?php if ( strcmp( get_template(), 'chocolat' ) == 0 ) : ?>
+		<div id="<?php echo $tab_title['option']['id']; ?>" class="panel"><?php /* panel */ ?>
+			<div id="login-option"><?php /* Options */ ?>
 				<h3><?php _e( 'Options', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
-				<div class="inside">
-					<table class="form-table">
-						<tr>
-							<th scope="row"><?php _e( 'Option', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
-							<td><table class="nest"><tr>
-								<td class="center"><img src="<?php echo esc_url( plugins_url( 'inc/mcl-chocolat/img/login-chocolat.png', __FILE__ ) ); ?>" alt="<?php _e( 'Chocolat', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" class="w-150"><br /><?php _e( 'Chocolat', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></td>
-								<td><fieldset><?php
-								$option_name = 'mcl_option_chocolat';
-								$option_text = __( 'Use the theme "Chocolat" in the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
-								ms_custom_login_checkbox( $options, $option_name, $option_text );
-								?></fieldset></td>
-							</tr></table></td>
-						</tr>
-					</table>
-				</div>
+				<table class="form-table">
+					<tr>
+						<td class="center"><img src="<?php echo esc_url( plugins_url( 'inc/mcl-chocolat/img/login-chocolat.png', __FILE__ ) ); ?>" alt="<?php _e( 'Chocolat', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" class="w-150"><br /><?php _e( 'Chocolat', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></td>
+						<td><fieldset><?php
+							$option_name = 'mcl_option_chocolat';
+							$option_text = __( 'Use the theme "Chocolat" in the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+							ms_custom_login_checkbox( $options, $option_name, $option_text );
+						?></fieldset></td>
+					</tr>
+				</table>
 			</div><!-- /#login-option -->
-			<?php endif; ?>
+		</div><!-- /.panel -->
+		<?php endif; ?>
 
-			<div id="submit-button">
-				<?php submit_button( __( 'Save Changes', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'primary', 'save' );
-				if ( ! is_multisite() && is_user_logged_in() ) : ?>
+	</div><!-- /#tabset -->
+
+	<div id="submit-button">
+		<?php submit_button( __( 'Save Changes', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'primary', 'save' );
+			if ( ! is_multisite() && is_user_logged_in() ) : ?>
 				<p id="preview"><a class="thickbox button" href="<?php echo wp_login_url(); ?>" ><?php _e( 'Preview', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></a></p>
-				<?php endif;
-				submit_button( __( 'Reset Defaults', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'secondary', 'reset' ); ?>
-			</div>
-		</form>
-	</div>
+			<?php endif;
+			submit_button( __( 'Reset Defaults', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'secondary', 'reset' ); ?>
+		</div>
+	</form>
+</div>
 
-	<?php /* login page preview */
-		if ( ! is_multisite() && is_user_logged_in() ) : ?>
+<?php /* login page preview */
+	if ( ! is_multisite() && is_user_logged_in() ) : ?>
 	<div id="preview-popup">
 		<h3 class="title"><?php _e( 'Preview', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
 		<div class="preview-inline">
@@ -832,7 +873,7 @@ function ms_custom_login_options() {
 			</div>
 		</div>
 	</div>
-	<?php endif;
+<?php endif;
 }
 
 /**
@@ -921,10 +962,60 @@ function ms_custom_login_style() {
 
 	if ( strcmp( get_template(), 'chocolat' ) == 0 && ! empty( $options['mcl_option_chocolat'] ) ) {
 		wp_enqueue_style( 'ms-custom-login-chocolat', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/mcl-chocolat/mcl-chocolat.css', array(), null );
-		wp_print_styles();
 	}
 
-	echo '<style type="text/css">' . "\n";
+	wp_enqueue_style( 'ms-custom-login', home_url( '/?mcl_login=1' ) );
+	wp_print_styles();
+}
+add_action( 'login_enqueue_scripts', 'ms_custom_login_style' );
+
+/**
+ * ------------------------------------------------------------
+ * 7.3.1 - Add Query Var Stylesheet trigger
+ * Adds a query var to our stylesheet, 
+ * so it can trigger our psuedo-stylesheet
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_add_trigger( $vars ) {
+	$vars[] = 'mcl_login';
+	return $vars;
+}
+add_filter( 'query_vars', 'ms_custom_login_add_trigger' );
+
+/**
+ * ------------------------------------------------------------
+ * 7.3.2 - pseudo-stylesheet load
+ * If trigger (query var) is tripped, load our pseudo-stylesheet
+ * I'd prefer to esc $content at the very last moment, 
+ * but we need to allow the > character.
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_trigger_check() {
+	if ( intval( get_query_var( 'mcl_login' ) ) == 1 ) {
+		ob_start();
+		header( 'Content-type: text/css; charset=utf-8' );
+		$raw_content = ms_custom_login_output();
+		$content     = wp_kses( $raw_content, array( '\'', '\"' ) );
+		$content     = str_replace( '&gt;', '>', $content );
+		echo $content; //xss okay
+		exit;
+		ob_clean();
+	}
+}
+add_action( 'template_redirect', 'ms_custom_login_trigger_check' );
+
+/**
+ * ------------------------------------------------------------
+ * 7.3.3 - Login Page Style Output CSS
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_output() {
+	$options = ms_custom_login_get_option();
+	$default = ms_custom_login_default_options();
+	echo '@charset "UTF-8";' . "\n\n";
 
 // Web font
 	if ( ! empty( $options['mcl_show_logo'] ) && ! empty( $options['mcl_show_logo_text'] ) && ! empty( $options['mcl_text_webfont'] ) ) {
@@ -1178,11 +1269,8 @@ if ( ! empty( $options['mcl_hide_backlink'] ) ) : ?>
 }
 <?php echo "\n"; endif;
 
-// custom css
-if ( ! empty( $options['mcl_custom_css'] ) ) {
-	echo "\n" . wp_kses_stripslashes( $options['mcl_custom_css'] ) . "\n";
-} ?>
-</style>
-<?php
+	// custom css
+	if ( ! empty( $options['mcl_custom_css'] ) ) {
+		echo wp_kses_stripslashes( $options['mcl_custom_css'] ) . "\n";
+	}
 }
-add_action( 'login_enqueue_scripts', 'ms_custom_login_style' );

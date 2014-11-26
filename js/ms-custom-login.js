@@ -9,6 +9,7 @@ jQuery(function($){
 	options_checkbox();
 	codemirror();
 	preview_popup();
+	cookie_tabs();
 
 	// h3 option box
 	function options_slidebox(){
@@ -52,7 +53,9 @@ jQuery(function($){
 		}
 	}
 
-	// CodeMirror
+	/*
+	* CodeMirror
+	*/
 	function codemirror(){
 		var editor = CodeMirror.fromTextArea(document.getElementById("ms_custom_login_options[mcl_custom_css]"), {
 			lineNumbers: true,
@@ -60,9 +63,31 @@ jQuery(function($){
 		});
 	}
 
-	// login page preview
+	/*
+	* login page preview
+	*/
 	function preview_popup(){
 		var $href = $('#preview a').attr('href');
 		$('#preview a').attr('href', $href+'?TB_iframe=true&width=800&height=600&sandbox=""');
+	}
+
+	/*
+	* jquery.cookie.js
+	* jquery.ui.tabs.min.js
+	* Save to cookie open tabs
+	* Cookies will be deleted if you close the browser
+	*/
+	function cookie_tabs(){
+		$('#tabset').tabs({
+			active: ($.cookie('mcl_tabs')) ? $.cookie('mcl_tabs') : 0,
+			activate: function(event, ui){
+				// Expiration date of the cookie (30 minutes)
+				var date = new Date();
+				date.setTime(date.getTime()+(30*60*1000));
+
+				// Register cookies
+				$.cookie('mcl_tabs', $(this).tabs('option', 'active'), {expires:date});
+			}
+		});
 	}
 });

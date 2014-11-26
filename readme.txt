@@ -4,7 +4,7 @@ Contributors: mignonstyle
 Donate link: http://mignonstyle.com/
 Tags: login, admin, custom, customise, customize, customisation, customization, logo, custom login, custom logo
 Requires at least: 3.9
-Tested up to: 4.0
+Tested up to: 4.0.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -30,11 +30,12 @@ https://github.com/mignonstyle/ms-custom-login
 
 = Translators =
 
-* Japanese (ja) : [Mignon Style](http://mignonstyle.com/)
+* Japanese (ja) : Mignon Style
 
 = Contributors =
 
 Special Thanks!
+
 * Shinichi Nishikawa
 
 == Installation ==
@@ -52,6 +53,11 @@ Special Thanks!
 3. This plugin includes a special edition for users of WordPress Theme "Chocolat".
 
 == Changelog ==
+
+= 0.5 =
+* Add a tab to the options page.
+* Add an external file CSS.
+* Custom CSS fix.
 
 = 0.4 =
 * Add CSS source code editor plugin.
