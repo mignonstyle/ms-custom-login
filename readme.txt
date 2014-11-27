@@ -54,6 +54,9 @@ Special Thanks!
 
 == Changelog ==
 
+= 0.6 =
+* Bug fix.
+
 = 0.5 =
 * Add a tab to the options page.
 * Add an external file CSS.

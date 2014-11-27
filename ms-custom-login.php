@@ -5,7 +5,7 @@
  * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.5
+ * Version: 0.6
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -962,60 +962,10 @@ function ms_custom_login_style() {
 
 	if ( strcmp( get_template(), 'chocolat' ) == 0 && ! empty( $options['mcl_option_chocolat'] ) ) {
 		wp_enqueue_style( 'ms-custom-login-chocolat', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/mcl-chocolat/mcl-chocolat.css', array(), null );
+		wp_print_styles();
 	}
 
-	wp_enqueue_style( 'ms-custom-login', home_url( '/?mcl_login=1' ) );
-	wp_print_styles();
-}
-add_action( 'login_enqueue_scripts', 'ms_custom_login_style' );
-
-/**
- * ------------------------------------------------------------
- * 7.3.1 - Add Query Var Stylesheet trigger
- * Adds a query var to our stylesheet, 
- * so it can trigger our psuedo-stylesheet
- * ------------------------------------------------------------
- */
-
-function ms_custom_login_add_trigger( $vars ) {
-	$vars[] = 'mcl_login';
-	return $vars;
-}
-add_filter( 'query_vars', 'ms_custom_login_add_trigger' );
-
-/**
- * ------------------------------------------------------------
- * 7.3.2 - pseudo-stylesheet load
- * If trigger (query var) is tripped, load our pseudo-stylesheet
- * I'd prefer to esc $content at the very last moment, 
- * but we need to allow the > character.
- * ------------------------------------------------------------
- */
-
-function ms_custom_login_trigger_check() {
-	if ( intval( get_query_var( 'mcl_login' ) ) == 1 ) {
-		ob_start();
-		header( 'Content-type: text/css; charset=utf-8' );
-		$raw_content = ms_custom_login_output();
-		$content     = wp_kses( $raw_content, array( '\'', '\"' ) );
-		$content     = str_replace( '&gt;', '>', $content );
-		echo $content; //xss okay
-		exit;
-		ob_clean();
-	}
-}
-add_action( 'template_redirect', 'ms_custom_login_trigger_check' );
-
-/**
- * ------------------------------------------------------------
- * 7.3.3 - Login Page Style Output CSS
- * ------------------------------------------------------------
- */
-
-function ms_custom_login_output() {
-	$options = ms_custom_login_get_option();
-	$default = ms_custom_login_default_options();
-	echo '@charset "UTF-8";' . "\n\n";
+	echo '<style type="text/css">' . "\n";
 
 // Web font
 	if ( ! empty( $options['mcl_show_logo'] ) && ! empty( $options['mcl_show_logo_text'] ) && ! empty( $options['mcl_text_webfont'] ) ) {
@@ -1269,8 +1219,11 @@ if ( ! empty( $options['mcl_hide_backlink'] ) ) : ?>
 }
 <?php echo "\n"; endif;
 
-	// custom css
-	if ( ! empty( $options['mcl_custom_css'] ) ) {
-		echo wp_kses_stripslashes( $options['mcl_custom_css'] ) . "\n";
-	}
+// custom css
+if ( ! empty( $options['mcl_custom_css'] ) ) {
+	echo "\n" . wp_kses_stripslashes( $options['mcl_custom_css'] ) . "\n";
+} ?>
+</style>
+<?php
 }
+add_action( 'login_enqueue_scripts', 'ms_custom_login_style' );
