@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MS Custom Login\n"
-"POT-Creation-Date: 2014-11-27 13:39+0900\n"
-"PO-Revision-Date: 2014-11-27 13:39+0900\n"
+"POT-Creation-Date: 2014-12-14 11:14+0900\n"
+"PO-Revision-Date: 2014-12-14 11:14+0900\n"
 "Last-Translator: \n"
 "Language-Team: Mignon Style <mignonxstyle@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../ms-custom-login.php:115 ../inc/login-register.php:112
+#: ../ms-custom-login.php:115 ../inc/login-register.php:166
 msgid "Select Image"
 msgstr ""
 
@@ -39,411 +39,428 @@ msgstr ""
 msgid "Set up Image"
 msgstr ""
 
-#: ../ms-custom-login.php:238
+#: ../ms-custom-login.php:240
 msgid "Add drop shadow"
 msgstr ""
 
-#: ../ms-custom-login.php:243
+#: ../ms-custom-login.php:245
 msgid "Remove drop shadow"
 msgstr ""
 
-#: ../ms-custom-login.php:259
+#: ../ms-custom-login.php:261
 msgid "Left"
 msgstr ""
 
-#: ../ms-custom-login.php:263 ../ms-custom-login.php:287
+#: ../ms-custom-login.php:265 ../ms-custom-login.php:289
 msgid "Center"
 msgstr ""
 
-#: ../ms-custom-login.php:267
+#: ../ms-custom-login.php:269
 msgid "Right"
 msgstr ""
 
-#: ../ms-custom-login.php:283
+#: ../ms-custom-login.php:285
 msgid "Top"
 msgstr ""
 
-#: ../ms-custom-login.php:291
+#: ../ms-custom-login.php:293
 msgid "Bottom"
 msgstr ""
 
-#: ../ms-custom-login.php:307
+#: ../ms-custom-login.php:309
 msgid "Tile"
 msgstr ""
 
-#: ../ms-custom-login.php:311
+#: ../ms-custom-login.php:313
 msgid "Tile Horizontally"
 msgstr ""
 
-#: ../ms-custom-login.php:315
+#: ../ms-custom-login.php:317
 msgid "Tile Vertically"
 msgstr ""
 
-#: ../ms-custom-login.php:319
+#: ../ms-custom-login.php:321
 msgid "No Repeat"
 msgstr ""
 
-#: ../ms-custom-login.php:335
+#: ../ms-custom-login.php:337
 msgid "Scroll"
 msgstr ""
 
-#: ../ms-custom-login.php:339
+#: ../ms-custom-login.php:341
 msgid "Fixed"
 msgstr ""
 
-#: ../ms-custom-login.php:355
+#: ../ms-custom-login.php:357
 msgid "Auto"
 msgstr ""
 
-#: ../ms-custom-login.php:359
+#: ../ms-custom-login.php:361
 msgid "Contain"
 msgstr ""
 
-#: ../ms-custom-login.php:363
+#: ../ms-custom-login.php:365
 msgid "Cover"
 msgstr ""
 
-#: ../ms-custom-login.php:379
+#: ../ms-custom-login.php:381
 msgid "1"
 msgstr ""
 
-#: ../ms-custom-login.php:383
+#: ../ms-custom-login.php:385
 msgid "0.9"
 msgstr ""
 
-#: ../ms-custom-login.php:387
+#: ../ms-custom-login.php:389
 msgid "0.8"
 msgstr ""
 
-#: ../ms-custom-login.php:391
+#: ../ms-custom-login.php:393
 msgid "0.7"
 msgstr ""
 
-#: ../ms-custom-login.php:395
+#: ../ms-custom-login.php:397
 msgid "0.6"
 msgstr ""
 
-#: ../ms-custom-login.php:399
+#: ../ms-custom-login.php:401
 msgid "0.5"
 msgstr ""
 
-#: ../ms-custom-login.php:403
+#: ../ms-custom-login.php:405
 msgid "0.4"
 msgstr ""
 
-#: ../ms-custom-login.php:407
+#: ../ms-custom-login.php:409
 msgid "0.3"
 msgstr ""
 
-#: ../ms-custom-login.php:411
+#: ../ms-custom-login.php:413
 msgid "0.2"
 msgstr ""
 
-#: ../ms-custom-login.php:415
+#: ../ms-custom-login.php:417
 msgid "0.1"
 msgstr ""
 
-#: ../ms-custom-login.php:419
+#: ../ms-custom-login.php:421
 msgid "0"
 msgstr ""
 
-#: ../ms-custom-login.php:435
+#: ../ms-custom-login.php:437
 msgid "Login Page Settings"
 msgstr ""
 
-#: ../ms-custom-login.php:439 ../ms-custom-login.php:826
+#: ../ms-custom-login.php:441 ../ms-custom-login.php:855
 msgid "Custom CSS"
 msgstr ""
 
-#: ../ms-custom-login.php:447
+#: ../ms-custom-login.php:449
 msgid "Option"
 msgstr ""
 
-#: ../ms-custom-login.php:478
+#: ../ms-custom-login.php:480
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: ../ms-custom-login.php:498
+#: ../ms-custom-login.php:500
 msgid "Login Page Setting"
 msgstr ""
 
-#: ../ms-custom-login.php:502 ../ms-custom-login.php:688
+#: ../ms-custom-login.php:504 ../ms-custom-login.php:716
 #, php-format
 msgid "%s Background Color"
 msgstr ""
 
-#: ../ms-custom-login.php:502 ../ms-custom-login.php:511
-#: ../ms-custom-login.php:521 ../ms-custom-login.php:547
-#: ../ms-custom-login.php:549 ../ms-custom-login.php:561
+#: ../ms-custom-login.php:504 ../ms-custom-login.php:513
+#: ../ms-custom-login.php:525 ../ms-custom-login.php:551
+#: ../ms-custom-login.php:553 ../ms-custom-login.php:571
 msgid "Page"
 msgstr ""
 
-#: ../ms-custom-login.php:511 ../ms-custom-login.php:706
+#: ../ms-custom-login.php:513 ../ms-custom-login.php:734
 #, php-format
 msgid "%s Background Image"
 msgstr ""
 
-#: ../ms-custom-login.php:515
+#: ../ms-custom-login.php:517
 msgid "The image you set will be used for the backgrounds of the login page."
 msgstr ""
 
-#: ../ms-custom-login.php:515 ../ms-custom-login.php:623
-#: ../ms-custom-login.php:710
+#: ../ms-custom-login.php:518 ../ms-custom-login.php:643
+#: ../ms-custom-login.php:739
 #, php-format
 msgid "Recommendation: %s."
 msgstr ""
 
-#: ../ms-custom-login.php:515
+#: ../ms-custom-login.php:518
 msgid "png, jpg or gif"
 msgstr ""
 
-#: ../ms-custom-login.php:521 ../ms-custom-login.php:716
+#: ../ms-custom-login.php:525 ../ms-custom-login.php:745
 #, php-format
 msgid "%s Background Position"
 msgstr ""
 
-#: ../ms-custom-login.php:523 ../ms-custom-login.php:718
+#: ../ms-custom-login.php:527 ../ms-custom-login.php:747
 msgid "Horizontal direction"
 msgstr ""
 
-#: ../ms-custom-login.php:528 ../ms-custom-login.php:723
+#: ../ms-custom-login.php:532 ../ms-custom-login.php:752
 msgid "Vertical direction"
 msgstr ""
 
-#: ../ms-custom-login.php:533 ../ms-custom-login.php:728
+#: ../ms-custom-login.php:537 ../ms-custom-login.php:757
 msgid "Repeat"
 msgstr ""
 
-#: ../ms-custom-login.php:538
+#: ../ms-custom-login.php:542
 msgid "Attachment"
 msgstr ""
 
-#: ../ms-custom-login.php:547
+#: ../ms-custom-login.php:551
 #, php-format
 msgid "%s Background Size"
 msgstr ""
 
-#: ../ms-custom-login.php:549
+#: ../ms-custom-login.php:553
 #, php-format
 msgid "Please Select a %s background size or enter a value."
 msgstr ""
 
-#: ../ms-custom-login.php:556
+#: ../ms-custom-login.php:564
 msgid "Enter a value"
 msgstr ""
 
-#: ../ms-custom-login.php:561 ../ms-custom-login.php:762
+#: ../ms-custom-login.php:571 ../ms-custom-login.php:791
 #, php-format
 msgid "%s Text Color"
 msgstr ""
 
-#: ../ms-custom-login.php:563 ../ms-custom-login.php:652
+#: ../ms-custom-login.php:573 ../ms-custom-login.php:672
 msgid "Text color"
 msgstr ""
 
-#: ../ms-custom-login.php:568
+#: ../ms-custom-login.php:578
 msgid "Link color"
 msgstr ""
 
-#: ../ms-custom-login.php:573 ../ms-custom-login.php:657
-#: ../ms-custom-login.php:787
+#: ../ms-custom-login.php:583 ../ms-custom-login.php:677
+#: ../ms-custom-login.php:816
 msgid "Hover color"
 msgstr ""
 
-#: ../ms-custom-login.php:585
+#: ../ms-custom-login.php:595
 msgid "Login Page Logo Setting"
 msgstr ""
 
-#: ../ms-custom-login.php:589
+#: ../ms-custom-login.php:599
 msgid "Logo Display"
 msgstr ""
 
-#: ../ms-custom-login.php:592
+#: ../ms-custom-login.php:602
 msgid "Display a logo."
 msgstr ""
 
-#: ../ms-custom-login.php:601
+#: ../ms-custom-login.php:611
 msgid "Link Attribute"
 msgstr ""
 
-#: ../ms-custom-login.php:604
+#: ../ms-custom-login.php:614
 msgid "Use site name and URL for the logo."
 msgstr ""
 
-#: ../ms-custom-login.php:610
+#: ../ms-custom-login.php:617
+msgid "Use the URL and title of the Web site to logo of link attributes."
+msgstr ""
+
+#: ../ms-custom-login.php:617
+msgid ""
+"Please enter if you want to change the URL and title of the link attribute."
+msgstr ""
+
+#: ../ms-custom-login.php:618
+msgid "URL of the link attributes"
+msgstr ""
+
+#: ../ms-custom-login.php:622
+msgid "Title of the link attributes"
+msgstr ""
+
+#: ../ms-custom-login.php:629
 msgid "Logo Image Display"
 msgstr ""
 
-#: ../ms-custom-login.php:613
+#: ../ms-custom-login.php:632
 msgid "Display the logo image."
 msgstr ""
 
-#: ../ms-custom-login.php:619
+#: ../ms-custom-login.php:638
 msgid "Logo Image"
 msgstr ""
 
-#: ../ms-custom-login.php:623
+#: ../ms-custom-login.php:642
 msgid "The image you set will be used for the logo of the login page."
 msgstr ""
 
-#: ../ms-custom-login.php:623
+#: ../ms-custom-login.php:643
 msgid "a png, jpg or gif file of width 320px"
 msgstr ""
 
-#: ../ms-custom-login.php:633
+#: ../ms-custom-login.php:653
 msgid "Logo Text"
 msgstr ""
 
-#: ../ms-custom-login.php:636
+#: ../ms-custom-login.php:656
 msgid "Display the logo text."
 msgstr ""
 
-#: ../ms-custom-login.php:642
+#: ../ms-custom-login.php:662
 msgid "Font Size"
 msgstr ""
 
-#: ../ms-custom-login.php:644
+#: ../ms-custom-login.php:664
 msgid "Set font size of the logo. The default is 20px."
 msgstr ""
 
-#: ../ms-custom-login.php:645 ../ms-custom-login.php:740
+#: ../ms-custom-login.php:665 ../ms-custom-login.php:769
 msgid "px"
 msgstr ""
 
-#: ../ms-custom-login.php:650
+#: ../ms-custom-login.php:670
 msgid "Text Color"
 msgstr ""
 
-#: ../ms-custom-login.php:666
+#: ../ms-custom-login.php:686
 msgid "Font Family"
 msgstr ""
 
-#: ../ms-custom-login.php:673
+#: ../ms-custom-login.php:697
 msgid "Web Font"
 msgstr ""
 
-#: ../ms-custom-login.php:684
+#: ../ms-custom-login.php:712
 msgid "Login Form Setting"
 msgstr ""
 
-#: ../ms-custom-login.php:688 ../ms-custom-login.php:706
-#: ../ms-custom-login.php:716 ../ms-custom-login.php:737
-#: ../ms-custom-login.php:745
+#: ../ms-custom-login.php:716 ../ms-custom-login.php:734
+#: ../ms-custom-login.php:745 ../ms-custom-login.php:766
+#: ../ms-custom-login.php:774
 msgid "Form"
 msgstr ""
 
-#: ../ms-custom-login.php:690
+#: ../ms-custom-login.php:718
 msgid ""
 "Select the transparency if you want to make the color of the background "
 "transparent. The default is Opacity."
 msgstr ""
 
-#: ../ms-custom-login.php:692 ../ms-custom-login.php:782
+#: ../ms-custom-login.php:720 ../ms-custom-login.php:811
 msgid "Background color"
 msgstr ""
 
-#: ../ms-custom-login.php:697
+#: ../ms-custom-login.php:725
 msgid "Background Transparency"
 msgstr ""
 
-#: ../ms-custom-login.php:697
+#: ../ms-custom-login.php:725
 msgid "( Transparency : 0 - Opacity : 1 )"
 msgstr ""
 
-#: ../ms-custom-login.php:710
+#: ../ms-custom-login.php:738
 msgid "The image you set will be used as a background image of the login form."
 msgstr ""
 
-#: ../ms-custom-login.php:710
+#: ../ms-custom-login.php:739
 msgid "a png, jpg or gif file of width 320px, height 275px"
 msgstr ""
 
-#: ../ms-custom-login.php:737
+#: ../ms-custom-login.php:766
 #, php-format
 msgid "%s Rounded Rectangle Size"
 msgstr ""
 
-#: ../ms-custom-login.php:739
+#: ../ms-custom-login.php:768
 msgid "Set the size of the rounded corners in px. The default is 0px."
 msgstr ""
 
-#: ../ms-custom-login.php:745
+#: ../ms-custom-login.php:774
 #, php-format
 msgid "%s Box Shadow"
 msgstr ""
 
-#: ../ms-custom-login.php:758
+#: ../ms-custom-login.php:787
 msgid "Login Button Setting"
 msgstr ""
 
-#: ../ms-custom-login.php:762 ../ms-custom-login.php:771
-#: ../ms-custom-login.php:780
+#: ../ms-custom-login.php:791 ../ms-custom-login.php:800
+#: ../ms-custom-login.php:809
 msgid "Button"
 msgstr ""
 
-#: ../ms-custom-login.php:771
+#: ../ms-custom-login.php:800
 #, php-format
 msgid "%s Border Color"
 msgstr ""
 
-#: ../ms-custom-login.php:780
+#: ../ms-custom-login.php:809
 #, php-format
 msgid "%s Color"
 msgstr ""
 
-#: ../ms-custom-login.php:799
+#: ../ms-custom-login.php:828
 msgid "Links Setting"
 msgstr ""
 
-#: ../ms-custom-login.php:803
+#: ../ms-custom-login.php:832
 msgid "Password Link"
 msgstr ""
 
-#: ../ms-custom-login.php:806
+#: ../ms-custom-login.php:835
 msgid "Hide the \"Register\" and \"Lost password\" links."
 msgstr ""
 
-#: ../ms-custom-login.php:812
+#: ../ms-custom-login.php:841
 msgid "Back Link"
 msgstr ""
 
-#: ../ms-custom-login.php:815
+#: ../ms-custom-login.php:844
 msgid "Hide the \"Back to blog\" link."
 msgstr ""
 
-#: ../ms-custom-login.php:829
+#: ../ms-custom-login.php:862
 msgid "Enter Your Custom CSS Here"
 msgstr ""
 
-#: ../ms-custom-login.php:839
+#: ../ms-custom-login.php:873
 msgid "Options"
 msgstr ""
 
-#: ../ms-custom-login.php:842
+#: ../ms-custom-login.php:876
 msgid "Chocolat"
 msgstr ""
 
-#: ../ms-custom-login.php:845
+#: ../ms-custom-login.php:879
 msgid "Use the theme \"Chocolat\" in the login page."
 msgstr ""
 
-#: ../ms-custom-login.php:857
+#: ../ms-custom-login.php:891
 msgid "Save Changes"
 msgstr ""
 
-#: ../ms-custom-login.php:859 ../ms-custom-login.php:869
+#: ../ms-custom-login.php:893 ../ms-custom-login.php:903
 msgid "Preview"
 msgstr ""
 
-#: ../ms-custom-login.php:861
+#: ../ms-custom-login.php:895
 msgid "Reset Defaults"
 msgstr ""
 
-#: ../inc/login-register.php:119
+#: ../inc/login-register.php:173
 msgid "Delete Image"
 msgstr ""
 
-#: ../inc/login-register.php:124
+#: ../inc/login-register.php:178
 msgid ""
 "Sorry, WordPress you are using is not supported. Upgrade your WordPress."
 msgstr ""

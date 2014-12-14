@@ -5,7 +5,7 @@
  * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.6
+ * Version: 0.7
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -189,6 +189,8 @@ function ms_custom_login_default_options() {
 		// Logo Setting
 		'mcl_show_logo'       => 1,
 		'mcl_logo_link_attr'  => 0,
+		'mcl_logo_link_url'   => '',
+		'mcl_logo_link_title' => '',
 		'mcl_show_logo_img'   => 1,
 		'mcl_logo_url'        => '',
 		'mcl_show_logo_text'  => 0,
@@ -483,7 +485,7 @@ function ms_custom_login_options() {
 		<form method="post" action="options.php" enctype="multipart/form-data">
 		<?php settings_fields( 'ms_custom_login_options' );
 			if ( ! is_multisite() && is_user_logged_in() ) add_thickbox(); ?>
-			<input id="ms_custom_login_options[mcl_default]" class="regular-text" type="hidden" name="ms_custom_login_options[mcl_default]" value="<?php echo esc_attr_e( $options['mcl_default'] ); ?>" />
+			<input id="ms_custom_login_options[mcl_default]" class="regular-text" type="hidden" name="ms_custom_login_options[mcl_default]" value="<?php echo esc_attr( $options['mcl_default'] ); ?>" />
 
 	<div id="tabset"><?php /* tabset */ ?>
 		<ul class="tabs clearfix"><?php /* tabs */ ?>
@@ -512,12 +514,14 @@ function ms_custom_login_options() {
 							<td><fieldset><?php
 								$option_id = 'page-bg';
 								$option_name = 'mcl_page_bg_url';
-								$option_desc = __( 'The image you set will be used for the backgrounds of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'png, jpg or gif', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
-								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc );
+								$option_desc = __( 'The image you set will be used for the backgrounds of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								$option_desc2 = sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'png, jpg or gif', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
+								
+								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc, $option_desc2 );
 							?></fieldset></td>
 						</tr>
 
-						<tr class="<?php esc_attr_e( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Position */ ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Position */ ?>
 							<th scope="row"><?php printf( __( '%s Background Position', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Page', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
@@ -543,7 +547,7 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr class="<?php esc_attr_e( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Size */ ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Size */ ?>
 							<th scope="row"><?php printf( __( '%s Background Size', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Page', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td colspan="2"><p><?php printf( __( 'Please Select a %s background size or enter a value.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Page', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></p></td>
@@ -553,7 +557,13 @@ function ms_custom_login_options() {
 									$option_name = 'mcl_bg_size_select';
 									ms_custom_login_select( $options, $option_array, $option_name );
 								?></td>
-							<td><input id="ms_custom_login_options[mcl_bg_size_value]" name="ms_custom_login_options[mcl_bg_size_value]" value="<?php esc_attr_e( $options['mcl_bg_size_value'] ); ?>" type="text" class="regular-text" placeholder="<?php _e( 'Enter a value', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" /></td>
+								<td><?php
+									$option_name = 'mcl_bg_size_value';
+									$option_type = 'text';
+									$option_class = 'regular-text';
+									$placeholder = __( 'Enter a value', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+									ms_custom_login_textfield( $options, $option_name, '', $option_type, $option_class, '', $placeholder );
+								?></td>
 							</tr></table></td>
 						</tr>
 
@@ -603,6 +613,15 @@ function ms_custom_login_options() {
 								$option_name = 'mcl_logo_link_attr';
 								$option_text = __( 'Use site name and URL for the logo.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
 								ms_custom_login_checkbox( $options, $option_name, $option_text );
+							?>
+							<p><?php _e( 'Use the URL and title of the Web site to logo of link attributes.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?><br /><?php _e( 'Please enter if you want to change the URL and title of the link attribute.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><br />
+							<p><?php _e( 'URL of the link attributes', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
+								$option_name = 'mcl_logo_link_url';
+								$option_type = 'url';
+								ms_custom_login_textfield( $options, $option_name, '', $option_type );
+							?><p><?php _e( 'Title of the link attributes', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
+							$option_name = 'mcl_logo_link_title';
+								ms_custom_login_textfield( $options, $option_name );
 							?></fieldset></td>
 						</tr>
 
@@ -620,8 +639,9 @@ function ms_custom_login_options() {
 							<td><fieldset><?php
 								$option_id = 'mcl-logo-img';
 								$option_name = 'mcl_logo_url';
-								$option_desc = __( 'The image you set will be used for the logo of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'a png, jpg or gif file of width 320px', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
-								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc );
+								$option_desc = __( 'The image you set will be used for the logo of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								$option_desc2 = sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'a png, jpg or gif file of width 320px', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
+								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc, $option_desc2 );
 							?></fieldset></td>
 						</tr>
 					</table>
@@ -664,15 +684,23 @@ function ms_custom_login_options() {
 
 						<tr class="hidebox"><?php /* Logo Text Font Family */ ?>
 							<th scope="row"><?php _e( 'Font Family', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
-							<td><textarea id="ms_custom_login_options[mcl_text_family]" cols="50" rows="2" name="ms_custom_login_options[mcl_text_family]"><?php echo esc_textarea( $options['mcl_text_family'] ); ?></textarea>
-							<p class="example">'Josefin Sans', sans-serif</p>
+							<td><?php
+								$option_name = 'mcl_text_family';
+								$option_cols = '50';
+								$option_rows = '2';
+								ms_custom_login_textarea( $options, $option_name, $option_cols, $option_rows );
+							?><p class="example">'Josefin Sans', sans-serif</p>
 							</td>
 						</tr>
 
 						<tr class="hidebox"><?php /* Logo Text Web Font */ ?>
 							<th scope="row"><?php _e( 'Web Font', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
-							<td><textarea id="ms_custom_login_options[mcl_text_webfont]" cols="50" rows="2" name="ms_custom_login_options[mcl_text_webfont]"><?php echo esc_textarea( $options['mcl_text_webfont'] ); ?></textarea>
-							<p class="example">@import url(http://fonts.googleapis.com/css?family=Josefin+Sans);</p>
+							<td><?php
+								$option_name = 'mcl_text_webfont';
+								$option_cols = '50';
+								$option_rows = '2';
+								ms_custom_login_textarea( $options, $option_name, $option_cols, $option_rows );
+							?><p class="example">@import url(http://fonts.googleapis.com/css?family=Josefin+Sans);</p>
 							</td>
 						</tr>
 					</table>
@@ -707,12 +735,13 @@ function ms_custom_login_options() {
 							<td><fieldset><?php
 								$option_id = 'mcl-form-bg';
 								$option_name = 'mcl_form_bg_url';
-								$option_desc = __( 'The image you set will be used as a background image of the login form.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'a png, jpg or gif file of width 320px, height 275px', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
-								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc );
+								$option_desc = __( 'The image you set will be used as a background image of the login form.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								$option_desc2 = sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'a png, jpg or gif file of width 320px, height 275px', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
+								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc, $option_desc2 );
 							?></fieldset></td>
 						</tr>
 
-						<tr class="<?php esc_attr_e( ms_custom_login_upload_children( $options['mcl_form_bg_url'] ) ); ?>"><?php /* Form Background Position */ ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_form_bg_url'] ) ); ?>"><?php /* Form Background Position */ ?>
 							<th scope="row"><?php printf( __( '%s Background Position', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Form', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
@@ -825,9 +854,14 @@ function ms_custom_login_options() {
 			<div id="custom-css-setting"><?php /* Custom CSS Setting */ ?>
 				<h3><?php _e( 'Custom CSS', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
 				<table class="form-table">
-					<tr><?php /* Custom CSS */
-						$content = isset( $options['mcl_custom_css'] ) && ! empty( $options['mcl_custom_css'] ) ? $options['mcl_custom_css'] : '/* ' . __( 'Enter Your Custom CSS Here', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' */'; ?>
-						<td><textarea id="ms_custom_login_options[mcl_custom_css]" cols="50" rows="3" name="ms_custom_login_options[mcl_custom_css]"><?php echo esc_textarea( $content ); ?></textarea></td>
+					<tr>
+						<td><?php
+							$option_name ='mcl_custom_css';
+							$option_cols = '50';
+							$option_rows = '3';
+							$content = isset( $options['mcl_custom_css'] ) && ! empty( $options['mcl_custom_css'] ) ? $options['mcl_custom_css'] : '/* ' . __( 'Enter Your Custom CSS Here', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' */';
+							ms_custom_login_textarea( $options, $option_name, $option_cols, $option_rows, $content );
+						?></td>
 					</tr>
 				</table>
 			</div><!-- /#custom-css-setting -->
@@ -889,6 +923,10 @@ function ms_custom_login_headerurl( $login_header_url ) {
 		$login_header_url = esc_url( home_url( '/' ) );
 	}
 
+	if ( ! empty( $options['mcl_logo_link_url'] ) ) {
+		$login_header_url = esc_url( $options['mcl_logo_link_url'] );
+	}
+
 	return $login_header_url;
 }
 add_filter( 'login_headerurl', 'ms_custom_login_headerurl' );
@@ -908,6 +946,10 @@ function ms_custom_login_headertitle( $login_header_title ) {
 		} else {
 			$login_header_title = get_option( 'blogname' );
 		}
+	}
+
+	if ( ! empty( $options['mcl_logo_link_title'] ) ) {
+		$login_header_title = esc_attr( $options['mcl_logo_link_title'] );
 	}
 
 	return $login_header_title;
@@ -975,7 +1017,7 @@ function ms_custom_login_style() {
 // html
 if ( $options['mcl_page_bg_color'] != $default['mcl_page_bg_color'] ) : ?>
 html {
-	background: <?php esc_attr_e( $options['mcl_page_bg_color'] ); ?> !important;
+	background: <?php echo esc_attr( $options['mcl_page_bg_color'] ); ?> !important;
 }
 <?php echo "\n"; endif;
 
@@ -1005,7 +1047,7 @@ if ( ( $options['mcl_page_bg_color'] != $default['mcl_page_bg_color'] ) || ! emp
 // .login label
 if ( $options['mcl_text_color'] != $default['mcl_text_color'] ) : ?>
 .login label {
-	color: <?php esc_attr_e( $options['mcl_text_color'] ); ?>;
+	color: <?php echo esc_attr( $options['mcl_text_color'] ); ?>;
 }
 <?php echo "\n"; endif;
 
@@ -1014,7 +1056,7 @@ if ( $options['mcl_link_color'] != $default['mcl_link_color'] ) : ?>
 a,
 .login #nav a,
 .login #backtoblog a {
-	color: <?php esc_attr_e( $options['mcl_link_color'] ); ?>;
+	color: <?php echo esc_attr( $options['mcl_link_color'] ); ?>;
 }
 <?php echo "\n"; endif;
 
@@ -1025,7 +1067,7 @@ a:active,
 a:focus,
 .login #nav a:hover,
 .login #backtoblog a:hover {
-	color: <?php esc_attr_e( $options['mcl_link_color_hover'] ); ?>;
+	color: <?php echo esc_attr( $options['mcl_link_color_hover'] ); ?>;
 }
 <?php echo "\n"; endif;
 
@@ -1167,14 +1209,14 @@ if ( $logo_hover && ( $options['mcl_logo_text_hover'] != $default['mcl_logo_text
 .login h1 a:hover,
 .login h1 a:active,
 .login h1 a:focus {
-	color: <?php esc_attr_e( $options['mcl_logo_text_hover'] ); ?>;
+	color: <?php echo esc_attr( $options['mcl_logo_text_hover'] ); ?>;
 }
 <?php echo "\n"; endif;
 
 // .login .button-primary
 if ( $options['mcl_btn_bg_color'] != $default['mcl_btn_bg_color'] ) : ?>
 .login .button-primary {
-	background: <?php esc_attr_e( $options['mcl_btn_bg_color'] ); ?>;
+	background: <?php echo esc_attr( $options['mcl_btn_bg_color'] ); ?>;
 }
 <?php echo "\n"; endif;
 
@@ -1183,7 +1225,7 @@ if ( $options['mcl_btn_bg_hover'] != $default['mcl_btn_bg_hover'] ) : ?>
 .login .button-primary:hover,
 .login .button-primary:focus,
 .login .button-primary:active {
-	background: <?php esc_attr_e( $options['mcl_btn_bg_hover'] ); ?>;
+	background: <?php echo esc_attr( $options['mcl_btn_bg_hover'] ); ?>;
 }
 <?php echo "\n"; endif;
 
@@ -1194,13 +1236,13 @@ if ( ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) ||
 .login .button-primary:focus,
 .login .button-primary:active {
 <?php if ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) : ?>
-	border-color: <?php esc_attr_e( $options['mcl_btn_border_color'] ); ?>;
+	border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
 	-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
 	box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
 <?php endif;
 
 if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
-	color: <?php esc_attr_e( $options['mcl_btn_text_color'] ); ?>;
+	color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
 <?php endif; ?>
 }
 <?php echo "\n"; endif;

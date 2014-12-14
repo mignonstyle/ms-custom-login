@@ -6,34 +6,82 @@
 
 /**
  * ------------------------------------------------------------
- * 10.0 - Checkbox
+ * 10.0 - Text
  * ------------------------------------------------------------
  */
 
-function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $option_img = '' ) {
+function ms_custom_login_textfield( $options, $option_name, $option_label = '', $option_type = 'text', $option_class = 'regular-text', $label_after = '', $placeholder = '' ) {
 ?>
-	<p class="checkbox"><label><input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" type="checkbox" value="1" <?php checked( $options[$option_name], 1 ); ?> /><?php
-	if ( ! empty( $option_img ) ) {
-		echo '<img src="' . esc_url( plugins_url( $option_img, __FILE__ ) ) . '" alt="' . esc_attr( $option_text ) . '">';
+	<p><?php
+	if ( ! empty( $option_label ) ) {
+		echo '<label for="ms_custom_login_options[' . esc_attr( $option_name ) . ']">' . esc_attr( $option_label ) . '</label>';
+	} ?>
+	<input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" class="<?php echo esc_attr( $option_class ); ?>" type="<?php echo esc_attr( $option_type ); ?>" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]"<?php echo ( ! empty( $placeholder ) ) ? ' placeholder="' . esc_attr( $placeholder ) . '"' : ''; ?> value="<?php
+	switch ( $option_type ){
+		case 'url':
+			echo esc_url( $options[$option_name] );
+			break;
+		case 'email':
+			echo antispambot( $options[$option_name] );
+			break;
+		case 'number':
+			echo absint( $options[$option_name] );
+			break;
+		case 'hidden':
+			echo esc_attr( $options[$option_name] );
+			break;
+		default:
+			echo esc_attr( $options[$option_name] );
 	}
-	esc_attr_e( $option_text ); ?></label></p>
+?>" /><?php
+		echo ( ! empty( $label_after ) ) ? '&nbsp;' . esc_attr( $label_after ) : '';
+	?></p>
 <?php
 }
 
 /**
  * ------------------------------------------------------------
- * 10.1 - Radio Button
+ * 10.1 - Textarea
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_textarea( $options, $option_name, $option_cols = '60', $option_rows = '3', $content = '' ) {
+	$content =  ( ! empty( $content ) ) ? $content : $options[$option_name];
+?>
+	<p><textarea id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" cols="<?php echo absint( $option_cols ); ?>" rows="<?php echo absint( $option_rows ); ?>" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]"><?php echo esc_textarea( $content ); ?></textarea></p>
+<?php
+}
+
+/**
+ * ------------------------------------------------------------
+ * 10.2 - Checkbox
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $option_img = '' ) {
+?>
+	<p class="checkbox"><label><input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" type="checkbox" value="1" <?php checked( $options[$option_name], 1 ); ?> /><?php
+	if ( ! empty( $option_img ) ) {
+		echo '<img src="' . esc_url( plugins_url( $option_img, __FILE__ ) ) . '" alt="' . esc_attr( $option_text ) . '">';
+	}
+	echo esc_attr( $option_text ); ?></label></p>
+<?php
+}
+
+/**
+ * ------------------------------------------------------------
+ * 10.3 - Radio Button
  * ------------------------------------------------------------
  */
 
 function ms_custom_login_radio( $options, $option_array, $option_id, $option_name ) {
 	if ( is_array( $option_array ) ) {
 ?>
-	<div id="<?php esc_attr_e( $option_id ); ?>" class="radio-button">
+	<div id="<?php echo esc_attr( $option_id ); ?>" class="radio-button">
 	<?php foreach ( $option_array as $option ) : ?>
-		<label><input type="radio" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" value="<?php esc_attr_e( $option['value'] ); ?>" <?php checked( $options[$option_name], $option['value'] ); ?> /><?php esc_attr_e( $option['label'] ); ?>
+		<label><input type="radio" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" value="<?php echo esc_attr( $option['value'] ); ?>" <?php checked( $options[$option_name], $option['value'] ); ?> /><?php echo esc_attr( $option['label'] ); ?>
 		<?php if ( isset( $option['img'] ) ) : ?>
-			<img src="<?php echo esc_url( plugins_url( 'img/' . $option['img'] , __FILE__ ) ) ?>" alt="<?php esc_attr_e( $option['label'] ); ?>">
+			<img src="<?php echo esc_url( plugins_url( 'img/' . $option['img'] , __FILE__ ) ) ?>" alt="<?php echo esc_attr( $option['label'] ); ?>">
 		<?php endif; ?></label>
 	<?php endforeach; ?>
 	</div>
@@ -43,16 +91,16 @@ function ms_custom_login_radio( $options, $option_array, $option_id, $option_nam
 
 /**
  * ------------------------------------------------------------
- * 10.2 - Select Box
+ * 10.4 - Select Box
  * ------------------------------------------------------------
  */
 
 function ms_custom_login_select( $options, $option_array, $option_name ) {
 ?>
-	<select id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" >
+	<select id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" >
 	<?php if ( is_array( $option_array ) ) :
 		foreach ( $option_array as $option ) : ?>
-			<option value="<?php esc_attr_e( $option['value'] ); ?>" <?php selected( $options[$option_name], $option['value'] ); ?>><?php esc_attr_e( $option['label'] ); ?></option>
+			<option value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[$option_name], $option['value'] ); ?>><?php echo esc_attr( $option['label'] ); ?></option>
 	<?php endforeach; endif; ?>
 	</select>
 <?php
@@ -60,7 +108,7 @@ function ms_custom_login_select( $options, $option_array, $option_name ) {
 
 /**
  * ------------------------------------------------------------
- * 10.3 - Color Picker
+ * 10.5 - Color Picker
  * ------------------------------------------------------------
  */
 
@@ -69,17 +117,17 @@ function ms_custom_login_color_picker( $options, $option_name, $default_color ) 
 
 ?>
 	<div class="color-picker">
-		<input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" value="<?php
+		<input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" value="<?php
 	$color = ms_custom_login_sanitize_hex_color( $options[$option_name] );
 	$color = ! empty( $color ) ? $color : $default_color;
-	esc_attr_e( $color ); ?>" type="text" data-default-color="<?php esc_attr_e( $default_color ); ?>" class="color-picker-field" />
+	echo esc_attr( $color ); ?>" type="text" data-default-color="<?php echo esc_attr( $default_color ); ?>" class="color-picker-field" />
 	</div>
 <?php
 }
 
 /**
  * ------------------------------------------------------------
- * 10.3.1 - Color Sanitize
+ * 10.5.1 - Color Sanitize
  * ------------------------------------------------------------
  */
 
@@ -96,27 +144,33 @@ function ms_custom_login_sanitize_hex_color( $color ) {
 
 /**
  * ------------------------------------------------------------
- * 10.4 - Media UpLoader
+ * 10.6 - Media UpLoader
  * ------------------------------------------------------------
  */
 
-function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $option_name, $option_desc ) {
+function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $option_name, $option_desc = '', $option_desc2 = '' ) {
 	$upload_remove_class = ! empty( $options[$option_name] ) ? 'remove-open' : 'upload-open';
 
 	if ( function_exists( 'wp_enqueue_media' ) ) : ?>
-		<div id="option-<?php esc_attr_e( $option_id ); ?>" class="media-upload">
-			<p><?php esc_attr_e( $option_desc ); ?></p>
-			<div class="upload-remove <?php esc_attr_e( $upload_remove_class ); ?>">
-				<input id="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" name="ms_custom_login_options[<?php esc_attr_e( $option_name ); ?>]" value="<?php echo esc_url( $options[$option_name] ); ?>" type="hidden" class="regular-text" />
+		<div id="option-<?php echo esc_attr( $option_id ); ?>" class="media-upload">
+			<?php
+				if ( ! empty( $option_desc ) ) {
+				echo '<p>' . esc_attr( $option_desc ) ;
+				echo ( ! empty( $option_desc2 ) ) ? '<br />' . esc_attr( $option_desc2 ) : '';
+				echo '</p>';
+				}
+			?>
+			<div class="upload-remove <?php echo esc_attr( $upload_remove_class ); ?>">
+				<input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" value="<?php echo esc_url( $options[$option_name] ); ?>" type="hidden" class="regular-text" />
 				<table><tr>
-					<td class="upload-button"><input id="option-upload-<?php esc_attr_e( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
+					<td class="upload-button"><input id="option-upload-<?php echo esc_attr( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
 					<?php if ( ! empty( $options[$option_name] ) ) {
 						$image_src = esc_url( $options[$option_name] );
 						if( preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $image_src ) ) {
 							echo '<td class="upload-preview"><img src="'.$image_src.'" alt="" /></td>';
 						}
 					} ?>
-					<td class="remove-button"><input id="option-remove-<?php esc_attr_e( $option_id ); ?>" class="button option-remove-button" value="<?php _e( 'Delete Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
+					<td class="remove-button"><input id="option-remove-<?php echo esc_attr( $option_id ); ?>" class="button option-remove-button" value="<?php _e( 'Delete Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>" type="button"></td>
 				</tr></table>
 			</div>
 		</div>
@@ -189,6 +243,10 @@ function ms_custom_login_validate( $input ) {
 		if ( ! isset( $input['mcl_logo_link_attr'] ) )
 			$input['mcl_logo_link_attr'] = null;
 		$input['mcl_logo_link_attr'] = ( $input['mcl_logo_link_attr'] == 1 ? 1 : 0 );
+
+		$input['mcl_logo_link_url'] = esc_url_raw( $input['mcl_logo_link_url'] );
+
+		$input['mcl_logo_link_title'] = esc_attr( $input['mcl_logo_link_title'] );
 
 		if ( ! isset( $input['mcl_show_logo_img'] ) )
 			$input['mcl_show_logo_img'] = null;

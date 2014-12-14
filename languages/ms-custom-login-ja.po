@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MS Custom Login\n"
-"POT-Creation-Date: 2014-11-27 13:39+0900\n"
-"PO-Revision-Date: 2014-11-27 13:39+0900\n"
+"POT-Creation-Date: 2014-12-14 11:14+0900\n"
+"PO-Revision-Date: 2014-12-14 11:14+0900\n"
 "Last-Translator: Mignon Style <mignonxstyle@gmail.com>\n"
 "Language-Team: Mignon Style <mignonxstyle@gmail.com>\n"
 "Language: Japanese\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Settings"
 msgstr "設定"
 
-#: ../ms-custom-login.php:115 ../inc/login-register.php:112
+#: ../ms-custom-login.php:115 ../inc/login-register.php:166
 msgid "Select Image"
 msgstr "画像を選択"
 
@@ -42,412 +42,429 @@ msgstr "画像を選択"
 msgid "Set up Image"
 msgstr "画像を設定"
 
-#: ../ms-custom-login.php:238
+#: ../ms-custom-login.php:240
 msgid "Add drop shadow"
 msgstr "影をつける"
 
-#: ../ms-custom-login.php:243
+#: ../ms-custom-login.php:245
 msgid "Remove drop shadow"
 msgstr "影をつけない"
 
-#: ../ms-custom-login.php:259
+#: ../ms-custom-login.php:261
 msgid "Left"
 msgstr "左"
 
-#: ../ms-custom-login.php:263 ../ms-custom-login.php:287
+#: ../ms-custom-login.php:265 ../ms-custom-login.php:289
 msgid "Center"
 msgstr "中央"
 
-#: ../ms-custom-login.php:267
+#: ../ms-custom-login.php:269
 msgid "Right"
 msgstr "右"
 
-#: ../ms-custom-login.php:283
+#: ../ms-custom-login.php:285
 msgid "Top"
 msgstr "上"
 
-#: ../ms-custom-login.php:291
+#: ../ms-custom-login.php:293
 msgid "Bottom"
 msgstr "下"
 
-#: ../ms-custom-login.php:307
+#: ../ms-custom-login.php:309
 msgid "Tile"
 msgstr "タイル"
 
-#: ../ms-custom-login.php:311
+#: ../ms-custom-login.php:313
 msgid "Tile Horizontally"
 msgstr "水平方向に繰り返し"
 
-#: ../ms-custom-login.php:315
+#: ../ms-custom-login.php:317
 msgid "Tile Vertically"
 msgstr "垂直方向に繰り返し"
 
-#: ../ms-custom-login.php:319
+#: ../ms-custom-login.php:321
 msgid "No Repeat"
 msgstr "繰り返しなし"
 
-#: ../ms-custom-login.php:335
+#: ../ms-custom-login.php:337
 msgid "Scroll"
 msgstr "スクロール"
 
-#: ../ms-custom-login.php:339
+#: ../ms-custom-login.php:341
 msgid "Fixed"
 msgstr "固定"
 
-#: ../ms-custom-login.php:355
+#: ../ms-custom-login.php:357
 msgid "Auto"
 msgstr "Auto"
 
-#: ../ms-custom-login.php:359
+#: ../ms-custom-login.php:361
 msgid "Contain"
 msgstr "Contain"
 
-#: ../ms-custom-login.php:363
+#: ../ms-custom-login.php:365
 msgid "Cover"
 msgstr "Cover"
 
-#: ../ms-custom-login.php:379
+#: ../ms-custom-login.php:381
 msgid "1"
 msgstr "1"
 
-#: ../ms-custom-login.php:383
+#: ../ms-custom-login.php:385
 msgid "0.9"
 msgstr "0.9"
 
-#: ../ms-custom-login.php:387
+#: ../ms-custom-login.php:389
 msgid "0.8"
 msgstr "0.8"
 
-#: ../ms-custom-login.php:391
+#: ../ms-custom-login.php:393
 msgid "0.7"
 msgstr "0.7"
 
-#: ../ms-custom-login.php:395
+#: ../ms-custom-login.php:397
 msgid "0.6"
 msgstr "0.6"
 
-#: ../ms-custom-login.php:399
+#: ../ms-custom-login.php:401
 msgid "0.5"
 msgstr "0.5"
 
-#: ../ms-custom-login.php:403
+#: ../ms-custom-login.php:405
 msgid "0.4"
 msgstr "0.4"
 
-#: ../ms-custom-login.php:407
+#: ../ms-custom-login.php:409
 msgid "0.3"
 msgstr "0.3"
 
-#: ../ms-custom-login.php:411
+#: ../ms-custom-login.php:413
 msgid "0.2"
 msgstr "0.2"
 
-#: ../ms-custom-login.php:415
+#: ../ms-custom-login.php:417
 msgid "0.1"
 msgstr "0.1"
 
-#: ../ms-custom-login.php:419
+#: ../ms-custom-login.php:421
 msgid "0"
 msgstr "0"
 
-#: ../ms-custom-login.php:435
+#: ../ms-custom-login.php:437
 msgid "Login Page Settings"
 msgstr "ログインページの設定"
 
-#: ../ms-custom-login.php:439 ../ms-custom-login.php:826
+#: ../ms-custom-login.php:441 ../ms-custom-login.php:855
 msgid "Custom CSS"
 msgstr "カスタムCSS"
 
-#: ../ms-custom-login.php:447
+#: ../ms-custom-login.php:449
 msgid "Option"
 msgstr "オプション"
 
-#: ../ms-custom-login.php:478
+#: ../ms-custom-login.php:480
 msgid "You do not have sufficient permissions to access this page."
 msgstr "このページにアクセスするための十分な権限がありません。"
 
-#: ../ms-custom-login.php:498
+#: ../ms-custom-login.php:500
 msgid "Login Page Setting"
 msgstr "ページの設定"
 
-#: ../ms-custom-login.php:502 ../ms-custom-login.php:688
+#: ../ms-custom-login.php:504 ../ms-custom-login.php:716
 #, php-format
 msgid "%s Background Color"
 msgstr "%sの背景色"
 
-#: ../ms-custom-login.php:502 ../ms-custom-login.php:511
-#: ../ms-custom-login.php:521 ../ms-custom-login.php:547
-#: ../ms-custom-login.php:549 ../ms-custom-login.php:561
+#: ../ms-custom-login.php:504 ../ms-custom-login.php:513
+#: ../ms-custom-login.php:525 ../ms-custom-login.php:551
+#: ../ms-custom-login.php:553 ../ms-custom-login.php:571
 msgid "Page"
 msgstr "ページ"
 
-#: ../ms-custom-login.php:511 ../ms-custom-login.php:706
+#: ../ms-custom-login.php:513 ../ms-custom-login.php:734
 #, php-format
 msgid "%s Background Image"
 msgstr "%sの背景画像"
 
-#: ../ms-custom-login.php:515
+#: ../ms-custom-login.php:517
 msgid "The image you set will be used for the backgrounds of the login page."
 msgstr "設定した画像がログインページの背景に使用されます。"
 
-#: ../ms-custom-login.php:515 ../ms-custom-login.php:623
-#: ../ms-custom-login.php:710
+#: ../ms-custom-login.php:518 ../ms-custom-login.php:643
+#: ../ms-custom-login.php:739
 #, php-format
 msgid "Recommendation: %s."
 msgstr "おすすめは %sです。"
 
-#: ../ms-custom-login.php:515
+#: ../ms-custom-login.php:518
 msgid "png, jpg or gif"
 msgstr "png、jpg、gifファイル"
 
-#: ../ms-custom-login.php:521 ../ms-custom-login.php:716
+#: ../ms-custom-login.php:525 ../ms-custom-login.php:745
 #, php-format
 msgid "%s Background Position"
 msgstr "%sの背景画像の位置"
 
-#: ../ms-custom-login.php:523 ../ms-custom-login.php:718
+#: ../ms-custom-login.php:527 ../ms-custom-login.php:747
 msgid "Horizontal direction"
 msgstr "水平方向"
 
-#: ../ms-custom-login.php:528 ../ms-custom-login.php:723
+#: ../ms-custom-login.php:532 ../ms-custom-login.php:752
 msgid "Vertical direction"
 msgstr "垂直方向"
 
-#: ../ms-custom-login.php:533 ../ms-custom-login.php:728
+#: ../ms-custom-login.php:537 ../ms-custom-login.php:757
 msgid "Repeat"
 msgstr "繰り返し"
 
-#: ../ms-custom-login.php:538
+#: ../ms-custom-login.php:542
 msgid "Attachment"
 msgstr "表示の固定"
 
-#: ../ms-custom-login.php:547
+#: ../ms-custom-login.php:551
 #, php-format
 msgid "%s Background Size"
 msgstr "%sの背景画像のサイズ"
 
-#: ../ms-custom-login.php:549
+#: ../ms-custom-login.php:553
 #, php-format
 msgid "Please Select a %s background size or enter a value."
 msgstr "%sの背景のサイズを選択するか、値を入力してください。"
 
-#: ../ms-custom-login.php:556
+#: ../ms-custom-login.php:564
 msgid "Enter a value"
 msgstr "値を入力"
 
-#: ../ms-custom-login.php:561 ../ms-custom-login.php:762
+#: ../ms-custom-login.php:571 ../ms-custom-login.php:791
 #, php-format
 msgid "%s Text Color"
 msgstr "%sの文字色"
 
-#: ../ms-custom-login.php:563 ../ms-custom-login.php:652
+#: ../ms-custom-login.php:573 ../ms-custom-login.php:672
 msgid "Text color"
 msgstr "文字の色"
 
-#: ../ms-custom-login.php:568
+#: ../ms-custom-login.php:578
 msgid "Link color"
 msgstr "リンクの色"
 
-#: ../ms-custom-login.php:573 ../ms-custom-login.php:657
-#: ../ms-custom-login.php:787
+#: ../ms-custom-login.php:583 ../ms-custom-login.php:677
+#: ../ms-custom-login.php:816
 msgid "Hover color"
 msgstr "hover の色"
 
-#: ../ms-custom-login.php:585
+#: ../ms-custom-login.php:595
 msgid "Login Page Logo Setting"
 msgstr "ロゴの設定"
 
-#: ../ms-custom-login.php:589
+#: ../ms-custom-login.php:599
 msgid "Logo Display"
 msgstr "ロゴの表示"
 
-#: ../ms-custom-login.php:592
+#: ../ms-custom-login.php:602
 msgid "Display a logo."
 msgstr "ロゴを表示する"
 
-#: ../ms-custom-login.php:601
+#: ../ms-custom-login.php:611
 msgid "Link Attribute"
 msgstr "ロゴのリンク属性"
 
-#: ../ms-custom-login.php:604
+#: ../ms-custom-login.php:614
 msgid "Use site name and URL for the logo."
 msgstr "サイト名とサイトのURLをロゴに使用する"
 
-#: ../ms-custom-login.php:610
+#: ../ms-custom-login.php:617
+msgid "Use the URL and title of the Web site to logo of link attributes."
+msgstr "ロゴのリンク属性にWebサイトのURLとタイトルを使用します。"
+
+#: ../ms-custom-login.php:617
+msgid ""
+"Please enter if you want to change the URL and title of the link attribute."
+msgstr "リンク属性のURLとタイトルを変更する場合は入力してください。"
+
+#: ../ms-custom-login.php:618
+msgid "URL of the link attributes"
+msgstr "リンク属性のURL"
+
+#: ../ms-custom-login.php:622
+msgid "Title of the link attributes"
+msgstr "リンク属性のタイトル"
+
+#: ../ms-custom-login.php:629
 msgid "Logo Image Display"
 msgstr "ロゴ画像の表示"
 
-#: ../ms-custom-login.php:613
+#: ../ms-custom-login.php:632
 msgid "Display the logo image."
 msgstr "ロゴの画像を表示する"
 
-#: ../ms-custom-login.php:619
+#: ../ms-custom-login.php:638
 msgid "Logo Image"
 msgstr "ロゴの画像"
 
-#: ../ms-custom-login.php:623
+#: ../ms-custom-login.php:642
 msgid "The image you set will be used for the logo of the login page."
 msgstr "設定した画像がログインページのロゴに使用されます。"
 
-#: ../ms-custom-login.php:623
+#: ../ms-custom-login.php:643
 msgid "a png, jpg or gif file of width 320px"
 msgstr "幅 320pxの png、jpg、gifファイル"
 
-#: ../ms-custom-login.php:633
+#: ../ms-custom-login.php:653
 msgid "Logo Text"
 msgstr "ロゴの文字"
 
-#: ../ms-custom-login.php:636
+#: ../ms-custom-login.php:656
 msgid "Display the logo text."
 msgstr "ロゴの文字を表示する"
 
-#: ../ms-custom-login.php:642
+#: ../ms-custom-login.php:662
 msgid "Font Size"
 msgstr "フォントサイズ"
 
-#: ../ms-custom-login.php:644
+#: ../ms-custom-login.php:664
 msgid "Set font size of the logo. The default is 20px."
 msgstr "ロゴのフォントサイズを設定します。デフォルトは 20pxです。"
 
-#: ../ms-custom-login.php:645 ../ms-custom-login.php:740
+#: ../ms-custom-login.php:665 ../ms-custom-login.php:769
 msgid "px"
 msgstr "px"
 
-#: ../ms-custom-login.php:650
+#: ../ms-custom-login.php:670
 msgid "Text Color"
 msgstr "文字の色"
 
-#: ../ms-custom-login.php:666
+#: ../ms-custom-login.php:686
 msgid "Font Family"
 msgstr "フォントの種類"
 
-#: ../ms-custom-login.php:673
+#: ../ms-custom-login.php:697
 msgid "Web Font"
 msgstr "Webフォント"
 
-#: ../ms-custom-login.php:684
+#: ../ms-custom-login.php:712
 msgid "Login Form Setting"
 msgstr "フォームの設定"
 
-#: ../ms-custom-login.php:688 ../ms-custom-login.php:706
-#: ../ms-custom-login.php:716 ../ms-custom-login.php:737
-#: ../ms-custom-login.php:745
+#: ../ms-custom-login.php:716 ../ms-custom-login.php:734
+#: ../ms-custom-login.php:745 ../ms-custom-login.php:766
+#: ../ms-custom-login.php:774
 msgid "Form"
 msgstr "フォーム"
 
-#: ../ms-custom-login.php:690
+#: ../ms-custom-login.php:718
 msgid ""
 "Select the transparency if you want to make the color of the background "
 "transparent. The default is Opacity."
 msgstr ""
 "背景の色を透明にする場合は透明度を選択してください。デフォルトは不透明です。"
 
-#: ../ms-custom-login.php:692 ../ms-custom-login.php:782
+#: ../ms-custom-login.php:720 ../ms-custom-login.php:811
 msgid "Background color"
 msgstr "背景の色"
 
-#: ../ms-custom-login.php:697
+#: ../ms-custom-login.php:725
 msgid "Background Transparency"
 msgstr "背景の透明度"
 
-#: ../ms-custom-login.php:697
+#: ../ms-custom-login.php:725
 msgid "( Transparency : 0 - Opacity : 1 )"
 msgstr "（ 透明 : 0 〜 不透明 : 1 ）"
 
-#: ../ms-custom-login.php:710
+#: ../ms-custom-login.php:738
 msgid "The image you set will be used as a background image of the login form."
 msgstr "設定した画像がログインページのフォームの背景に使用されます。"
 
-#: ../ms-custom-login.php:710
+#: ../ms-custom-login.php:739
 msgid "a png, jpg or gif file of width 320px, height 275px"
 msgstr "幅320px、高さ 275pxの png、jpg、gif ファイル"
 
-#: ../ms-custom-login.php:737
+#: ../ms-custom-login.php:766
 #, php-format
 msgid "%s Rounded Rectangle Size"
 msgstr "%sの角丸のサイズ"
 
-#: ../ms-custom-login.php:739
+#: ../ms-custom-login.php:768
 msgid "Set the size of the rounded corners in px. The default is 0px."
 msgstr "角丸のサイズをpxで設定します。デフォルトは 0pxです。"
 
-#: ../ms-custom-login.php:745
+#: ../ms-custom-login.php:774
 #, php-format
 msgid "%s Box Shadow"
 msgstr "%sの影"
 
-#: ../ms-custom-login.php:758
+#: ../ms-custom-login.php:787
 msgid "Login Button Setting"
 msgstr "ボタンの設定"
 
-#: ../ms-custom-login.php:762 ../ms-custom-login.php:771
-#: ../ms-custom-login.php:780
+#: ../ms-custom-login.php:791 ../ms-custom-login.php:800
+#: ../ms-custom-login.php:809
 msgid "Button"
 msgstr "ボタン"
 
-#: ../ms-custom-login.php:771
+#: ../ms-custom-login.php:800
 #, php-format
 msgid "%s Border Color"
 msgstr "%sの枠線の色"
 
-#: ../ms-custom-login.php:780
+#: ../ms-custom-login.php:809
 #, php-format
 msgid "%s Color"
 msgstr "%sの色"
 
-#: ../ms-custom-login.php:799
+#: ../ms-custom-login.php:828
 msgid "Links Setting"
 msgstr "リンクの設定"
 
-#: ../ms-custom-login.php:803
+#: ../ms-custom-login.php:832
 msgid "Password Link"
 msgstr "「パスワード」のリンク"
 
-#: ../ms-custom-login.php:806
+#: ../ms-custom-login.php:835
 msgid "Hide the \"Register\" and \"Lost password\" links."
 msgstr "「登録」と「パスワードをお忘れですか？」のリンクを表示しない"
 
-#: ../ms-custom-login.php:812
+#: ../ms-custom-login.php:841
 msgid "Back Link"
 msgstr "「戻る」のリンク"
 
-#: ../ms-custom-login.php:815
+#: ../ms-custom-login.php:844
 msgid "Hide the \"Back to blog\" link."
 msgstr "「Webサイトへ戻る」のリンクを表示しない"
 
-#: ../ms-custom-login.php:829
+#: ../ms-custom-login.php:862
 msgid "Enter Your Custom CSS Here"
 msgstr "カスタマイズするCSSをここに入力してください。"
 
-#: ../ms-custom-login.php:839
+#: ../ms-custom-login.php:873
 msgid "Options"
 msgstr "オプション"
 
-#: ../ms-custom-login.php:842
+#: ../ms-custom-login.php:876
 msgid "Chocolat"
 msgstr "Chocolat"
 
-#: ../ms-custom-login.php:845
+#: ../ms-custom-login.php:879
 msgid "Use the theme \"Chocolat\" in the login page."
 msgstr "ログインページにテーマ「Chocolat」を使用する"
 
-#: ../ms-custom-login.php:857
+#: ../ms-custom-login.php:891
 msgid "Save Changes"
 msgstr "変更を保存"
 
-#: ../ms-custom-login.php:859 ../ms-custom-login.php:869
+#: ../ms-custom-login.php:893 ../ms-custom-login.php:903
 msgid "Preview"
 msgstr "プレビュー"
 
-#: ../ms-custom-login.php:861
+#: ../ms-custom-login.php:895
 msgid "Reset Defaults"
 msgstr "リセット"
 
-#: ../inc/login-register.php:119
+#: ../inc/login-register.php:173
 msgid "Delete Image"
 msgstr "画像を削除"
 
-#: ../inc/login-register.php:124
+#: ../inc/login-register.php:178
 msgid ""
 "Sorry, WordPress you are using is not supported. Upgrade your WordPress."
 msgstr ""
