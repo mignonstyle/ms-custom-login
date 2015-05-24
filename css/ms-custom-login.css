@@ -217,6 +217,11 @@ Options Style
 	}
 }
 
+#ms-custom-login table.inline div,
+#ms-custom-login table.inline p {
+	display: inline;
+}
+
 /* ------------------------------------
 4.0 - image media-uploader
 ------------------------------------ */
@@ -245,6 +250,29 @@ Options Style
 }
 
 /* ------------------------------------
+8.0 - Option desc-option
+------------------------------------ */
+
+#ms-custom-login  #notice-option.update-nag {
+	display: block;
+	margin: 20px 0 0;
+}
+
+#ms-custom-login  #notice-option input {
+	display: none;
+}
+
+#ms-custom-login  #notice-option .notice-title,
+#ms-custom-login  #notice-option span {
+	font-weight: bold;
+}
+
+#ms-custom-login  #notice-option span {
+	color: #0074a2;
+	cursor: pointer;
+}
+
+/* ------------------------------------
 9.0 - CodeMirror
 ------------------------------------ */
 
@@ -260,8 +288,13 @@ Options Style
 9.1 - thickbox (preview)
 ------------------------------------ */
 
-#preview-popup {
+#ms-custom-login #preview-popup {
 	display: none;
+}
+
+#ms-custom-login #preview-container iframe {
+	height: 650px;
+	width: 100%;
 }
 
 /* ------------------------------------

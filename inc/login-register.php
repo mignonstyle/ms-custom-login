@@ -300,6 +300,20 @@ function ms_custom_login_validate( $input ) {
 		if ( ! array_key_exists( $input['mcl_form_boxshadow_radio'], ms_custom_login_form_boxshadow() ) )
 			$input['mcl_form_boxshadow_radio'] = null;
 
+		if ( ! isset( $input['mcl_form_x_select'] ) )
+			$input['mcl_form_x_select'] = null;
+		if ( ! array_key_exists( $input['mcl_form_x_select'], ms_custom_login_bg_position_x() ) )
+			$input['mcl_form_x_select'] = null;
+
+		if ( ! isset( $input['mcl_form_y_select'] ) )
+			$input['mcl_form_y_select'] = null;
+		if ( ! array_key_exists( $input['mcl_form_y_select'], ms_custom_login_bg_position_y() ) )
+			$input['mcl_form_y_select'] = null;
+
+		$input['mcl_form_x_pos'] = absint( $input['mcl_form_x_pos'] );
+
+		$input['mcl_form_y_pos'] = absint( $input['mcl_form_y_pos'] );
+
 		// Button Setting
 		$input['mcl_btn_text_color'] = esc_attr( $input['mcl_btn_text_color'] );
 

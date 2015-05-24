@@ -4,7 +4,7 @@ Contributors: mignonstyle
 Donate link: http://mignonstyle.com/
 Tags: login, admin, custom, customise, customize, customisation, customization, logo, custom login, custom logo
 Requires at least: 3.9
-Tested up to: 4.1
+Tested up to: 4.2.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,10 @@ Special Thanks!
 3. This plugin includes a special edition for users of WordPress Theme "Chocolat".
 
 == Changelog ==
+
+= 0.8 =
+* Add the selection of the "position of the form".
+* Add A Comment.
 
 = 0.7 =
 * Add the URL and title of the link attribute.

@@ -5,7 +5,7 @@
  * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.7
+ * Version: 0.8
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -209,6 +209,10 @@ function ms_custom_login_default_options() {
 		'mcl_form_bg_repeat_select' => 'repeat',
 		'mcl_form_radius'           => 0,
 		'mcl_form_boxshadow_radio'  => 'boxshadow_true',
+		'mcl_form_x_select'         => 'center',
+		'mcl_form_y_select'         => 'top',
+		'mcl_form_x_pos'            => 5,
+		'mcl_form_y_pos'            => 0,
 
 		// Button Setting
 		'mcl_btn_text_color'   => '#ffffff',
@@ -484,8 +488,14 @@ function ms_custom_login_options() {
 
 		<form method="post" action="options.php" enctype="multipart/form-data">
 		<?php settings_fields( 'ms_custom_login_options' );
-			if ( ! is_multisite() && is_user_logged_in() ) add_thickbox(); ?>
-			<input id="ms_custom_login_options[mcl_default]" class="regular-text" type="hidden" name="ms_custom_login_options[mcl_default]" value="<?php echo esc_attr( $options['mcl_default'] ); ?>" />
+			if ( ! is_multisite() && is_user_logged_in() ) {
+				add_thickbox();
+			}
+
+			$option_name = 'mcl_default';
+			$option_type = 'hidden';
+			ms_custom_login_textfield( $options, $option_name, '', $option_type );
+		?>
 
 	<div id="tabset"><?php /* tabset */ ?>
 		<ul class="tabs clearfix"><?php /* tabs */ ?>
@@ -595,7 +605,7 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Page Logo Setting', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr class="target2"><?php /* Logo Display */ ?>
+						<tr id="show-logo" class="target"><?php /* Logo Display */ ?>
 							<th scope="row"><?php _e( 'Logo Display', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><fieldset><?php
 								$option_name = 'mcl_show_logo';
@@ -605,15 +615,16 @@ function ms_custom_login_options() {
 						</tr>
 					</table>
 
-					<div id="show-logo" class="option-check hidebox2">
+					<div id="show-logo-attr" class="option-check hidebox show-logo">
 					<table class="form-table">
 						<tr><?php /* Logo Link Attribute */ ?>
 							<th scope="row"><?php _e( 'Link Attribute', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
-							<td><fieldset><?php
+							<td id="logo-link-attr" class="target"><fieldset><?php
 								$option_name = 'mcl_logo_link_attr';
 								$option_text = __( 'Use site name and URL for the logo.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
 								ms_custom_login_checkbox( $options, $option_name, $option_text );
 							?>
+							<div class="hidebox logo-link-attr">
 							<p><?php _e( 'Use the URL and title of the Web site to logo of link attributes.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?><br /><?php _e( 'Please enter if you want to change the URL and title of the link attribute.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><br />
 							<p><?php _e( 'URL of the link attributes', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
 								$option_name = 'mcl_logo_link_url';
@@ -622,10 +633,10 @@ function ms_custom_login_options() {
 							?><p><?php _e( 'Title of the link attributes', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
 							$option_name = 'mcl_logo_link_title';
 								ms_custom_login_textfield( $options, $option_name );
-							?></fieldset></td>
+							?></div></fieldset></td>
 						</tr>
 
-						<tr class="target"><?php /* Logo Image Display */ ?>
+						<tr id="show-logo-img" class="target"><?php /* Logo Image Display */ ?>
 							<th scope="row"><?php _e( 'Logo Image Display', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><fieldset><?php
 								$option_name = 'mcl_show_logo_img';
@@ -634,7 +645,7 @@ function ms_custom_login_options() {
 							?></fieldset></td>
 						</tr>
 
-						<tr class="hidebox"><?php /* Logo Image */ ?>
+						<tr class="hidebox show-logo-img"><?php /* Logo Image */ ?>
 							<th scope="row"><?php _e( 'Logo Image', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><fieldset><?php
 								$option_id = 'mcl-logo-img';
@@ -642,14 +653,14 @@ function ms_custom_login_options() {
 								$option_desc = __( 'The image you set will be used for the logo of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
 								$option_desc2 = sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'a png, jpg or gif file of width 320px', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
 								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc, $option_desc2 );
-							?></fieldset></td>
+								?></fieldset></td>
 						</tr>
 					</table>
 					</div>
 
-					<div id="show-text" class="option-check hidebox2">
+					<div id="show-text" class="option-check hidebox show-logo">
 					<table class="form-table">
-						<tr class="target"><?php /* Logo Text */ ?>
+						<tr id="show-logo-text" class="target"><?php /* Logo Text */ ?>
 							<th scope="row"><?php _e( 'Logo Text', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><fieldset><?php
 								$option_name = 'mcl_show_logo_text';
@@ -658,15 +669,19 @@ function ms_custom_login_options() {
 							?></fieldset></td>
 						</tr>
 
-						<tr class="hidebox"><?php /* Logo Text Font Size */ ?>
+						<tr class="hidebox show-logo-text"><?php /* Logo Text Font Size */ ?>
 							<th scope="row"><?php _e( 'Font Size', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><fieldset>
-								<p><?php _e( 'Set font size of the logo. The default is 20px.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p>
-								<input id="ms_custom_login_options[mcl_text_size]" name="ms_custom_login_options[mcl_text_size]" value="<?php echo absint( $options['mcl_text_size'] ); ?>" type="number" class="small-text" />&nbsp;<?php _e( 'px', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>
-							</fieldset></td>
+								<p><?php _e( 'Set font size of the logo. The default is 20px.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
+								$option_name = 'mcl_text_size';
+								$option_type = 'number';
+								$option_class = 'small-text';
+								$label_after = __( 'px', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								ms_custom_login_textfield( $options, $option_name, '', $option_type, $option_class, $label_after );
+								?></fieldset></td>
 						</tr>
 
-						<tr class="hidebox"><?php /* Logo Text Color */ ?>
+						<tr class="hidebox show-logo-text"><?php /* Logo Text Color */ ?>
 							<th scope="row"><?php _e( 'Text Color', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Text color', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
@@ -682,7 +697,7 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr class="hidebox"><?php /* Logo Text Font Family */ ?>
+						<tr class="hidebox show-logo-text"><?php /* Logo Text Font Family */ ?>
 							<th scope="row"><?php _e( 'Font Family', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><?php
 								$option_name = 'mcl_text_family';
@@ -693,7 +708,7 @@ function ms_custom_login_options() {
 							</td>
 						</tr>
 
-						<tr class="hidebox"><?php /* Logo Text Web Font */ ?>
+						<tr class="hidebox show-logo-text"><?php /* Logo Text Web Font */ ?>
 							<th scope="row"><?php _e( 'Web Font', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></th>
 							<td><?php
 								$option_name = 'mcl_text_webfont';
@@ -765,9 +780,13 @@ function ms_custom_login_options() {
 						<tr><?php /* Form Rounded Rectangle Size */ ?>
 							<th scope="row"><?php printf( __( '%s Rounded Rectangle Size', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Form', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
 							<td><fieldset>
-								<p><?php _e( 'Set the size of the rounded corners in px. The default is 0px.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p>
-								<input id="ms_custom_login_options[mcl_form_radius]" name="ms_custom_login_options[mcl_form_radius]" value="<?php echo absint( $options['mcl_form_radius'] ); ?>" type="number" class="small-text" />&nbsp;<?php _e( 'px', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?>
-							</fieldset></td>
+								<p><?php _e( 'Set the size of the rounded corners in px. The default is 0px.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p><?php
+								$option_name = 'mcl_form_radius';
+								$option_type = 'number';
+								$option_class = 'small-text';
+								$label_after = __( 'px', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+								ms_custom_login_textfield( $options, $option_name, '', $option_type, $option_class, $label_after );
+								?></fieldset></td>
 						</tr>
 
 						<tr><?php /* Form Box Shadow */ ?>
@@ -778,6 +797,72 @@ function ms_custom_login_options() {
 								$option_name = 'mcl_form_boxshadow_radio';
 								ms_custom_login_radio( $options, $option_array, $option_id, $option_name );
 							?></fieldset></td>
+						</tr>
+
+						<tr><?php /* Form Box Shadow */ ?>
+							<th scope="row"><?php printf( __( '%s Position', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'Form', MS_CUSTOM_LOGIN_TEXTDOMAIN ) ); ?></th>
+							<td>
+							<table class="nest inline">
+								<tr>
+									<td><p><?php _e( 'Horizontal direction', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p></td>
+									<td><p><?php _e( 'Vertical direction', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p></td>
+								</tr>
+								<tr>
+									<td><?php
+									$option_array = ms_custom_login_bg_position_x();
+									$option_name = 'mcl_form_x_select';
+
+									$option_name_pos = 'mcl_form_x_pos';
+									$option_label = '';
+									$option_type = 'tnumber';
+									$option_class = 'small-text';
+									$label_after = __( '%', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+
+									if ( strtoupper( get_locale() ) == 'JA' ) {
+										ms_custom_login_select( $options, $option_array, $option_name );
+									} else {
+										
+										echo '<div class="form-x-pos">';
+										ms_custom_login_textfield( $options, $option_name_pos, $option_label, $option_type, $option_class, $label_after );
+										echo '</div>';
+									}
+									echo '<div class="form-x-pos">' . __( 'From', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . '</div>';
+									if ( strtoupper( get_locale() ) == 'JA' ) {
+										echo '<div class="form-x-pos">';
+										ms_custom_login_textfield( $options, $option_name_pos, $option_label, $option_type, $option_class, $label_after );
+										echo '</div>';
+
+									} else {
+										ms_custom_login_select( $options, $option_array, $option_name );
+									} ?></td>
+
+									<td><?php
+									$option_array = ms_custom_login_bg_position_y();
+									$option_name = 'mcl_form_y_select';
+
+									$option_name_pos = 'mcl_form_y_pos';
+									$option_label = '';
+									$option_type = 'tnumber';
+									$option_class = 'small-text';
+									$label_after = __( '%', MS_CUSTOM_LOGIN_TEXTDOMAIN );
+
+									if ( strtoupper( get_locale() ) == 'JA' ) {
+										ms_custom_login_select( $options, $option_array, $option_name );
+									} else {
+										echo '<div class="form-y-pos">';
+										ms_custom_login_textfield( $options, $option_name_pos, $option_label, $option_type, $option_class, $label_after );
+										echo '</div>';
+									}
+									echo '<div class="form-y-pos">' . __( 'From', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . '</div>';
+									if ( strtoupper( get_locale() ) == 'JA' ) {
+										echo '<div class="form-y-pos">';
+										ms_custom_login_textfield( $options, $option_name_pos, $option_label, $option_type, $option_class, $label_after );
+										echo '</div>';
+									} else {
+										ms_custom_login_select( $options, $option_array, $option_name );
+									} ?></td>
+								</tr>
+							</table></td>
 						</tr>
 					</table>
 				</div>
@@ -887,27 +972,35 @@ function ms_custom_login_options() {
 
 	</div><!-- /#tabset -->
 
-	<div id="submit-button">
+	<div id="submit-button" class="clearfix">
 		<?php submit_button( __( 'Save Changes', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'primary', 'save' );
 			if ( ! is_multisite() && is_user_logged_in() ) : ?>
 				<p id="preview"><a class="thickbox button" href="<?php echo wp_login_url(); ?>" ><?php _e( 'Preview', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></a></p>
 			<?php endif;
 			submit_button( __( 'Reset Defaults', MS_CUSTOM_LOGIN_TEXTDOMAIN ), 'secondary', 'reset' ); ?>
-		</div>
-	</form>
-</div>
+	</div>
 
-<?php /* login page preview */
+	<!-- Notice Option -->
+	<div id="notice-option" class="update-nag clearfix">
+		<p class="notice-title"><?php _e( 'If you can not "Save changes" or "reset":', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?><span class="notice-open"><?php _e( 'More detailed', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></span><span class="notice-close"><?php _e( 'Dismiss this notice', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></span></p>
+		<p class="notice-desc"><?php echo __( 'When WAF setting of the server is enabled, you can not "Save changes" or "reset".', MS_CUSTOM_LOGIN_TEXTDOMAIN ) . ' ' . __( 'Please save the settings after you disable the WAF configuration.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?><br /><?php _e( 'Once you have save the settings, for security, please reenable the WAF setting.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?><br /><?php _e( 'Please contact the server administrator for more information.', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></p>
+	</div>
+	</form>
+
+	<?php /* login page preview */
 	if ( ! is_multisite() && is_user_logged_in() ) : ?>
 	<div id="preview-popup">
 		<h3 class="title"><?php _e( 'Preview', MS_CUSTOM_LOGIN_TEXTDOMAIN ); ?></h3>
 		<div class="preview-inline">
 			<div id="preview-container">
-				<iframe src="<?php echo wp_login_url( get_permalink() ); ?>" sandbox="" style="width: 100%; height: 650px;"></iframe>
+				<iframe src="<?php echo wp_login_url( get_permalink() ); ?>" sandbox=""></iframe>
 			</div>
 		</div>
 	</div>
-<?php endif;
+	<?php endif; ?>
+</div>
+
+<?php
 }
 
 /**
@@ -1246,6 +1339,34 @@ if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
 <?php endif; ?>
 }
 <?php echo "\n"; endif;
+
+// #login
+$login_css = '';
+
+if ( $options['mcl_form_x_select'] != $default['mcl_form_x_select'] ) {
+	if ( ! empty( $options['mcl_form_x_select'] ) ) $login_css .= "\t" . 'margin-' . esc_attr( $options['mcl_form_x_select'] ) . ': ' . absint( $options['mcl_form_x_pos'] ) . '%;'. "\n";
+}
+
+if ( $options['mcl_form_y_select'] != 'top' || $options['mcl_form_y_pos'] > 0 ) {
+	if ( $options['mcl_form_y_select'] == 'center' ) {
+		$form_y_pos = 50;
+	} else if ( $options['mcl_form_y_select'] == 'bottom' ) {
+		$form_y_pos = ( $options['mcl_form_y_pos'] > 0 ) ? 100 - absint( $options['mcl_form_y_pos'] ) : 100 ;
+	} else {
+		$form_y_pos = $options['mcl_form_y_pos'];
+	}
+
+	$login_css .= "\t" . 'padding-top: 0;'. "\n";
+	$login_css .= "\t" . 'position: relative;'. "\n";
+	$login_css .= "\t" . 'top: ' . absint( $form_y_pos ) . '%;'. "\n";
+	$login_css .= "\t" . '-webkit-transform: translateY(-' . absint( $form_y_pos ) . '%);'. "\n";
+	$login_css .= "\t" . '-ms-transform: translateY(-' . absint( $form_y_pos ) . '%);'. "\n";
+	$login_css .= "\t" . 'transform: translateY(-' . absint( $form_y_pos ) . '%);'. "\n";
+}
+
+if ( ! empty( $login_css ) ) {
+	echo '#login {' . "\n" . $login_css . '}' . "\n\n";
+}
 
 // #nav
 if ( ! empty( $options['mcl_hide_nav'] ) ) : ?>

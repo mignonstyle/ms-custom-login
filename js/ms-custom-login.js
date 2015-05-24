@@ -23,35 +23,93 @@ jQuery(function($){
 	}
 
 	// checkbox
-	$('.option-check .target input:checkbox, .option-check .target2 input:checkbox').change(function(){
-		var parent_id = $(this).parents('.option-check').attr('id');
-		checkbox_show_hide(parent_id);
+	$('.option-check .target input:checkbox').change(function(){
+		var eml = $(this);
+		var parent_id = eml.parents('.option-check').attr('id');
+		var elm_id = eml.parents('.target').attr('id');
+		checkbox_show_hide(eml, parent_id, elm_id);
 	});
 
 	function options_checkbox(){
-		$('.option-check').each(function(){
-			var parent_id = $(this).attr('id');
-			checkbox_show_hide(parent_id);
+		$('.option-check .target input:checkbox').each(function(){
+			var eml = $(this);
+			var parent_id = eml.parents('.option-check').attr('id');
+			var elm_id = eml.parents('.target').attr('id');
+			checkbox_show_hide(eml, parent_id, elm_id);
 		});
 	}
 
-	function checkbox_show_hide(parent_id){
-		parent_id = '#'+parent_id;
+	function checkbox_show_hide(eml, parent_id, elm_id){
+		parent_id = '#' + parent_id;
+		var elm_class = '.' + elm_id;
 
-		if ( parent_id == '#logo-setting'){
-			if($(parent_id+' .target2 input:checkbox').prop('checked')){
-				$(parent_id+' .hidebox2').show();
-			}else{
-				$(parent_id+' .hidebox2').hide();
-			}
+		if(eml.prop('checked')){
+			$('.hidebox' + elm_class).show();
 		}else{
-			if($(parent_id+' .target input:checkbox').prop('checked')){
-				$(parent_id+' .hidebox').show();
-			}else{
-				$(parent_id+' .hidebox').hide();
-			}
+			$('.hidebox' + elm_class).hide();
 		}
 	}
+
+	// form position select x
+	form_pos_select_x();
+	function form_pos_select_x(){
+		$('select[id*="mcl_form_x_select"]').change(function(){
+			form_pos_show_hide_x();
+		});
+	}
+
+	form_pos_show_hide_x();
+	function form_pos_show_hide_x(){
+		var select_x = $('select[id*="mcl_form_x_select"]').val();
+
+		if(select_x.indexOf('center') != -1){
+			$('.form-x-pos').hide();
+		}else{
+			$('.form-x-pos').show();
+		}
+	}
+
+	// form position select y
+	form_pos_select_y();
+	function form_pos_select_y(){
+		$('select[id*="mcl_form_y_select"]').change(function(){
+			form_pos_show_hide_y();
+		});
+	}
+
+	form_pos_show_hide_y();
+	function form_pos_show_hide_y(){
+		var select_x = $('select[id*="mcl_form_y_select"]').val();
+
+		if(select_x.indexOf('center') != -1){
+			$('.form-y-pos').hide();
+		}else{
+			$('.form-y-pos').show();
+		}
+	}
+
+	// notice option
+	$('#notice-option .notice-close').hide();
+	$('#notice-option .notice-desc').hide();
+	notice_option();
+
+	function notice_option(){
+		$('#notice-option .notice-open').click(function(){
+			$('#notice-option .notice-desc').show();
+			$('#notice-option .notice-close').show();
+			$('#notice-option .notice-open').hide();
+		});
+
+		$('#notice-option .notice-close').click(function(){
+			$('#notice-option .notice-desc').hide();
+			$('#notice-option .notice-close').hide();
+			$('#notice-option .notice-open').show();
+		});
+	}
+
+	$('#notice-option input').change(function(){
+		notice_option();
+	});
 
 	/*
 	* CodeMirror
