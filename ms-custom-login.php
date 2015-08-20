@@ -5,7 +5,7 @@
  * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.8
+ * Version: 0.9
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -1239,7 +1239,9 @@ if ( empty( $options['mcl_show_logo'] ) ) {
 		}
 	} else {
 		if ( ! empty( $options['mcl_logo_url'] ) ) {
-			list( $width, $height ) = getimagesize( $options['mcl_logo_url'] );
+			$abs_path = rtrim( ABSPATH, '/' );
+			$path = str_replace( site_url(), $abs_path, $options['mcl_logo_url'] );
+			list( $width, $height ) = getimagesize( $path );
 
 			if ( $width >= 320 ) {
 				$logo_size = 'cover';
@@ -1263,7 +1265,6 @@ if ( empty( $options['mcl_show_logo'] ) ) {
 			$width = 84;
 			$height = 84;
 		}
-
 		if ( ! empty( $options['mcl_show_logo_text'] ) ) {
 			$text_x = 'left';
 			$text_indent = ( $width + 10 ) . 'px';
