@@ -1,7 +1,7 @@
 === MS Custom Login ===
 
 Contributors: mignonstyle
-Donate link: http://mignonstyle.com/
+Donate link: https://www.amazon.co.jp/registry/wishlist/34JPDJL2WWR3O
 Tags: login, admin, custom, customise, customize, customisation, customization, logo, custom login, custom logo
 Requires at least: 3.9
 Tested up to: 4.5.2
