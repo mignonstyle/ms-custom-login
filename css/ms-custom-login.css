@@ -264,6 +264,8 @@ Options Style
 
 #ms-custom-login  #notice-option .notice-title,
 #ms-custom-login  #notice-option span {
+	color: #555;
+	font-size: 1em;
 	font-weight: bold;
 }
 

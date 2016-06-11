@@ -5,7 +5,7 @@
  * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 0.9
+ * Version: 1.0
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
@@ -63,6 +63,43 @@ function ms_custom_login_action_links( $links, $file ) {
 	return $links;
 }
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ms_custom_login_action_links', 10, 2 );
+
+/**
+ * ------------------------------------------------------------
+ * 0.0.3 - Initialize plugin links
+ * ------------------------------------------------------------
+ */
+
+function ms_custom_login_plugin_row_meta( $links, $file ) {
+
+	if ( plugin_basename( __FILE__ ) == $file ) {
+		$new_links = array(
+			'home'    => array(
+				'url'   => 'https://wordpress.org/plugins/ms-custom-login/',
+				'label' => __( 'Home', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			),
+			'support' => array(
+				'url'   => 'https://wordpress.org/support/plugin/ms-custom-login',
+				'label' => __( 'Support', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			),
+			'reviews' => array(
+				'url'   => 'https://wordpress.org/support/view/plugin-reviews/ms-custom-login',
+				'label' => __( 'Reviews', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			),
+			'donate'  => array(
+				'url'   => 'https://www.amazon.co.jp/registry/wishlist/34JPDJL2WWR3O',
+				'label' => __( 'Donate', MS_CUSTOM_LOGIN_TEXTDOMAIN ),
+			),
+		);
+
+		foreach( $new_links as $key => $value ) {
+			$links[$key] = '<a href="' . esc_url( $value['url'] ) . '" target="_blank">' . esc_html( $value['label'] ) . '</a>';
+		}
+	}
+
+	return $links;
+}
+add_filter( 'plugin_row_meta', 'ms_custom_login_plugin_row_meta', 10, 2 );
 
 /**
  * ------------------------------------------------------------
@@ -1257,7 +1294,7 @@ if ( empty( $options['mcl_show_logo'] ) ) {
 			$logo_height = absint ( $height ) . 'px';
 			$bg_position = 'center bottom';
 
-			$login_h1_a_css .= "\t" . 'background-image: url(' . esc_url( $options['mcl_logo_url'] ) . ');' . "\n";
+			$login_h1_a_css .= "\t" . 'background-image: url(' . esc_url( $options['mcl_logo_url'] ) . ') !important;' . "\n";
 			$login_h1_a_css .= "\t" . '-webkit-background-size: ' . esc_attr( $logo_size ) . ';' . "\n";
 			$login_h1_a_css .= "\t" . 'background-size: ' . esc_attr( $logo_size ) . ';' . "\n";
 			$login_h1_a_css .= "\t" . 'margin: 0 auto;' . "\n";
