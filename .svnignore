@@ -7,11 +7,10 @@ bin
 tests
 vendor
 README.md
-phpunit.xml
+phpunit.xml.dist
 phpcs.ruleset.xml
 composer.json
 composer.lock
 node_modules
 npm-debug.log
 package.json
-phpunit.xml
