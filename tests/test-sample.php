@@ -2,12 +2,14 @@
 /**
  * Class SampleTest
  *
- * @package ms-custom-login
+ * @package Ms_Custom_Login
  */
+
 /**
  * Sample test case.
  */
 class SampleTest extends WP_UnitTestCase {
+
 	/**
 	 * A single example test.
 	 */
