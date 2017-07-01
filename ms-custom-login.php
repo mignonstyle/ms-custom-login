@@ -489,7 +489,7 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Page Setting', 'ms-custom-login' ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php // translators: Page Background Color ?>
+						<tr><?php // translators: Page Background Color. ?>
 							<th scope="row"><?php printf( __( '%s Background Color', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><?php
 								$option_name = 'mcl_page_bg_color';
@@ -498,7 +498,7 @@ function ms_custom_login_options() {
 							?></td>
 						</tr>
 
-						<tr><?php // translators: Page Background Image ?>
+						<tr><?php // translators: Page Background Image. ?>
 							<th scope="row"><?php printf( __( '%s Background Image', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset><?php
 								$option_id = 'page-bg';
@@ -711,7 +711,7 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Form Setting', 'ms-custom-login' ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php // Form Background Color ?>
+						<tr><?php // translators: Form Background Color. ?>
 							<th scope="row"><?php printf( __( '%s Background Color', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td colspan="2"><p><?php _e( 'Select the transparency if you want to make the color of the background transparent. The default is Opacity.', 'ms-custom-login' ); ?></p></td>
@@ -729,7 +729,7 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr><?php // translators: Form Background Image ?>
+						<tr><?php // translators: Form Background Image. ?>
 							<th scope="row"><?php printf( __( '%s Background Image', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset><?php
 								$option_id = 'mcl-form-bg';
