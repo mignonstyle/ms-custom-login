@@ -1182,15 +1182,15 @@ function ms_custom_login_style() {
 	}
 
 	// .login h1 a
-	$login_h1_css = '';
+	$login_h1_css   = '';
 	$login_h1_a_css = '';
-	$logo_height = '';
-	$logo_width = '';
-	$line_height = '';
-	$text_x = '';
-	$text_indent = '';
-	$bg_position = '';
-	$logo_hover = false;
+	$logo_height    = '';
+	$logo_width     = '';
+	$line_height    = '';
+	$text_x         = '';
+	$text_indent    = '';
+	$bg_position    = '';
+	$logo_hover     = false;
 
 	if ( empty( $options['mcl_show_logo'] ) ) {
 		$login_h1_a_css .= "\t" . 'display: none;' . "\n";
@@ -1329,21 +1329,21 @@ function ms_custom_login_style() {
 
 	// .login .button-primary -border-.
 	if ( ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) || ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) ) : ?>
-	.login .button-primary,
-	.login .button-primary:hover,
-	.login .button-primary:focus,
-	.login .button-primary:active {
-	<?php if ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) : ?>
-		border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
-		-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
-		box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
-	<?php endif;
+		.login .button-primary,
+		.login .button-primary:hover,
+		.login .button-primary:focus,
+		.login .button-primary:active {
+		<?php if ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) : ?>
+			border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
+			-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+			box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+		<?php endif;
 
-	if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
-		color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
-	<?php endif; ?>
-	}
-	<?php echo "\n";
+		if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
+			color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
+		<?php endif; ?>
+		}
+		<?php echo "\n";
 	endif;
 
 	// #login.
