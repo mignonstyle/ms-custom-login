@@ -478,11 +478,11 @@ function ms_custom_login_options() {
 
 			<div id="tabset">
 				<ul class="tabs clearfix">
-				<?php if ( is_array( $tab_title ) ) {
-					foreach ( $tab_title as $tabs ) {
-						echo '<li><h3 class="title"><a href="#' . $tabs['id'] . '" id="tab-' . $tabs['id'] . '">' . $tabs['title'] . '</a></h3></li>' . "\n";
-					}
-				} ?>
+<?php if ( is_array( $tab_title ) ) {
+	foreach ( $tab_title as $tabs ) {
+		echo '<li><h3 class="title"><a href="#' . $tabs['id'] . '" id="tab-' . $tabs['id'] . '">' . $tabs['title'] . '</a></h3></li>' . "\n";
+	}
+} ?>
 				</ul>
 
 				<div id="<?php echo $tab_title['settings']['id']; ?>" class="panel">
@@ -1337,9 +1337,9 @@ function ms_custom_login_style() {
 			border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
 			-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
 			box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
-		<?php endif;
+		<?php endif; ?>
 
-		if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
+		<?php if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
 			color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
 		<?php endif; ?>
 		}
