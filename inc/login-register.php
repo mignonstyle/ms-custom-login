@@ -1,7 +1,8 @@
 <?php
 /**
- * login-register.php
- * option page register file
+ * Option page register file
+ *
+ * @package MS Custom Login
  */
 
 /**
@@ -44,7 +45,7 @@ function ms_custom_login_textfield( $options, $option_name, $option_label = '', 
  * ------------------------------------------------------------
  */
 function ms_custom_login_textarea( $options, $option_name, $option_cols = '60', $option_rows = '3', $content = '' ) {
-	$content =  ( ! empty( $content ) ) ? $content : $options[ $option_name ];
+	$content = ( ! empty( $content ) ) ? $content : $options[ $option_name ];
 ?>
 	<p><textarea id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" cols="<?php echo absint( $option_cols ); ?>" rows="<?php echo absint( $option_rows ); ?>" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]"><?php echo esc_textarea( $content ); ?></textarea></p>
 <?php
@@ -96,7 +97,8 @@ function ms_custom_login_select( $options, $option_array, $option_name ) {
 	<?php if ( is_array( $option_array ) ) :
 		foreach ( $option_array as $option ) : ?>
 			<option value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $option_name ], $option['value'] ); ?>><?php echo esc_attr( $option['label'] ); ?></option>
-	<?php endforeach; endif; ?>
+		<?php endforeach;
+	endif; ?>
 	</select>
 <?php
 }
@@ -112,9 +114,9 @@ function ms_custom_login_color_picker( $options, $option_name, $default_color ) 
 ?>
 	<div class="color-picker">
 		<input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" value="<?php
-	$color = ms_custom_login_sanitize_hex_color( $options[ $option_name ] );
-	$color = ! empty( $color ) ? $color : $default_color;
-	echo esc_attr( $color ); ?>" type="text" data-default-color="<?php echo esc_attr( $default_color ); ?>" class="color-picker-field" />
+		$color = ms_custom_login_sanitize_hex_color( $options[ $option_name ] );
+		$color = ! empty( $color ) ? $color : $default_color;
+		echo esc_attr( $color ); ?>" type="text" data-default-color="<?php echo esc_attr( $default_color ); ?>" class="color-picker-field" />
 	</div>
 <?php
 }
@@ -130,7 +132,7 @@ function ms_custom_login_sanitize_hex_color( $color ) {
 	}
 
 	// 3 or 6 hex digits, or the empty string.
-	if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
+	if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
 		return $color;
 	}
 
@@ -149,9 +151,9 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 		<div id="option-<?php echo esc_attr( $option_id ); ?>" class="media-upload">
 			<?php
 				if ( ! empty( $option_desc ) ) {
-				echo '<p>' . esc_attr( $option_desc ) ;
-				echo ( ! empty( $option_desc2 ) ) ? '<br />' . esc_attr( $option_desc2 ) : '';
-				echo '</p>';
+					echo '<p>' . esc_attr( $option_desc ) ;
+					echo ( ! empty( $option_desc2 ) ) ? '<br />' . esc_attr( $option_desc2 ) : '';
+					echo '</p>';
 				}
 			?>
 			<div class="upload-remove <?php echo esc_attr( $upload_remove_class ); ?>">
@@ -160,9 +162,9 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 					<td class="upload-button"><input id="option-upload-<?php echo esc_attr( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select Image', 'ms-custom-login' ); ?>" type="button"></td>
 					<?php if ( ! empty( $options[ $option_name ] ) ) {
 						$image_src = esc_url( $options[ $option_name ] );
-						if ( preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $image_src ) ) {
-							echo '<td class="upload-preview"><img src="'.$image_src.'" alt="" /></td>';
-						}
+						if ( preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $image_src ) ) : ?>
+							<td class="upload-preview"><img src="'.$image_src.'" alt="" /></td>
+						<?php endif;
 					} ?>
 					<td class="remove-button"><input id="option-remove-<?php echo esc_attr( $option_id ); ?>" class="button option-remove-button" value="<?php _e( 'Delete Image', 'ms-custom-login' ); ?>" type="button"></td>
 				</tr></table>
@@ -176,6 +178,8 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 /**
  * ------------------------------------------------------------
  * 11.0 - sanitize and validate
+ *
+ * @param array $input Options
  * ------------------------------------------------------------
  */
 function ms_custom_login_validate( $input ) {
