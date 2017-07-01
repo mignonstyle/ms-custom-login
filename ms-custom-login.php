@@ -477,13 +477,12 @@ function ms_custom_login_options() {
 		?>
 
 			<div id="tabset">
-				<ul class="tabs clearfix">
-<?php if ( is_array( $tab_title ) ) {
-	foreach ( $tab_title as $tabs ) {
-		echo '<li><h3 class="title"><a href="#' . $tabs['id'] . '" id="tab-' . $tabs['id'] . '">' . $tabs['title'] . '</a></h3></li>' . "\n";
-	}
-} ?>
-				</ul>
+				<ul class="tabs clearfix"><?php
+				if ( is_array( $tab_title ) ) {
+					foreach ( $tab_title as $tabs ) {
+						echo '<li><h3 class="title"><a href="#' . $tabs['id'] . '" id="tab-' . $tabs['id'] . '">' . $tabs['title'] . '</a></h3></li>' . "\n";
+					}
+				} ?></ul>
 
 				<div id="<?php echo $tab_title['settings']['id']; ?>" class="panel">
 					<div id="page-setting" class="option-box option-check">
