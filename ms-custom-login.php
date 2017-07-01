@@ -85,7 +85,7 @@ function ms_custom_login_plugin_row_meta( $links, $file ) {
 		);
 
 		foreach ( $new_links as $key => $value ) {
-			$links[$key] = '<a href="' . esc_url( $value['url'] ) . '" target="_blank">' . esc_html( $value['label'] ) . '</a>';
+			$links[ $key ] = '<a href="' . esc_url( $value['url'] ) . '" target="_blank">' . esc_html( $value['label'] ) . '</a>';
 		}
 	}
 
@@ -458,9 +458,9 @@ function ms_custom_login_options() {
 	$options = ms_custom_login_get_option();
 	$tab_title = ms_custom_login_tab_title();
 
-	if ( ! current_user_can( 'manage_options' ) )
+	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( _e( 'You do not have sufficient permissions to access this page.', 'ms-custom-login' ) );
-	?>
+	} ?>
 	<div id="ms-custom-login" class="wrap">
 		<h2><?php _e( 'MS Custom Login', 'ms-custom-login' ); ?></h2>
 
@@ -489,8 +489,7 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Page Setting', 'ms-custom-login' ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php /* Page Background Color */
-							// translators: Page Background Color ?>
+						<tr><?php // translators: Page Background Color ?>
 							<th scope="row"><?php printf( __( '%s Background Color', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><?php
 								$option_name = 'mcl_page_bg_color';
@@ -499,8 +498,7 @@ function ms_custom_login_options() {
 							?></td>
 						</tr>
 
-						<tr><?php /* Page Background Image */
-							// translators: Page Background Image ?>
+						<tr><?php // translators: Page Background Image ?>
 							<th scope="row"><?php printf( __( '%s Background Image', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset><?php
 								$option_id = 'page-bg';
@@ -514,8 +512,7 @@ function ms_custom_login_options() {
 							?></fieldset></td>
 						</tr>
 
-						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Position */
-							// translators: Page Background Position. ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php // translators: Page Background Position. ?>
 							<th scope="row"><?php printf( __( '%s Background Position', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', 'ms-custom-login' ); ?></p><?php
@@ -541,8 +538,7 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Size */
-							// translators: Page Background Size. ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php // translators: Page Background Size. ?>
 							<th scope="row"><?php printf( __( '%s Background Size', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<?php // translators: Please Select a Page background size or enter a value. ?>
@@ -563,8 +559,7 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr><?php /* Page Text Color */
-							// translators: Page Text Color. ?>
+						<tr><?php // translators: Page Text Color. ?>
 							<th scope="row"><?php printf( __( '%s Text Color', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Text color', 'ms-custom-login' ); ?></p><?php
@@ -638,6 +633,8 @@ function ms_custom_login_options() {
 								$option_id = 'mcl-logo-img';
 								$option_name = 'mcl_logo_url';
 								$option_desc = __( 'The image you set will be used for the logo of the login page.', 'ms-custom-login' );
+
+								// translators: Recommendation: a png, jpg or gif file of width 320px.
 								$option_desc2 = sprintf( __( 'Recommendation: %s.', 'ms-custom-login' ), __( 'a png, jpg or gif file of width 320px', 'ms-custom-login' ) );
 								ms_custom_login_media_uploader( $options, 'ms-custom-login', $option_id, $option_name, $option_desc, $option_desc2 );
 								?></fieldset></td>
@@ -714,7 +711,7 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Form Setting', 'ms-custom-login' ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php /* Form Background Color */ ?>
+						<tr><?php // Form Background Color ?>
 							<th scope="row"><?php printf( __( '%s Background Color', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td colspan="2"><p><?php _e( 'Select the transparency if you want to make the color of the background transparent. The default is Opacity.', 'ms-custom-login' ); ?></p></td>
@@ -732,19 +729,20 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr><?php /* Form Background Image */ ?>
+						<tr><?php // translators: Form Background Image ?>
 							<th scope="row"><?php printf( __( '%s Background Image', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset><?php
 								$option_id = 'mcl-form-bg';
 								$option_name = 'mcl_form_bg_url';
 								$option_desc = __( 'The image you set will be used as a background image of the login form.', 'ms-custom-login' );
+
+								// translators: Recommendation: a png, jpg or gif file of width 320px, height 275px.
 								$option_desc2 = sprintf( __( 'Recommendation: %s.', 'ms-custom-login' ), __( 'a png, jpg or gif file of width 320px, height 275px', 'ms-custom-login' ) );
 								ms_custom_login_media_uploader( $options, 'ms-custom-login', $option_id, $option_name, $option_desc, $option_desc2 );
 							?></fieldset></td>
 						</tr>
 
-						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_form_bg_url'] ) ); ?>"><?php /* Form Background Position */
-							// translators: Form Background Position. ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_form_bg_url'] ) ); ?>"><?php // translators: Form Background Position. ?>
 							<th scope="row"><?php printf( __( '%s Background Position', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', 'ms-custom-login' ); ?></p><?php
@@ -765,8 +763,7 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr><?php /* Form Rounded Rectangle Size */
-							// translators: Form Rounded Rectangle Size.  ?>
+						<tr><?php // translators: Form Rounded Rectangle Size.  ?>
 							<th scope="row"><?php printf( __( '%s Rounded Rectangle Size', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset>
 								<p><?php _e( 'Set the size of the rounded corners in px. The default is 0px.', 'ms-custom-login' ); ?></p><?php
@@ -778,7 +775,7 @@ function ms_custom_login_options() {
 								?></fieldset></td>
 						</tr>
 
-						<tr><?php /* Form Box Shadow */ ?>
+						<tr><?php // translators: Form Box Shadow. ?>
 							<th scope="row"><?php printf( __( '%s Box Shadow', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset><?php
 								$option_array = ms_custom_login_form_boxshadow();
@@ -788,8 +785,7 @@ function ms_custom_login_options() {
 							?></fieldset></td>
 						</tr>
 
-						<tr><?php /* Form Box Shadow */
-							// translators: Form Position. ?>
+						<tr><?php // translators: Form Position. ?>
 							<th scope="row"><?php printf( __( '%s Position', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td>
 							<table class="nest inline">
@@ -862,8 +858,7 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Button Setting', 'ms-custom-login' ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php /* Button Text Color */
-							// translators: Button Text Color. ?>
+						<tr><?php // translators: Button Text Color. ?>
 							<th scope="row"><?php printf( __( '%s Text Color', 'ms-custom-login' ), __( 'Button', 'ms-custom-login' ) ); ?></th>
 							<td><?php
 								$option_name = 'mcl_btn_text_color';
@@ -872,8 +867,7 @@ function ms_custom_login_options() {
 							?></td>
 						</tr>
 
-						<tr><?php /* Button Border Color */
-							// translators: Button Border Color. ?>
+						<tr><?php // translators: Button Border Color. ?>
 							<th scope="row"><?php printf( __( '%s Border Color', 'ms-custom-login' ), __( 'Button', 'ms-custom-login' ) ); ?></th>
 							<td><?php
 								$option_name = 'mcl_btn_border_color';
@@ -882,8 +876,7 @@ function ms_custom_login_options() {
 							?></td>
 						</tr>
 
-						<tr><?php /* Button Color */
-							// translators: Button Color. ?>
+						<tr><?php // translators: Button Color. ?>
 							<th scope="row"><?php printf( __( '%s Color', 'ms-custom-login' ), __( 'Button', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Background color', 'ms-custom-login' ); ?></p><?php
@@ -1332,15 +1325,15 @@ function ms_custom_login_style() {
 	.login .button-primary:hover,
 	.login .button-primary:focus,
 	.login .button-primary:active {
-		<?php if ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) : ?>
-			border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
-			-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
-			box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
-		<?php endif;
+	<?php if ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) : ?>
+		border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
+		-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+		box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+	<?php endif;
 
-		if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
-			color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
-		<?php endif; ?>
+	if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
+		color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
+	<?php endif; ?>
 	}
 	<?php echo "\n";
 	endif;
