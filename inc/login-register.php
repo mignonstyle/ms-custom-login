@@ -9,7 +9,6 @@
  * 10.0 - Text
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_textfield( $options, $option_name, $option_label = '', $option_type = 'text', $option_class = 'regular-text', $label_after = '', $placeholder = '' ) {
 ?>
 	<p><?php
@@ -44,7 +43,6 @@ function ms_custom_login_textfield( $options, $option_name, $option_label = '', 
  * 10.1 - Textarea
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_textarea( $options, $option_name, $option_cols = '60', $option_rows = '3', $content = '' ) {
 	$content =  ( ! empty( $content ) ) ? $content : $options[ $option_name ];
 ?>
@@ -57,7 +55,6 @@ function ms_custom_login_textarea( $options, $option_name, $option_cols = '60', 
  * 10.2 - Checkbox
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $option_img = '' ) {
 ?>
 	<p class="checkbox"><label><input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" type="checkbox" value="1" <?php checked( $options[ $option_name ], 1 ); ?> /><?php
@@ -73,7 +70,6 @@ function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $o
  * 10.3 - Radio Button
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_radio( $options, $option_array, $option_id, $option_name ) {
 	if ( is_array( $option_array ) ) {
 ?>
@@ -94,7 +90,6 @@ function ms_custom_login_radio( $options, $option_array, $option_id, $option_nam
  * 10.4 - Select Box
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_select( $options, $option_array, $option_name ) {
 ?>
 	<select id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" >
@@ -111,7 +106,6 @@ function ms_custom_login_select( $options, $option_array, $option_name ) {
  * 10.5 - Color Picker
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_color_picker( $options, $option_name, $default_color ) {
 	$default_color = ms_custom_login_sanitize_hex_color( $default_color );
 
@@ -130,7 +124,6 @@ function ms_custom_login_color_picker( $options, $option_name, $default_color ) 
  * 10.5.1 - Color Sanitize
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_sanitize_hex_color( $color ) {
 	if ( '' === $color ) {
 		return '';
@@ -149,7 +142,6 @@ function ms_custom_login_sanitize_hex_color( $color ) {
  * 10.6 - Media UpLoader
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $option_name, $option_desc = '', $option_desc2 = '' ) {
 	$upload_remove_class = ! empty( $options[ $option_name ] ) ? 'remove-open' : 'upload-open';
 
@@ -186,7 +178,6 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
  * 11.0 - sanitize and validate
  * ------------------------------------------------------------
  */
-
 function ms_custom_login_validate( $input ) {
 	if ( isset( $_POST['reset'] ) ) {
 		$input = ms_custom_login_default_options();
