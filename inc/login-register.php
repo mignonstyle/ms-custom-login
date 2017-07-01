@@ -177,8 +177,7 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
  * ------------------------------------------------------------
  * 11.0 - sanitize and validate
  *
- * @param array $input Options.
- *
+ * @param array $input Option value mcl_default, mcl_option_chocolat, etc.
  * ------------------------------------------------------------
  */
 function ms_custom_login_validate( $input ) {
@@ -408,6 +407,6 @@ function ms_custom_login_validate( $input ) {
 
 		// Custom CSS Setting.
 		$input['mcl_custom_css'] = wp_kses_stripslashes( $input['mcl_custom_css'] );
-	} // end if().
+	} // End if().
 	return $input;
 }
