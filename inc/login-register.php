@@ -177,7 +177,7 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
  * ------------------------------------------------------------
  * 11.0 - sanitize and validate
  *
- * @param array $input Option value mcl_default, mcl_option_chocolat, etc.
+ * @param array $input Option
  * ------------------------------------------------------------
  */
 function ms_custom_login_validate( $input ) {
