@@ -49,7 +49,7 @@ function ms_custom_login_plugin_description() {
 /**
  * 0.0.2 - plugin setting links
  *
- * @param array $links String.
+ * @param array  $links String.
  * @param string $file File.
  * @return array
  */
@@ -66,7 +66,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ms_custom_log
 /**
  * 0.0.3 - Initialize plugin links
  *
- * @param array $links String.
+ * @param array  $links String.
  * @param string $file File.
  * @return array
  */
