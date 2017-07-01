@@ -174,11 +174,10 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 }
 
 /**
- * ------------------------------------------------------------
  * 11.0 - sanitize and validate
  *
  * @param array $input Option.
- * ------------------------------------------------------------
+ * @return string
  */
 function ms_custom_login_validate( $input ) {
 	if ( isset( $_POST['reset'] ) ) {
