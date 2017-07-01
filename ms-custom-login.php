@@ -9,18 +9,22 @@
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0
- * 
+ *
+ * @package MS Custom Login
+ */
+
+/**
  * Copyright 2014 Mignon Style (email : mignonxstyle@gmail.com)
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
  * published by the Free Software Foundation.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -123,7 +127,7 @@ function ms_custom_login_admin_enqueue_style( $hook ) {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'ms_custom_login_style', MS_CUSTOM_LOGIN_PLUGIN_URL . 'css/ms-custom-login.css', array(), null );
 
-		// CodeMirror
+		// CodeMirror.
 		wp_enqueue_style( 'mcl-codemirror', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/codemirror/lib/codemirror.css', array(), null );
 		wp_enqueue_script( 'mcl-codemirror-js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/codemirror/lib/codemirror.js', array(), false, true );
 		wp_enqueue_script( 'mcl-codemirror-css-js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'inc/codemirror/mode/css/css.js', array( 'mcl-codemirror-js' ), false, true );
@@ -141,10 +145,10 @@ function ms_custom_login_admin_print_scripts() {
 	wp_enqueue_script( 'ms_custom_login_cookie', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/jquery.cookie.js', array( 'jquery' ), null, true );
 	wp_enqueue_script( 'ms_custom_login_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/ms-custom-login.js', array( 'jquery', 'ms_custom_login_cookie', 'jquery-ui-tabs', 'mcl-codemirror-js' ), false, true );
 
-	// color picker
+	// color picker.
 	wp_enqueue_script( 'ms_custom_login_colorpicker_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/color-picer.js', array( 'wp-color-picker' ), false, true );
 
-	// media uploader
+	// media uploader.
 	if ( function_exists( 'wp_enqueue_media' ) ) {
 		wp_enqueue_media();
 		wp_register_script( 'ms_custom_login_media_uploader_js', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/media-uploader.js', array( 'jquery' ), false, true );
@@ -166,7 +170,7 @@ function ms_custom_login_admin_print_scripts() {
 function ms_custom_login_add_page() {
 	$page_hook = add_options_page( MS_CUSTOM_LOGIN_TITLE, MS_CUSTOM_LOGIN_TITLE, 'manage_options', MS_CUSTOM_LOGIN_DOMAIN, 'ms_custom_login_options' );
 
-	// Read the script only to options page
+	// Read the script only to options page.
 	add_action( 'admin_print_scripts-'.$page_hook, 'ms_custom_login_admin_print_scripts' );
 }
 add_action( 'admin_menu', 'ms_custom_login_add_page' );
@@ -177,7 +181,7 @@ add_action( 'admin_menu', 'ms_custom_login_add_page' );
  * ------------------------------------------------------------
  */
 
-function ms_custom_login_options_init(){
+function ms_custom_login_options_init() {
 	register_setting( 'ms_custom_login_options', 'ms_custom_login_options', 'ms_custom_login_validate' );
 	include_once( MS_CUSTOM_LOGIN_PLUGIN_PATH . 'inc/login-register.php' );
 	register_uninstall_hook( __FILE__, 'ms_custom_login_uninstall' );
@@ -203,13 +207,13 @@ function ms_custom_login_uninstall() {
 
 function ms_custom_login_default_options() {
 	$default_options = array(
-		// Default
+		// Default.
 		'mcl_default' => '',
 
-		// Options
+		// Options.
 		'mcl_option_chocolat' => 0,
 
-		// Page Setting
+		// Page Setting.
 		'mcl_page_bg_color'    => '#f1f1f1',
 		'mcl_page_bg_url'      => '',
 		'mcl_bg_x_select'      => 'left',
@@ -223,7 +227,7 @@ function ms_custom_login_default_options() {
 		'mcl_link_color'       => '#999999',
 		'mcl_link_color_hover' => '#2ea2cc',
 
-		// Logo Setting
+		// Logo Setting.
 		'mcl_show_logo'       => 1,
 		'mcl_logo_link_attr'  => 0,
 		'mcl_logo_link_url'   => '',
@@ -237,7 +241,7 @@ function ms_custom_login_default_options() {
 		'mcl_text_family'     =>  '',
 		'mcl_text_webfont'    =>  '',
 
-		// Form Setting
+		// Form Setting.
 		'mcl_form_bg_color'         => '#ffffff',
 		'mcl_form_bg_alpha'         => 1,
 		'mcl_form_bg_url'           => '',
@@ -251,17 +255,17 @@ function ms_custom_login_default_options() {
 		'mcl_form_x_pos'            => 5,
 		'mcl_form_y_pos'            => 0,
 
-		// Button Setting
+		// Button Setting.
 		'mcl_btn_text_color'   => '#ffffff',
 		'mcl_btn_border_color' => '#0074a2',
 		'mcl_btn_bg_color'     => '#2ea2cc',
 		'mcl_btn_bg_hover'     => '#1e8cbe',
 
-		// Links Setting
+		// Links Setting.
 		'mcl_hide_nav'      => 0,
 		'mcl_hide_backlink' => 0,
 
-		//Custom CSS
+		//Custom CSS.
 		'mcl_custom_css' => '',
 	);
 	return $default_options;
@@ -517,7 +521,7 @@ function ms_custom_login_options() {
 	$options = ms_custom_login_get_option();
 	$tab_title = ms_custom_login_tab_title();
 
-	if ( !current_user_can( 'manage_options' ) ) 
+	if ( !current_user_can( 'manage_options' ) )
 		wp_die( _e( 'You do not have sufficient permissions to access this page.', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
 	?>
 	<div id="ms-custom-login" class="wrap">
@@ -563,7 +567,7 @@ function ms_custom_login_options() {
 								$option_name = 'mcl_page_bg_url';
 								$option_desc = __( 'The image you set will be used for the backgrounds of the login page.', MS_CUSTOM_LOGIN_TEXTDOMAIN );
 								$option_desc2 = sprintf( __( 'Recommendation: %s.', MS_CUSTOM_LOGIN_TEXTDOMAIN ), __( 'png, jpg or gif', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
-								
+
 								ms_custom_login_media_uploader( $options, MS_CUSTOM_LOGIN_TEXTDOMAIN, $option_id, $option_name, $option_desc, $option_desc2 );
 							?></fieldset></td>
 						</tr>
@@ -858,7 +862,7 @@ function ms_custom_login_options() {
 									if ( strtoupper( get_locale() ) == 'JA' ) {
 										ms_custom_login_select( $options, $option_array, $option_name );
 									} else {
-										
+
 										echo '<div class="form-x-pos">';
 										ms_custom_login_textfield( $options, $option_name_pos, $option_label, $option_type, $option_class, $label_after );
 										echo '</div>';
@@ -1418,12 +1422,13 @@ if ( ! empty( $options['mcl_hide_backlink'] ) ) : ?>
 #backtoblog {
 	display: none;
 }
-<?php echo "\n"; endif;
+<?php echo "\n";
+	endif;
 
-// custom css
-if ( ! empty( $options['mcl_custom_css'] ) ) {
-	echo "\n" . wp_kses_stripslashes( $options['mcl_custom_css'] ) . "\n";
-} ?>
+	// custom css.
+	if ( ! empty( $options['mcl_custom_css'] ) ) {
+		echo "\n" . wp_kses_stripslashes( $options['mcl_custom_css'] ) . "\n";
+	} ?>
 </style>
 <?php
 }
