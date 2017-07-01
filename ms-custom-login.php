@@ -48,6 +48,10 @@ function ms_custom_login_plugin_description() {
 
 /**
  * 0.0.2 - plugin setting links
+ *
+ * @param array $links String.
+ * @param string $file File.
+ * @return array
  */
 function ms_custom_login_action_links( $links, $file ) {
 	if ( plugin_basename( __FILE__ ) == $file ) {
@@ -61,6 +65,10 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ms_custom_log
 
 /**
  * 0.0.3 - Initialize plugin links
+ *
+ * @param array $links String.
+ * @param string $file File.
+ * @return array
  */
 function ms_custom_login_plugin_row_meta( $links, $file ) {
 
@@ -103,6 +111,8 @@ add_action( 'plugins_loaded', 'ms_custom_login_load_textdomain' );
 
 /**
  * 0.2 - Read css file
+ *
+ * @param string $hook plugin hook.
  */
 function ms_custom_login_admin_enqueue_style( $hook ) {
 	if ( 'settings_page_ms-custom-login' == $hook ) {
@@ -998,6 +1008,9 @@ function ms_custom_login_options() {
 
 /**
  * 7.1.1 - Login Page Logo ( link URL )
+ *
+ * @param string $login_header_url url.
+ * @return string
  */
 function ms_custom_login_headerurl( $login_header_url ) {
 	$options = ms_custom_login_get_option();
@@ -1016,6 +1029,9 @@ add_filter( 'login_headerurl', 'ms_custom_login_headerurl' );
 
 /**
  * 7.1.2 - Login Page Logo ( title )
+ *
+ * @param string $login_header_title login header title.
+ * @return string
  */
 function ms_custom_login_headertitle( $login_header_title ) {
 	$options = ms_custom_login_get_option();
@@ -1038,6 +1054,9 @@ add_filter( 'login_headertitle', 'ms_custom_login_headertitle' );
 
 /**
  * 7.2 - HEX -> RGB
+ *
+ * @param string $color color.
+ * @return string
  */
 function ms_custom_login_rgb16c( $color ) {
 	$color = trim( $color, '#' );
@@ -1055,6 +1074,9 @@ function ms_custom_login_rgb16c( $color ) {
 
 /**
  * 7.2.2 - Media UpLoader children
+ *
+ * @param string $upload_option url.
+ * @return string
  */
 function ms_custom_login_upload_children( $upload_option ) {
 	$upload_children_class = 'media-children ';
