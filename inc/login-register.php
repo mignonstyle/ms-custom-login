@@ -149,23 +149,21 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 
 	if ( function_exists( 'wp_enqueue_media' ) ) : ?>
 		<div id="option-<?php echo esc_attr( $option_id ); ?>" class="media-upload">
-			<?php
-				if ( ! empty( $option_desc ) ) {
-					echo '<p>' . esc_attr( $option_desc ) ;
-					echo ( ! empty( $option_desc2 ) ) ? '<br />' . esc_attr( $option_desc2 ) : '';
-					echo '</p>';
-				}
-			?>
+			<?php if ( ! empty( $option_desc ) ) {
+				echo '<p>' . esc_attr( $option_desc ) ;
+				echo ( ! empty( $option_desc2 ) ) ? '<br />' . esc_attr( $option_desc2 ): '';
+				echo '</p>';
+			} ?>
 			<div class="upload-remove <?php echo esc_attr( $upload_remove_class ); ?>">
 				<input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" value="<?php echo esc_url( $options[ $option_name ] ); ?>" type="hidden" class="regular-text" />
 				<table><tr>
 					<td class="upload-button"><input id="option-upload-<?php echo esc_attr( $option_id ); ?>" class="button option-upload-button" value="<?php _e( 'Select Image', 'ms-custom-login' ); ?>" type="button"></td>
-					<?php if ( ! empty( $options[ $option_name ] ) ) {
+					<?php if ( ! empty( $options[ $option_name ] ) ) :
 						$image_src = esc_url( $options[ $option_name ] );
 						if ( preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $image_src ) ) : ?>
 							<td class="upload-preview"><img src="'.$image_src.'" alt="" /></td>
 						<?php endif;
-					} ?>
+					endif; ?>
 					<td class="remove-button"><input id="option-remove-<?php echo esc_attr( $option_id ); ?>" class="button option-remove-button" value="<?php _e( 'Delete Image', 'ms-custom-login' ); ?>" type="button"></td>
 				</tr></table>
 			</div>
@@ -179,7 +177,7 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
  * ------------------------------------------------------------
  * 11.0 - sanitize and validate
  *
- * @param array $input Options
+ * @param array $input Options.
  * ------------------------------------------------------------
  */
 function ms_custom_login_validate( $input ) {
