@@ -84,7 +84,7 @@ function ms_custom_login_plugin_row_meta( $links, $file ) {
 			),
 		);
 
-		foreach( $new_links as $key => $value ) {
+		foreach ( $new_links as $key => $value ) {
 			$links[$key] = '<a href="' . esc_url( $value['url'] ) . '" target="_blank">' . esc_html( $value['label'] ) . '</a>';
 		}
 	}
@@ -147,7 +147,7 @@ function ms_custom_login_add_page() {
 	$page_hook = add_options_page( __( 'MS Custom Login', 'ms-custom-login' ), __( 'MS Custom Login', 'ms-custom-login' ), 'manage_options', MS_CUSTOM_LOGIN_DOMAIN, 'ms_custom_login_options' );
 
 	// Read the script only to options page.
-	add_action( 'admin_print_scripts-'.$page_hook, 'ms_custom_login_admin_print_scripts' );
+	add_action( 'admin_print_scripts-' . $page_hook, 'ms_custom_login_admin_print_scripts' );
 }
 add_action( 'admin_menu', 'ms_custom_login_add_page' );
 
@@ -232,7 +232,7 @@ function ms_custom_login_default_options() {
 		'mcl_hide_nav'      => 0,
 		'mcl_hide_backlink' => 0,
 
-		//Custom CSS.
+		// Custom CSS.
 		'mcl_custom_css' => '',
 	);
 	return $default_options;
@@ -458,7 +458,7 @@ function ms_custom_login_options() {
 	$options = ms_custom_login_get_option();
 	$tab_title = ms_custom_login_tab_title();
 
-	if ( !current_user_can( 'manage_options' ) )
+	if ( ! current_user_can( 'manage_options' ) )
 		wp_die( _e( 'You do not have sufficient permissions to access this page.', 'ms-custom-login' ) );
 	?>
 	<div id="ms-custom-login" class="wrap">
@@ -478,8 +478,8 @@ function ms_custom_login_options() {
 	<div id="tabset"><?php /* tabset */ ?>
 		<ul class="tabs clearfix"><?php /* tabs */ ?>
 		<?php if ( is_array( $tab_title ) ) {
-			foreach( $tab_title as $tabs ) {
-				echo '<li><h3 class="title"><a href="#'.$tabs['id'] . '" id="tab-' . $tabs['id'] . '">' . $tabs['title'] . '</a></h3></li>' . "\n";
+			foreach ( $tab_title as $tabs ) {
+				echo '<li><h3 class="title"><a href="#' . $tabs['id'] . '" id="tab-' . $tabs['id'] . '">' . $tabs['title'] . '</a></h3></li>' . "\n";
 			}
 		} ?>
 		</ul>
@@ -489,7 +489,8 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Page Setting', 'ms-custom-login' ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php /* Page Background Color */ ?>
+						<tr><?php /* Page Background Color */
+							// translators: Page Background Color ?>
 							<th scope="row"><?php printf( __( '%s Background Color', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><?php
 								$option_name = 'mcl_page_bg_color';
@@ -498,19 +499,23 @@ function ms_custom_login_options() {
 							?></td>
 						</tr>
 
-						<tr><?php /* Page Background Image */ ?>
+						<tr><?php /* Page Background Image */
+							// translators: Page Background Image ?>
 							<th scope="row"><?php printf( __( '%s Background Image', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset><?php
 								$option_id = 'page-bg';
 								$option_name = 'mcl_page_bg_url';
 								$option_desc = __( 'The image you set will be used for the backgrounds of the login page.', 'ms-custom-login' );
+
+								// translators: Recommendation: png, jpg or gif.
 								$option_desc2 = sprintf( __( 'Recommendation: %s.', 'ms-custom-login' ), __( 'png, jpg or gif', 'ms-custom-login' ) );
 
 								ms_custom_login_media_uploader( $options, 'ms-custom-login', $option_id, $option_name, $option_desc, $option_desc2 );
 							?></fieldset></td>
 						</tr>
 
-						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Position */ ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Position */
+							// translators: Page Background Position. ?>
 							<th scope="row"><?php printf( __( '%s Background Position', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', 'ms-custom-login' ); ?></p><?php
@@ -536,9 +541,11 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Size */ ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_page_bg_url'] ) ); ?>"><?php /* Page Background Size */
+							// translators: Page Background Size. ?>
 							<th scope="row"><?php printf( __( '%s Background Size', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
+								<?php // translators: Please Select a Page background size or enter a value. ?>
 								<td colspan="2"><p><?php printf( __( 'Please Select a %s background size or enter a value.', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></p></td>
 							</tr><tr>
 								<td><?php
@@ -556,7 +563,8 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr><?php /* Page Text Color */ ?>
+						<tr><?php /* Page Text Color */
+							// translators: Page Text Color. ?>
 							<th scope="row"><?php printf( __( '%s Text Color', 'ms-custom-login' ), __( 'Page', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Text color', 'ms-custom-login' ); ?></p><?php
@@ -735,7 +743,8 @@ function ms_custom_login_options() {
 							?></fieldset></td>
 						</tr>
 
-						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_form_bg_url'] ) ); ?>"><?php /* Form Background Position */ ?>
+						<tr class="<?php echo esc_attr( ms_custom_login_upload_children( $options['mcl_form_bg_url'] ) ); ?>"><?php /* Form Background Position */
+							// translators: Form Background Position. ?>
 							<th scope="row"><?php printf( __( '%s Background Position', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Horizontal direction', 'ms-custom-login' ); ?></p><?php
@@ -756,7 +765,8 @@ function ms_custom_login_options() {
 							</tr></table></td>
 						</tr>
 
-						<tr><?php /* Form Rounded Rectangle Size */ ?>
+						<tr><?php /* Form Rounded Rectangle Size */
+							// translators: Form Rounded Rectangle Size.  ?>
 							<th scope="row"><?php printf( __( '%s Rounded Rectangle Size', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td><fieldset>
 								<p><?php _e( 'Set the size of the rounded corners in px. The default is 0px.', 'ms-custom-login' ); ?></p><?php
@@ -778,7 +788,8 @@ function ms_custom_login_options() {
 							?></fieldset></td>
 						</tr>
 
-						<tr><?php /* Form Box Shadow */ ?>
+						<tr><?php /* Form Box Shadow */
+							// translators: Form Position. ?>
 							<th scope="row"><?php printf( __( '%s Position', 'ms-custom-login' ), __( 'Form', 'ms-custom-login' ) ); ?></th>
 							<td>
 							<table class="nest inline">
@@ -851,7 +862,8 @@ function ms_custom_login_options() {
 				<h3><?php _e( 'Login Button Setting', 'ms-custom-login' ); ?></h3>
 				<div class="inside">
 					<table class="form-table">
-						<tr><?php /* Button Text Color */ ?>
+						<tr><?php /* Button Text Color */
+							// translators: Button Text Color. ?>
 							<th scope="row"><?php printf( __( '%s Text Color', 'ms-custom-login' ), __( 'Button', 'ms-custom-login' ) ); ?></th>
 							<td><?php
 								$option_name = 'mcl_btn_text_color';
@@ -860,7 +872,8 @@ function ms_custom_login_options() {
 							?></td>
 						</tr>
 
-						<tr><?php /* Button Border Color */ ?>
+						<tr><?php /* Button Border Color */
+							// translators: Button Border Color. ?>
 							<th scope="row"><?php printf( __( '%s Border Color', 'ms-custom-login' ), __( 'Button', 'ms-custom-login' ) ); ?></th>
 							<td><?php
 								$option_name = 'mcl_btn_border_color';
@@ -869,7 +882,8 @@ function ms_custom_login_options() {
 							?></td>
 						</tr>
 
-						<tr><?php /* Button Color */ ?>
+						<tr><?php /* Button Color */
+							// translators: Button Color. ?>
 							<th scope="row"><?php printf( __( '%s Color', 'ms-custom-login' ), __( 'Button', 'ms-custom-login' ) ); ?></th>
 							<td><table class="nest"><tr>
 								<td><p><?php _e( 'Background color', 'ms-custom-login' ); ?></p><?php
@@ -1029,7 +1043,7 @@ function ms_custom_login_rgb16c( $color ) {
 	$color = trim( $color, '#' );
 	$c16 = '';
 
-	for( $i = 0; $i < strlen( $color ); $i += 2 ) {
+	for ( $i = 0; $i < strlen( $color ); $i += 2 ) {
 		$rgb16 = substr( $color, $i, 2 );
 		$value = intval( base_convert( $rgb16, 16, 10 ) );
 		$c16 .= $value . ', ';
@@ -1336,11 +1350,11 @@ function ms_custom_login_style() {
 
 	if ( $options['mcl_form_x_select'] != $default['mcl_form_x_select'] ) {
 		if ( ! empty( $options['mcl_form_x_select'] ) ) {
-			$login_css .= "\t" . 'margin-' . esc_attr( $options['mcl_form_x_select'] ) . ': ' . absint( $options['mcl_form_x_pos'] ) . '%;'. "\n";
+			$login_css .= "\t" . 'margin-' . esc_attr( $options['mcl_form_x_select'] ) . ': ' . absint( $options['mcl_form_x_pos'] ) . '%;' . "\n";
 		}
 	}
 
-	if ( $options['mcl_form_y_select'] != 'top' || $options['mcl_form_y_pos'] > 0 ) {
+	if ( 'top' != $options['mcl_form_y_select'] || 0 < $options['mcl_form_y_pos'] ) {
 		if ( 'center' == $options['mcl_form_y_select'] ) {
 			$form_y_pos = 50;
 		} elseif ( 'bottom' == $options['mcl_form_y_select'] ) {
@@ -1349,12 +1363,12 @@ function ms_custom_login_style() {
 			$form_y_pos = $options['mcl_form_y_pos'];
 		}
 
-		$login_css .= "\t" . 'padding-top: 0;'. "\n";
-		$login_css .= "\t" . 'position: relative;'. "\n";
-		$login_css .= "\t" . 'top: ' . absint( $form_y_pos ) . '%;'. "\n";
-		$login_css .= "\t" . '-webkit-transform: translateY(-' . absint( $form_y_pos ) . '%);'. "\n";
-		$login_css .= "\t" . '-ms-transform: translateY(-' . absint( $form_y_pos ) . '%);'. "\n";
-		$login_css .= "\t" . 'transform: translateY(-' . absint( $form_y_pos ) . '%);'. "\n";
+		$login_css .= "\t" . 'padding-top: 0;' . "\n";
+		$login_css .= "\t" . 'position: relative;' . "\n";
+		$login_css .= "\t" . 'top: ' . absint( $form_y_pos ) . '%;' . "\n";
+		$login_css .= "\t" . '-webkit-transform: translateY(-' . absint( $form_y_pos ) . '%);' . "\n";
+		$login_css .= "\t" . '-ms-transform: translateY(-' . absint( $form_y_pos ) . '%);' . "\n";
+		$login_css .= "\t" . 'transform: translateY(-' . absint( $form_y_pos ) . '%);' . "\n";
 	}
 
 	if ( ! empty( $login_css ) ) {
