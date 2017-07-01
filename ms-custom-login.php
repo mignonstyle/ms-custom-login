@@ -31,29 +31,23 @@
  */
 
 /**
- * ------------------------------------------------------------
  * 0.0 - define
- * ------------------------------------------------------------
  */
 define( 'MS_CUSTOM_LOGIN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'MS_CUSTOM_LOGIN_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MS_CUSTOM_LOGIN_DOMAIN', dirname( plugin_basename( __FILE__ ) ) );
-define( 'MS_CUSTOM_LOGIN_TEXTDOMAIN', 'ms-custom-login' );
-define( 'MS_CUSTOM_LOGIN_TITLE', __( 'MS Custom Login', MS_CUSTOM_LOGIN_TEXTDOMAIN ) );
 
-/* ----------------------------------------------
+/**
  * 0.0.1 - I18n of Plugin Description
  * There is no sense to return
- * --------------------------------------------*/
+ */
 function ms_custom_login_plugin_description() {
 	$plugin_description = __( 'Customize login page of your WordPress with images, colors and more.', 'ms-custom-login' );
 	return $plugin_description;
 }
 
 /**
- * ------------------------------------------------------------
  * 0.0.2 - plugin setting links
- * ------------------------------------------------------------
  */
 function ms_custom_login_action_links( $links, $file ) {
 	if ( plugin_basename( __FILE__ ) == $file ) {
@@ -66,9 +60,7 @@ function ms_custom_login_action_links( $links, $file ) {
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ms_custom_login_action_links', 10, 2 );
 
 /**
- * ------------------------------------------------------------
  * 0.0.3 - Initialize plugin links
- * ------------------------------------------------------------
  */
 function ms_custom_login_plugin_row_meta( $links, $file ) {
 
@@ -102,9 +94,7 @@ function ms_custom_login_plugin_row_meta( $links, $file ) {
 add_filter( 'plugin_row_meta', 'ms_custom_login_plugin_row_meta', 10, 2 );
 
 /**
- * ------------------------------------------------------------
  * 0.1 - Load plugin textdomain
- * ------------------------------------------------------------
  */
 function ms_custom_login_load_textdomain() {
 	load_plugin_textdomain( 'ms-custom-login', false, MS_CUSTOM_LOGIN_DOMAIN . '/languages' );
@@ -112,9 +102,7 @@ function ms_custom_login_load_textdomain() {
 add_action( 'plugins_loaded', 'ms_custom_login_load_textdomain' );
 
 /**
- * ------------------------------------------------------------
  * 0.2 - Read css file
- * ------------------------------------------------------------
  */
 function ms_custom_login_admin_enqueue_style( $hook ) {
 	if ( 'settings_page_ms-custom-login' == $hook ) {
@@ -130,9 +118,7 @@ function ms_custom_login_admin_enqueue_style( $hook ) {
 add_action( 'admin_enqueue_scripts', 'ms_custom_login_admin_enqueue_style' );
 
 /**
- * ------------------------------------------------------------
  * 0.3 - Read javascript file
- * ------------------------------------------------------------
  */
 function ms_custom_login_admin_print_scripts() {
 	wp_enqueue_script( 'ms_custom_login_cookie', MS_CUSTOM_LOGIN_PLUGIN_URL . 'js/jquery.cookie.js', array( 'jquery' ), null, true );
@@ -155,12 +141,10 @@ function ms_custom_login_admin_print_scripts() {
 }
 
 /**
- * ------------------------------------------------------------
  * 1.0 - Register options setting page
- * ------------------------------------------------------------
  */
 function ms_custom_login_add_page() {
-	$page_hook = add_options_page( MS_CUSTOM_LOGIN_TITLE, MS_CUSTOM_LOGIN_TITLE, 'manage_options', MS_CUSTOM_LOGIN_DOMAIN, 'ms_custom_login_options' );
+	$page_hook = add_options_page( __( 'MS Custom Login', 'ms-custom-login' ), __( 'MS Custom Login', 'ms-custom-login' ), 'manage_options', MS_CUSTOM_LOGIN_DOMAIN, 'ms_custom_login_options' );
 
 	// Read the script only to options page.
 	add_action( 'admin_print_scripts-'.$page_hook, 'ms_custom_login_admin_print_scripts' );
@@ -168,9 +152,7 @@ function ms_custom_login_add_page() {
 add_action( 'admin_menu', 'ms_custom_login_add_page' );
 
 /**
- * ------------------------------------------------------------
  * 2.0 - To register the setting options
- * ------------------------------------------------------------
  */
 function ms_custom_login_options_init() {
 	register_setting( 'ms_custom_login_options', 'ms_custom_login_options', 'ms_custom_login_validate' );
@@ -180,9 +162,7 @@ function ms_custom_login_options_init() {
 add_action( 'admin_init', 'ms_custom_login_options_init' );
 
 /**
- * ------------------------------------------------------------
  * 2.1 - uninstall setting options
- * ------------------------------------------------------------
  */
 function ms_custom_login_uninstall() {
 	$option_name = 'ms_custom_login_options';
@@ -190,9 +170,7 @@ function ms_custom_login_uninstall() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.0 - Create an array of default options
- * ------------------------------------------------------------
  */
 function ms_custom_login_default_options() {
 	$default_options = array(
@@ -224,11 +202,11 @@ function ms_custom_login_default_options() {
 		'mcl_show_logo_img'   => 1,
 		'mcl_logo_url'        => '',
 		'mcl_show_logo_text'  => 0,
-		'mcl_text_size'       =>  20,
+		'mcl_text_size'       => 20,
 		'mcl_logo_text_color' => '#999999',
 		'mcl_logo_text_hover' => '#2ea2cc',
-		'mcl_text_family'     =>  '',
-		'mcl_text_webfont'    =>  '',
+		'mcl_text_family'     => '',
+		'mcl_text_webfont'    => '',
 
 		// Form Setting.
 		'mcl_form_bg_color'         => '#ffffff',
@@ -261,9 +239,7 @@ function ms_custom_login_default_options() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.1 - Create an array of options - form boxshadow
- * ------------------------------------------------------------
  */
 function ms_custom_login_form_boxshadow() {
 	$form_boxshadow = array(
@@ -282,9 +258,7 @@ function ms_custom_login_form_boxshadow() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.2.1 - Create an array of options - background position x
- * ------------------------------------------------------------
  */
 function ms_custom_login_bg_position_x() {
 	$bg_position_x = array(
@@ -305,9 +279,7 @@ function ms_custom_login_bg_position_x() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.2.2 - Create an array of options - background position y
- * ------------------------------------------------------------
  */
 function ms_custom_login_bg_position_y() {
 	$bg_position_y = array(
@@ -328,9 +300,7 @@ function ms_custom_login_bg_position_y() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.3.3 - Create an array of options - background repeat
- * ------------------------------------------------------------
  */
 function ms_custom_login_bg_repeat() {
 	$bg_repeat = array(
@@ -355,9 +325,7 @@ function ms_custom_login_bg_repeat() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.3.4 - Create an array of options - background attachment
- * ------------------------------------------------------------
  */
 function ms_custom_login_bg_attach() {
 	$bg_attach = array(
@@ -374,9 +342,7 @@ function ms_custom_login_bg_attach() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.3.5 - Create an array of options - background size
- * ------------------------------------------------------------
  */
 function ms_custom_login_bg_size() {
 	$bg_size = array(
@@ -397,9 +363,7 @@ function ms_custom_login_bg_size() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.3.6 - Create an array of options - form background alpha
- * ------------------------------------------------------------
  */
 function ms_custom_login_bg_alpha() {
 	$bg_alpha = array(
@@ -452,9 +416,7 @@ function ms_custom_login_bg_alpha() {
 }
 
 /**
- * ------------------------------------------------------------
  * 3.3.7 - Tabs Title
- * ------------------------------------------------------------
  */
 function ms_custom_login_tab_title() {
 	$tab_title = array(
@@ -482,18 +444,14 @@ function ms_custom_login_tab_title() {
 }
 
 /**
- * ------------------------------------------------------------
  * 4.0 - Get the value options
- * ------------------------------------------------------------
  */
 function ms_custom_login_get_option() {
 	return get_option( 'ms_custom_login_options', ms_custom_login_default_options() );
 }
 
 /**
- * ------------------------------------------------------------
  * 5.0 - Creating options page
- * ------------------------------------------------------------
  */
 function ms_custom_login_options() {
 	$default_option = ms_custom_login_default_options();
@@ -504,25 +462,26 @@ function ms_custom_login_options() {
 		wp_die( _e( 'You do not have sufficient permissions to access this page.', 'ms-custom-login' ) );
 	?>
 	<div id="ms-custom-login" class="wrap">
-		<h2><?php _e( MS_CUSTOM_LOGIN_TITLE ); ?></h2>
+		<h2><?php _e( 'MS Custom Login', 'ms-custom-login' ); ?></h2>
 
 		<form method="post" action="options.php" enctype="multipart/form-data">
 		<?php settings_fields( 'ms_custom_login_options' );
-			if ( ! is_multisite() && is_user_logged_in() ) {
-				add_thickbox();
-			}
+		if ( ! is_multisite() && is_user_logged_in() ) {
+			add_thickbox();
+		}
 
-			$option_name = 'mcl_default';
-			$option_type = 'hidden';
-			ms_custom_login_textfield( $options, $option_name, '', $option_type );
+		$option_name = 'mcl_default';
+		$option_type = 'hidden';
+		ms_custom_login_textfield( $options, $option_name, '', $option_type );
 		?>
 
 	<div id="tabset"><?php /* tabset */ ?>
 		<ul class="tabs clearfix"><?php /* tabs */ ?>
-		<?php if ( is_array( $tab_title ) ) :
-			foreach( $tab_title as $tabs ) :
-				echo '<li><h3 class="title"><a href="#'.$tabs['id'].'" id="tab-'.$tabs['id'].'">'.$tabs['title'].'</a></h3></li>'."\n";
-		endforeach; endif; ?>
+		<?php if ( is_array( $tab_title ) ) {
+			foreach( $tab_title as $tabs ) {
+				echo '<li><h3 class="title"><a href="#'.$tabs['id'] . '" id="tab-' . $tabs['id'] . '">' . $tabs['title'] . '</a></h3></li>' . "\n";
+			}
+		} ?>
 		</ul>
 
 		<div id="<?php echo $tab_title['settings']['id']; ?>" class="panel"><?php /* panel */ ?>
@@ -961,7 +920,7 @@ function ms_custom_login_options() {
 				<table class="form-table">
 					<tr>
 						<td><?php
-							$option_name ='mcl_custom_css';
+							$option_name = 'mcl_custom_css';
 							$option_cols = '50';
 							$option_rows = '3';
 							$content = isset( $options['mcl_custom_css'] ) && ! empty( $options['mcl_custom_css'] ) ? $options['mcl_custom_css'] : '/* ' . __( 'Enter Your Custom CSS Here', 'ms-custom-login' ) . ' */';
@@ -994,10 +953,10 @@ function ms_custom_login_options() {
 
 	<div id="submit-button" class="clearfix">
 		<?php submit_button( __( 'Save Changes', 'ms-custom-login' ), 'primary', 'save' );
-			if ( ! is_multisite() && is_user_logged_in() ) : ?>
-				<p id="preview"><a class="thickbox button" href="<?php echo wp_login_url(); ?>" ><?php _e( 'Preview', 'ms-custom-login' ); ?></a></p>
-			<?php endif;
-			submit_button( __( 'Reset Defaults', 'ms-custom-login' ), 'secondary', 'reset' ); ?>
+		if ( ! is_multisite() && is_user_logged_in() ) : ?>
+			<p id="preview"><a class="thickbox button" href="<?php echo wp_login_url(); ?>" ><?php _e( 'Preview', 'ms-custom-login' ); ?></a></p>
+		<?php endif;
+		submit_button( __( 'Reset Defaults', 'ms-custom-login' ), 'secondary', 'reset' ); ?>
 	</div>
 
 	<!-- Notice Option -->
@@ -1024,9 +983,7 @@ function ms_custom_login_options() {
 }
 
 /**
- * ------------------------------------------------------------
  * 7.1.1 - Login Page Logo ( link URL )
- * ------------------------------------------------------------
  */
 function ms_custom_login_headerurl( $login_header_url ) {
 	$options = ms_custom_login_get_option();
@@ -1044,9 +1001,7 @@ function ms_custom_login_headerurl( $login_header_url ) {
 add_filter( 'login_headerurl', 'ms_custom_login_headerurl' );
 
 /**
- * ------------------------------------------------------------
  * 7.1.2 - Login Page Logo ( title )
- * ------------------------------------------------------------
  */
 function ms_custom_login_headertitle( $login_header_title ) {
 	$options = ms_custom_login_get_option();
@@ -1068,18 +1023,16 @@ function ms_custom_login_headertitle( $login_header_title ) {
 add_filter( 'login_headertitle', 'ms_custom_login_headertitle' );
 
 /**
- * ------------------------------------------------------------
  * 7.2 - HEX -> RGB
- * ------------------------------------------------------------
  */
 function ms_custom_login_rgb16c( $color ) {
 	$color = trim( $color, '#' );
 	$c16 = '';
 
-	for( $i = 0; $i < strlen( $color ); $i+=2 ) {
+	for( $i = 0; $i < strlen( $color ); $i += 2 ) {
 		$rgb16 = substr( $color, $i, 2 );
 		$value = intval( base_convert( $rgb16, 16, 10 ) );
-		$c16 .= $value.', ';
+		$c16 .= $value . ', ';
 	}
 	$rgb = trim( $c16, ', ' );
 
@@ -1087,9 +1040,7 @@ function ms_custom_login_rgb16c( $color ) {
 }
 
 /**
- * ------------------------------------------------------------
  * 7.2.2 - Media UpLoader children
- * ------------------------------------------------------------
  */
 function ms_custom_login_upload_children( $upload_option ) {
 	$upload_children_class = 'media-children ';
@@ -1098,9 +1049,7 @@ function ms_custom_login_upload_children( $upload_option ) {
 }
 
 /**
- * ------------------------------------------------------------
  * 7.3 - Login Page Style
- * ------------------------------------------------------------
  */
 function ms_custom_login_style() {
 	$options = ms_custom_login_get_option();
@@ -1117,19 +1066,20 @@ function ms_custom_login_style() {
 
 	echo '<style type="text/css">' . "\n";
 
-	// Web font
+	// Web font.
 	if ( ! empty( $options['mcl_show_logo'] ) && ! empty( $options['mcl_show_logo_text'] ) && ! empty( $options['mcl_text_webfont'] ) ) {
 		echo wp_kses_stripslashes( $options['mcl_text_webfont'] ) . "\n\n";
 	}
 
-	// html
+	// html.
 	if ( $options['mcl_page_bg_color'] != $default['mcl_page_bg_color'] ) : ?>
 	html {
 		background: <?php echo esc_attr( $options['mcl_page_bg_color'] ); ?> !important;
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
-	// body
+	// body.
 	if ( ( $options['mcl_page_bg_color'] != $default['mcl_page_bg_color'] ) || ! empty( $options['mcl_page_bg_url'] ) ) {
 		echo 'body {' . "\n";
 
@@ -1140,7 +1090,7 @@ function ms_custom_login_style() {
 		if ( ! empty( $options['mcl_page_bg_url'] ) ) {
 			echo "\t" . 'background-image: url(' . esc_url( $options['mcl_page_bg_url'] ) . ') !important;' . "\n";
 			echo "\t" . 'background-repeat: ' . esc_attr( $options['mcl_bg_repeat_select'] ) . ' !important;' . "\n";
-			echo "\t" . 'background-position: ' . esc_attr( $options['mcl_bg_x_select'] ).' '.esc_attr( $options['mcl_bg_y_select'] ) . ' !important;' . "\n";
+			echo "\t" . 'background-position: ' . esc_attr( $options['mcl_bg_x_select'] ) . ' ' . esc_attr( $options['mcl_bg_y_select'] ) . ' !important;' . "\n";
 			echo "\t" . 'background-attachment: ' . esc_attr( $options['mcl_bg_attach_select'] ) . ' !important;' . "\n";
 
 			$mcl_bg_size = $options['mcl_bg_size_select'];
@@ -1152,23 +1102,25 @@ function ms_custom_login_style() {
 		echo '}' . "\n\n";
 	}
 
-	// .login label
+	// .login label.
 	if ( $options['mcl_text_color'] != $default['mcl_text_color'] ) : ?>
 	.login label {
 		color: <?php echo esc_attr( $options['mcl_text_color'] ); ?>;
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
-	// a
+	// a.
 	if ( $options['mcl_link_color'] != $default['mcl_link_color'] ) : ?>
 	a,
 	.login #nav a,
 	.login #backtoblog a {
 		color: <?php echo esc_attr( $options['mcl_link_color'] ); ?>;
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
-	// a:hover
+	// a:hover.
 	if ( $options['mcl_link_color_hover'] != $default['mcl_link_color_hover'] ) : ?>
 	a:hover,
 	a:active,
@@ -1177,19 +1129,20 @@ function ms_custom_login_style() {
 	.login #backtoblog a:hover {
 		color: <?php echo esc_attr( $options['mcl_link_color_hover'] ); ?>;
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
-	// .login form
+	// .login form.
 	$login_form_css = '';
 
 	if ( $options['mcl_form_bg_color'] != $default['mcl_form_bg_color'] ) {
 		$login_form_css .= "\t" . 'background-color: ' . esc_attr( $options['mcl_form_bg_color'] ) . ';' . "\n";
 	}
 
-	if ( $options['mcl_form_bg_alpha'] != 1 ) {
+	if ( 1 != $options['mcl_form_bg_alpha'] ) {
 		$color = '';
 		$rgb = ms_custom_login_rgb16c( $options['mcl_form_bg_color'] );
-		$color = 'rgba('.$rgb.', '.$options['mcl_form_bg_alpha'].')';
+		$color = 'rgba(' . $rgb . ', ' . $options['mcl_form_bg_alpha'] . ')';
 
 		$login_form_css .= "\t" . 'background-color: ' . esc_attr( $color ) . ';' . "\n";
 	}
@@ -1197,7 +1150,7 @@ function ms_custom_login_style() {
 	if ( ! empty( $options['mcl_form_bg_url'] ) ) {
 		$login_form_css .= "\t" . 'background-image: url(' . esc_url( $options['mcl_form_bg_url'] ) . ');' . "\n";
 		$login_form_css .= "\t" . 'background-repeat: ' . esc_attr( $options['mcl_form_bg_repeat_select'] ) . ';' . "\n";
-		$login_form_css .= "\t" . 'background-position: ' . esc_attr( $options['mcl_form_bg_x_select'] ).' '.esc_attr( $options['mcl_form_bg_y_select'] ) . ';' . "\n";
+		$login_form_css .= "\t" . 'background-position: ' . esc_attr( $options['mcl_form_bg_x_select'] ) . ' ' . esc_attr( $options['mcl_form_bg_y_select'] ) . ';' . "\n";
 	}
 
 	if ( $options['mcl_form_radius'] != $default['mcl_form_radius'] ) {
@@ -1237,7 +1190,9 @@ function ms_custom_login_style() {
 				$login_h1_a_css .= "\t" . 'color: ' . esc_attr( $options['mcl_logo_text_color'] ) . ';' . "\n";
 			}
 
-			if ( ! empty( $options['mcl_text_family'] ) ) $login_h1_a_css .= "\t" . 'font-family: ' . wp_kses_stripslashes( $options['mcl_text_family'] ) . ';' . "\n";
+			if ( ! empty( $options['mcl_text_family'] ) ) {
+				$login_h1_a_css .= "\t" . 'font-family: ' . wp_kses_stripslashes( $options['mcl_text_family'] ) . ';' . "\n";
+			}
 
 			if ( $options['mcl_text_size'] != $default['mcl_text_size'] ) {
 				$login_h1_a_css .= "\t" . 'font-size: ' . absint( $options['mcl_text_size'] ) . 'px;' . "\n";
@@ -1262,14 +1217,18 @@ function ms_custom_login_style() {
 					$logo_size = 'cover';
 					$ratio = $width / 320;
 					$height = $height / $ratio;
-					if ( empty( $logo_width ) ) $logo_width = 'auto';
+					if ( empty( $logo_width ) ) {
+						$logo_width = 'auto';
+					}
 				} else {
 					$logo_size = 'auto';
-					if ( empty( $logo_width ) ) $logo_width = absint( $width ) . 'px';
+					if ( empty( $logo_width ) ) {
+						$logo_width = absint( $width ) . 'px';
+					}
 				}
 
 				$login_h1_css .= "\t" . 'margin: 0 auto 25px;' . "\n";
-				$logo_height = absint ( $height ) . 'px';
+				$logo_height = absint( $height ) . 'px';
 				$bg_position = 'center bottom';
 
 				$login_h1_a_css .= "\t" . 'background-image: url(' . esc_url( $options['mcl_logo_url'] ) . ') !important;' . "\n";
@@ -1290,20 +1249,32 @@ function ms_custom_login_style() {
 				$logo_hover = true;
 
 				if ( $height < $options['mcl_text_size'] ) {
-					$logo_height = absint ( $options['mcl_text_size'] ) . 'px';
+					$logo_height = absint( $options['mcl_text_size'] ) . 'px';
 				} else {
 					$line_height = $height;
 				}
 			}
-		}
+		} // End if().
 
-		if ( ! empty( $bg_position ) ) $login_h1_a_css .= "\t" . 'background-position: ' . esc_attr( $bg_position ) . ';' . "\n";
-		if ( ! empty( $logo_height ) ) $login_h1_a_css .= "\t" . 'height: ' . esc_attr( $logo_height ) . ';' . "\n";
-		if ( ! empty( $line_height ) ) $login_h1_a_css .= "\t" . 'line-height: ' . absint( $line_height ) . 'px;' . "\n";
-		if ( ! empty( $text_x ) ) $login_h1_a_css .= "\t" . 'text-align: ' . esc_attr( $text_x ) . ';' . "\n";
-		if ( ! empty( $text_indent ) ) $login_h1_a_css .= "\t" . 'text-indent: ' . esc_attr( $text_indent ) . ';' . "\n";
-		if ( ! empty( $logo_width ) ) $login_h1_a_css .= "\t" . 'width: ' . esc_attr( $logo_width ) . ';' . "\n";
-	}
+		if ( ! empty( $bg_position ) ) {
+			$login_h1_a_css .= "\t" . 'background-position: ' . esc_attr( $bg_position ) . ';' . "\n";
+		}
+		if ( ! empty( $logo_height ) ) {
+			$login_h1_a_css .= "\t" . 'height: ' . esc_attr( $logo_height ) . ';' . "\n";
+		}
+		if ( ! empty( $line_height ) ) {
+			$login_h1_a_css .= "\t" . 'line-height: ' . absint( $line_height ) . 'px;' . "\n";
+		}
+		if ( ! empty( $text_x ) ) {
+			$login_h1_a_css .= "\t" . 'text-align: ' . esc_attr( $text_x ) . ';' . "\n";
+		}
+		if ( ! empty( $text_indent ) ) {
+			$login_h1_a_css .= "\t" . 'text-indent: ' . esc_attr( $text_indent ) . ';' . "\n";
+		}
+		if ( ! empty( $logo_width ) ) {
+			$login_h1_a_css .= "\t" . 'width: ' . esc_attr( $logo_width ) . ';' . "\n";
+		}
+	} // End if().
 
 	if ( ! empty( $login_h1_css ) ) {
 		echo '.login h1 {' . "\n" . $login_h1_css . '}' . "\n\n";
@@ -1320,14 +1291,16 @@ function ms_custom_login_style() {
 	.login h1 a:focus {
 		color: <?php echo esc_attr( $options['mcl_logo_text_hover'] ); ?>;
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
 	// .login .button-primary.
 	if ( $options['mcl_btn_bg_color'] != $default['mcl_btn_bg_color'] ) : ?>
 	.login .button-primary {
 		background: <?php echo esc_attr( $options['mcl_btn_bg_color'] ); ?>;
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
 	// .login .button-primary:hover.
 	if ( $options['mcl_btn_bg_hover'] != $default['mcl_btn_bg_hover'] ) : ?>
@@ -1336,7 +1309,8 @@ function ms_custom_login_style() {
 	.login .button-primary:active {
 		background: <?php echo esc_attr( $options['mcl_btn_bg_hover'] ); ?>;
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
 	// .login .button-primary -border-.
 	if ( ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) || ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) ) : ?>
@@ -1344,29 +1318,32 @@ function ms_custom_login_style() {
 	.login .button-primary:hover,
 	.login .button-primary:focus,
 	.login .button-primary:active {
-	<?php if ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) : ?>
-		border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
-		-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
-		box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
-	<?php endif;
+		<?php if ( $options['mcl_btn_border_color'] != $default['mcl_btn_border_color'] ) : ?>
+			border-color: <?php echo esc_attr( $options['mcl_btn_border_color'] ); ?>;
+			-webkit-box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+			box-shadow: inset 0 1px 0 rgba( 255, 255, 255, 0.25 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+		<?php endif;
 
-	if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
-		color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
-	<?php endif; ?>
+		if ( $options['mcl_btn_text_color'] != $default['mcl_btn_text_color'] ) : ?>
+			color: <?php echo esc_attr( $options['mcl_btn_text_color'] ); ?>;
+		<?php endif; ?>
 	}
-	<?php echo "\n"; endif;
+	<?php echo "\n";
+	endif;
 
 	// #login.
 	$login_css = '';
 
 	if ( $options['mcl_form_x_select'] != $default['mcl_form_x_select'] ) {
-		if ( ! empty( $options['mcl_form_x_select'] ) ) $login_css .= "\t" . 'margin-' . esc_attr( $options['mcl_form_x_select'] ) . ': ' . absint( $options['mcl_form_x_pos'] ) . '%;'. "\n";
+		if ( ! empty( $options['mcl_form_x_select'] ) ) {
+			$login_css .= "\t" . 'margin-' . esc_attr( $options['mcl_form_x_select'] ) . ': ' . absint( $options['mcl_form_x_pos'] ) . '%;'. "\n";
+		}
 	}
 
 	if ( $options['mcl_form_y_select'] != 'top' || $options['mcl_form_y_pos'] > 0 ) {
-		if ( $options['mcl_form_y_select'] == 'center' ) {
+		if ( 'center' == $options['mcl_form_y_select'] ) {
 			$form_y_pos = 50;
-		} else if ( $options['mcl_form_y_select'] == 'bottom' ) {
+		} elseif ( 'bottom' == $options['mcl_form_y_select'] ) {
 			$form_y_pos = ( $options['mcl_form_y_pos'] > 0 ) ? 100 - absint( $options['mcl_form_y_pos'] ) : 100 ;
 		} else {
 			$form_y_pos = $options['mcl_form_y_pos'];
