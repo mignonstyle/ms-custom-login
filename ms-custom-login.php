@@ -5,7 +5,7 @@
  * Description: Customize login page of your WordPress with images, colors and more.
  * Text Domain: ms-custom-login
  * Domain Path: /languages
- * Version: 1.0
+ * Version: 1.1
  * Author: Mignon Style
  * Author URI: http://mignonstyle.com
  * License: GNU General Public License v2.0

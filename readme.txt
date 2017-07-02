@@ -54,7 +54,8 @@ Special Thanks!
 
 == Changelog ==
 
-= 2.0 =
+= 1.1 =
+* add travis-ci and unit test.
 
 = 1.0 =
 * Bug fix of logo image.
