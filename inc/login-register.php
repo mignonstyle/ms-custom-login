@@ -6,9 +6,15 @@
  */
 
 /**
- * ------------------------------------------------------------
  * 10.0 - Text
- * ------------------------------------------------------------
+ *
+ * @param string $options Option slug.
+ * @param string $option_name Option name.
+ * @param string $option_label textfield label.
+ * @param string $option_type textfield type.
+ * @param string $option_class textfield class name.
+ * @param string $label_after textfield label.
+ * @param string $placeholder textfield placeholder.
  */
 function ms_custom_login_textfield( $options, $option_name, $option_label = '', $option_type = 'text', $option_class = 'regular-text', $label_after = '', $placeholder = '' ) {
 ?>
@@ -40,9 +46,13 @@ function ms_custom_login_textfield( $options, $option_name, $option_label = '', 
 }
 
 /**
- * ------------------------------------------------------------
  * 10.1 - Textarea
- * ------------------------------------------------------------
+ *
+ * @param string $options Option slug.
+ * @param string $option_name Option name.
+ * @param int    $option_cols textarea cols.
+ * @param int    $option_rows textarea rows.
+ * @param string $content Option textarea content.
  */
 function ms_custom_login_textarea( $options, $option_name, $option_cols = '60', $option_rows = '3', $content = '' ) {
 	$content = ( ! empty( $content ) ) ? $content : $options[ $option_name ];
@@ -52,9 +62,12 @@ function ms_custom_login_textarea( $options, $option_name, $option_cols = '60', 
 }
 
 /**
- * ------------------------------------------------------------
  * 10.2 - Checkbox
- * ------------------------------------------------------------
+ *
+ * @param string $options Option slug.
+ * @param string $option_name Option name.
+ * @param strung $option_text Option checkbox text.
+ * @param string $option_img Option checkbox image.
  */
 function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $option_img = '' ) {
 ?>
@@ -67,9 +80,12 @@ function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $o
 }
 
 /**
- * ------------------------------------------------------------
  * 10.3 - Radio Button
- * ------------------------------------------------------------
+ *
+ * @param string $options Option slug.
+ * @param array  $option_array Option radio button text.
+ * @param string $option_id Option id.
+ * @param string $option_name Option name.
  */
 function ms_custom_login_radio( $options, $option_array, $option_id, $option_name ) {
 	if ( is_array( $option_array ) ) {
@@ -87,9 +103,11 @@ function ms_custom_login_radio( $options, $option_array, $option_id, $option_nam
 }
 
 /**
- * ------------------------------------------------------------
  * 10.4 - Select Box
- * ------------------------------------------------------------
+ *
+ * @param string $options Option slug.
+ * @param array  $option_array Option select box text.
+ * @param string $option_name Option name.
  */
 function ms_custom_login_select( $options, $option_array, $option_name ) {
 ?>
@@ -104,9 +122,11 @@ function ms_custom_login_select( $options, $option_array, $option_name ) {
 }
 
 /**
- * ------------------------------------------------------------
  * 10.5 - Color Picker
- * ------------------------------------------------------------
+ *
+ * @param string $options Option slug.
+ * @param string $option_name Option name.
+ * @param string $default_color Default color code.
  */
 function ms_custom_login_color_picker( $options, $option_name, $default_color ) {
 	$default_color = ms_custom_login_sanitize_hex_color( $default_color );
@@ -122,9 +142,10 @@ function ms_custom_login_color_picker( $options, $option_name, $default_color ) 
 }
 
 /**
- * ------------------------------------------------------------
  * 10.5.1 - Color Sanitize
- * ------------------------------------------------------------
+ *
+ * @param string $color Color code.
+ * @return string
  */
 function ms_custom_login_sanitize_hex_color( $color ) {
 	if ( '' === $color ) {
@@ -140,9 +161,14 @@ function ms_custom_login_sanitize_hex_color( $color ) {
 }
 
 /**
- * ------------------------------------------------------------
  * 10.6 - Media UpLoader
- * ------------------------------------------------------------
+ *
+ * @param string $options Option slug.
+ * @param string $text_domain Option domain.
+ * @param string $option_id Option id.
+ * @param string $option_name Option name.
+ * @param string $option_desc Option description.
+ * @param string $option_desc2 Option description.
  */
 function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $option_name, $option_desc = '', $option_desc2 = '' ) {
 	$upload_remove_class = ! empty( $options[ $option_name ] ) ? 'remove-open' : 'upload-open';
@@ -176,7 +202,7 @@ function ms_custom_login_media_uploader( $options, $text_domain, $option_id, $op
 /**
  * 11.0 - sanitize and validate
  *
- * @param array $input Option.
+ * @param array $input Option slug.
  * @return string
  */
 function ms_custom_login_validate( $input ) {
