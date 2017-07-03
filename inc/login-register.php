@@ -71,7 +71,7 @@ function ms_custom_login_textarea( $options, $option_name, $option_cols = '60', 
  */
 function ms_custom_login_checkbox( $options, $option_name, $option_text = '', $option_img = '' ) {
 ?>
-	<p class="checkbox"><label><input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" type="checkbox" value="1" <?php checked( $options[ $option_name ], 1 ); ?> /><?php
+	<p class="checkbox"><label><input id="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" name="ms_custom_login_options[<?php echo esc_attr( $option_name ); ?>]" type="checkbox" value="1" <?php if ( isset( $options[ $option_name ] ) ) { checked( $options[ $option_name ], 1 ); } ?> /><?php
 	if ( ! empty( $option_img ) ) {
 		echo '<img src="' . esc_url( plugins_url( $option_img, __FILE__ ) ) . '" alt="' . esc_attr( $option_text ) . '">';
 	}

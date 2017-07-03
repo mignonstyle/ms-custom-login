@@ -55,7 +55,9 @@ Special Thanks!
 == Changelog ==
 
 = 1.1 =
+* Test for WordPress 4.8.
 * add travis-ci and unit test.
+* Fix error of Undefined variable
 
 = 1.0 =
 * Bug fix of logo image.
